@@ -6,7 +6,7 @@ namespace BambuFramework
     {
         public void Play()
         {
-
+            GameManager.Instance.Play();
         }
 
         public void Setting()

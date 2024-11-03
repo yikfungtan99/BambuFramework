@@ -15,8 +15,18 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: cf9f7a3962c959c4d879b2c799046645
   m_SerializeEntries:
+  - m_GUID: 2f59bda58789ca74ab52c857711a3241
+    m_Address: Scenes/Game.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 789bb9d7200fabe47883fe567a9d7219
     m_Address: Assets/BambuFramework/Scenes
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b34ad08c7925b074d8d0643a51da47c8
+    m_Address: Scenes
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 
 namespace BambuFramework.SceneManagement
 {
-    public class SceneManager : MonoBehaviour
+    public class SceneManager : SingletonBehaviour<SceneManager>
     {
         [SerializeField] private SceneReference[] initialPermanentScenes;
         [SerializeField] private SceneReference[] initialSwappableScenes;
