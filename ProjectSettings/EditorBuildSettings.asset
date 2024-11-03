@@ -5,16 +5,22 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/Core/_GAME.unity
-    guid: 006ecfebb97343b4bab42fa0446cb050
+    path: Assets/BambuFramework/Scenes/Core/_BOOTSTRAP.unity
+    guid: 27a6c0cbdb8c0d142a471307b7f2fb58
   - enabled: 1
-    path: Assets/Scenes/Core/_UI.unity
+    path: Assets/BambuFramework/Scenes/Core/_MANAGERS.unity
+    guid: d8598e012ef04ee41809cfbf26dff6e1
+  - enabled: 1
+    path: Assets/BambuFramework/Scenes/Core/_UI.unity
     guid: 0cbec9d414bc7b1498894287e9277d72
   - enabled: 1
-    path: Assets/Scenes/Core/_HUD.unity
+    path: Assets/BambuFramework/Scenes/Core/_HUD.unity
     guid: ff6ba4caf0cb8a84d90c82442cac8eef
-  m_configObjects: {}
+  - enabled: 1
+    path: Assets/BambuFramework/Scenes/Core/_MAIN_MENU.unity
+    guid: 725f5fcfedc57ef428ce543bfdff1b8a
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 3ccacc4e121455945a681c011b48b1d0,
+      type: 2}
+  m_UseUCBPForAssetBundles: 0

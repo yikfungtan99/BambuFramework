@@ -18,6 +18,12 @@ namespace BambuFramework.SceneManagement
         private List<SceneReference> permanentSceneLayer = new List<SceneReference>();
         private List<SceneReference> swappableSceneLayer = new List<SceneReference>();
 
+        private void Start()
+        {
+            AddPermanentScenes(initialPermanentScenes);
+            SwapScenes(initialSwappableScenes);
+        }
+
         public void AddPermanentScene(SceneReference sceneRef)
         {
             LoadAddressableScene(sceneRef, LoadSceneMode.Additive);
