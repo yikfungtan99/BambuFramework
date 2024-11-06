@@ -13,7 +13,8 @@ namespace BambuFramework.SceneManagement
     public class SceneManager : SingletonBehaviour<SceneManager>
     {
         [SerializeField] private SceneReference[] initialPermanentScenes;
-        [SerializeField] private SceneReference[] initialSwappableScenes;
+        [SerializeField] private SceneReference mainMenuScene;
+        [SerializeField] private SceneReference[] gameScenes;
 
         private List<SceneReference> permanentSceneLayer = new List<SceneReference>();
         private List<SceneReference> swappableSceneLayer = new List<SceneReference>();
@@ -21,7 +22,17 @@ namespace BambuFramework.SceneManagement
         private void Start()
         {
             AddPermanentScenes(initialPermanentScenes);
-            SwapScenes(initialSwappableScenes);
+            LoadMainMenu();
+        }
+
+        public void LoadMainMenu()
+        {
+            SwapScene(mainMenuScene);
+        }
+
+        public void LoadGameScenes()
+        {
+            SwapScenes(gameScenes);
         }
 
         public void AddPermanentScene(SceneReference sceneRef)
@@ -51,6 +62,7 @@ namespace BambuFramework.SceneManagement
 
             for (int i = 0; i < sceneRef.Length; i++)
             {
+                Debug.Log(sceneRef[i].Name);
                 AddSceneToSwappable(sceneRef[i]);
             }
         }
@@ -60,12 +72,15 @@ namespace BambuFramework.SceneManagement
             LoadAddressableScene(sceneRef, LoadSceneMode.Additive);
             swappableSceneLayer.Add(sceneRef);
         }
+
         private async Task UnloadAllSwappable()
         {
             for (int i = 0; i < swappableSceneLayer.Count; i++)
             {
                 await UnloadScene(swappableSceneLayer[i]);
             }
+
+            swappableSceneLayer.Clear();
         }
 
         public void LoadAddressableScene(SceneReference sceneRef, LoadSceneMode sceneMode)
@@ -84,6 +99,9 @@ namespace BambuFramework.SceneManagement
         public async Task UnloadScene(SceneReference sceneRef)
         {
             AsyncOperation unloadOperation = UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync(sceneRef.Name);
+
+            if (unloadOperation == null) return;
+
             await WaitForAsyncOperation(unloadOperation);
         }
 
