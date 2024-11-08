@@ -12,6 +12,11 @@ namespace BambuFramework
 
         [SerializeField] private GameObject canvas;
 
+        private void Start()
+        {
+            canvas.gameObject.SetActive(false);
+        }
+
         private void OnEnable()
         {
             resumeButton.onClick.AddListener(Resume);
