@@ -1,0 +1,12 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/SampleStyle.uss?fileID=7433441132597879392&amp;guid=1d7a8dbe1f59a344b9721eedabebb58c&amp;type=3#SampleStyle" />
+    <engine:VisualElement name="Main" style="flex-grow: 1; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-image: url(&quot;project://database/Assets/BambuFramework/1x1.png?fileID=2800000&amp;guid=ba3ed740f6fc585439f363eac5c1c913&amp;type=3#1x1&quot;); -unity-background-image-tint-color: rgb(34, 34, 34);">
+        <engine:VisualElement name="Menu" style="flex-grow: 1; width: 50%; background-size: 100% 100%; font-size: 100px; padding-top: 87px; padding-right: 87px; padding-bottom: 87px; padding-left: 87px; align-items: flex-start; justify-content: space-evenly;">
+            <engine:Label text="BAMBU" name="lblTitle" style="font-size: 150px; color: rgb(217, 217, 217); flex-grow: 0; align-items: stretch; -unity-font-definition: url(&quot;project://database/Assets/BambuFramework/Fonts/Roboto/Roboto-Regular.ttf?fileID=12800000&amp;guid=6ba3006e52ef35e4c87d859af6d24b58&amp;type=3#Roboto-Regular&quot;); -unity-font-style: bold;" />
+            <engine:VisualElement style="flex-grow: 0; flex-shrink: 0; height: 50px;" />
+            <engine:Button text="RESUME" name="btnResume" selectable="false" class="customButton" style="-unity-font-definition: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&amp;guid=10ac738400b06df4895be04638b9e9ff&amp;type=3#NotInter-Regular&quot;);" />
+            <engine:Button text="SETTING" name="btnSetting" enabled="true" selectable="false" class="customButton" style="-unity-font-definition: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&amp;guid=10ac738400b06df4895be04638b9e9ff&amp;type=3#NotInter-Regular&quot;);" />
+            <engine:Button text="MAIN MENU" name="btnMainMenu" selectable="false" class="customButton" style="-unity-font-definition: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&amp;guid=10ac738400b06df4895be04638b9e9ff&amp;type=3#NotInter-Regular&quot;);" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

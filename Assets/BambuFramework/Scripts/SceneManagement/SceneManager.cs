@@ -1,3 +1,4 @@
+using BambuFramework.Debug;
 using Eflatun.SceneReference;
 using System.Collections;
 using System.Collections.Generic;
@@ -62,7 +63,7 @@ namespace BambuFramework.SceneManagement
 
             for (int i = 0; i < sceneRef.Length; i++)
             {
-                Debug.Log(sceneRef[i].Name);
+                BambuLogger.Log($"Swapping in scene: {sceneRef[i].Name}", ELogCategory.SCENE);
                 AddSceneToSwappable(sceneRef[i]);
             }
         }

@@ -1,0 +1,19 @@
+.customButton {
+    font-size: 80px;
+    background-color: rgba(188, 188, 188, 0);
+    color: rgb(217, 217, 217);
+    -unity-font-definition: url("project://database/Assets/BambuFramework/Fonts/Roboto/Roboto-Regular.ttf?fileID=12800000&guid=6ba3006e52ef35e4c87d859af6d24b58&type=3#Roboto-Regular");
+    -unity-text-outline-color: rgba(0, 0, 0, 0);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    opacity: 1;
+}
+
+.customButton:hover {
+}
+
+.customButton:focus {
+    color: rgb(244, 248, 141);
+}

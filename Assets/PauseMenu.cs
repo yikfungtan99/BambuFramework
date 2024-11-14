@@ -1,34 +1,28 @@
 using BambuFramework.SceneManagement;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 
-namespace BambuFramework
+namespace BambuFramework.UI
 {
-    public class PauseMenu : MonoBehaviour
+    public class PauseMenu : MenuScreen
     {
-        [SerializeField] private Button resumeButton;
-        [SerializeField] private Button settingButton;
-        [SerializeField] private Button mainMenuButton;
+        protected override Button firstButton => resumeButton;
 
-        [SerializeField] private GameObject canvas;
+        private Button resumeButton;
+        private Button settingButton;
+        private Button mainMenuButton;
 
-        private void Start()
+        protected void Start()
         {
-            canvas.gameObject.SetActive(false);
-        }
+            resumeButton = Root.Q<Button>("btnResume");
+            settingButton = Root.Q<Button>("btnSetting");
+            mainMenuButton = Root.Q<Button>("btnMainMenu");
 
-        private void OnEnable()
-        {
-            resumeButton.onClick.AddListener(Resume);
-            settingButton.onClick.AddListener(Setting);
-            mainMenuButton.onClick.AddListener(MainMenu);
-        }
+            resumeButton.clicked += Resume;
+            settingButton.clicked += Setting;
+            mainMenuButton.clicked += MainMenu;
 
-        private void OnDisable()
-        {
-            resumeButton.onClick.RemoveListener(Resume);
-            settingButton.onClick.RemoveListener(Setting);
-            mainMenuButton.onClick.RemoveListener(MainMenu);
+            Hide();
         }
 
         private void Resume()
@@ -49,20 +43,10 @@ namespace BambuFramework
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 Show();
             }
-        }
-
-        public void Show()
-        {
-            canvas.gameObject.SetActive(true);
-        }
-
-        public void Hide()
-        {
-            canvas.gameObject.SetActive(false);
         }
     }
 }

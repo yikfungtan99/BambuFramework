@@ -15,13 +15,58 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: cf9f7a3962c959c4d879b2c799046645
   m_SerializeEntries:
+  - m_GUID: 0cbec9d414bc7b1498894287e9277d72
+    m_Address: Assets/BambuFramework/Scenes/Core/_UI.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 27a6c0cbdb8c0d142a471307b7f2fb58
+    m_Address: Assets/BambuFramework/Scenes/Core/_BOOTSTRAP.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2f59bda58789ca74ab52c857711a3241
-    m_Address: Scenes/Game.unity
+    m_Address: Assets/BambuFramework/Scenes/Game.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4aafbeef5f6d9bc408eaba07386a6046
+    m_Address: Assets/BambuFramework/Scenes/Core/_PAUSE_MENU.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4c7f3a5a54ed49146a22e950db381afc
+    m_Address: Assets/BambuFramework/Scenes/Core/_TOOLKIT.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 725f5fcfedc57ef428ce543bfdff1b8a
+    m_Address: Assets/BambuFramework/Scenes/Core/_MAIN_MENU.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 789bb9d7200fabe47883fe567a9d7219
     m_Address: Assets/BambuFramework/Scenes
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 842ed52f81a475942b2d631e4ae6716b
+    m_Address: Assets/BambuFramework/Scenes/Core/_SETTINGS_MENU.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9de39143f7964aa4487294ed6581a46a
+    m_Address: Assets/BambuFramework/Scenes/Core
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d8598e012ef04ee41809cfbf26dff6e1
+    m_Address: Assets/BambuFramework/Scenes/Core/_MANAGERS.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ff6ba4caf0cb8a84d90c82442cac8eef
+    m_Address: Assets/BambuFramework/Scenes/Core/_HUD.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

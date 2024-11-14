@@ -1,39 +1,40 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 
-namespace BambuFramework
+namespace BambuFramework.UI
 {
-    public class MainMenu : MonoBehaviour
+    public class MainMenu : MenuScreen
     {
-        [SerializeField] private Button playButton;
-        [SerializeField] private Button settingButton;
-        [SerializeField] private Button quitButton;
+        private Button playButton;
+        private Button settingButton;
+        private Button exitButton;
 
-        private void OnEnable()
+        protected override Button firstButton => playButton;
+
+        protected void Start()
         {
-            playButton.onClick.AddListener(Play);
-            settingButton.onClick.AddListener(Setting);
-            quitButton.onClick.AddListener(Quit);
+            playButton = Root.Q<Button>("btnPlay");
+            settingButton = Root.Q<Button>("btnSetting");
+            exitButton = Root.Q<Button>("btnExit");
+
+            playButton.clicked += Play;
+            settingButton.clicked += Setting;
+            exitButton.clicked += Exit;
+
+            Show();
         }
 
-        private void OnDisable()
-        {
-            playButton.onClick.RemoveListener(Play);
-            settingButton.onClick.RemoveListener(Setting);
-            quitButton.onClick.RemoveListener(Quit);
-        }
-
-        public void Play()
+        private void Play()
         {
             GameManager.Instance.Play();
         }
 
         public void Setting()
         {
-
+            // Setting logic here
         }
 
-        public void Quit()
+        public void Exit()
         {
             Application.Quit();
         }
