@@ -26,7 +26,7 @@ namespace BambuFramework
 
         private void OnChange(PlayerInput input)
         {
-            Bambu.Print("On Change");
+
         }
     }
 }
