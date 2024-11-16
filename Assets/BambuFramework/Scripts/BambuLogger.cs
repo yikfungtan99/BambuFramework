@@ -8,6 +8,7 @@ namespace BambuFramework.Debug
         GENERIC = 0,
         UI = 1,
         SCENE = 2,
+        INPUT = 3
     }
 
     [System.Serializable]
