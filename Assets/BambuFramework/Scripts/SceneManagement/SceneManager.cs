@@ -22,8 +22,8 @@ namespace BambuFramework.SceneManagement
 
         private void Start()
         {
-            AddPermanentScenes(initialPermanentScenes);
             LoadMainMenu();
+            AddPermanentScenes(initialPermanentScenes);
         }
 
         public void LoadMainMenu()

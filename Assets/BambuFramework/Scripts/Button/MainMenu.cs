@@ -31,12 +31,17 @@ namespace BambuFramework.UI
 
         public void Setting()
         {
-            // Setting logic here
+            UIManager.Instance.ShowSettings();
         }
 
         public void Exit()
         {
             Application.Quit();
+        }
+
+        protected override void UpdateMenu()
+        {
+
         }
     }
 }

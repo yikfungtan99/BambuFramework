@@ -756,7 +756,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8baacd1f46dc86e4d854d3c3760c21d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialPermanentScenes: []
+  initialPermanentScenes:
+  - asset: {fileID: 102900000, guid: 0cbec9d414bc7b1498894287e9277d72, type: 3}
+    guid: 0cbec9d414bc7b1498894287e9277d72
   mainMenuScene:
     asset: {fileID: 102900000, guid: 725f5fcfedc57ef428ce543bfdff1b8a, type: 3}
     guid: 725f5fcfedc57ef428ce543bfdff1b8a
@@ -765,10 +767,6 @@ MonoBehaviour:
     guid: d8598e012ef04ee41809cfbf26dff6e1
   - asset: {fileID: 102900000, guid: 2f59bda58789ca74ab52c857711a3241, type: 3}
     guid: 2f59bda58789ca74ab52c857711a3241
-  - asset: {fileID: 102900000, guid: ff6ba4caf0cb8a84d90c82442cac8eef, type: 3}
-    guid: ff6ba4caf0cb8a84d90c82442cac8eef
-  - asset: {fileID: 102900000, guid: 4aafbeef5f6d9bc408eaba07386a6046, type: 3}
-    guid: 4aafbeef5f6d9bc408eaba07386a6046
 --- !u!1 &2121883837
 GameObject:
   m_ObjectHideFlags: 0

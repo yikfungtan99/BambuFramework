@@ -41,9 +41,9 @@ namespace BambuFramework.UI
         }
 
         // Update is called once per frame
-        void Update()
+        protected override void UpdateMenu()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Show();
             }
