@@ -17,3 +17,46 @@
 .customButton:focus {
     color: rgb(244, 248, 141);
 }
+
+#CustomToggle Label {
+    display: none;
+}
+
+#CustomToggle .unity-toggle__checkmark {
+    align-items: auto;
+    justify-content: flex-start;
+    flex-grow: 1;
+    flex-shrink: 0;
+    align-content: auto;
+    overflow: visible;
+    display: flex;
+    visibility: visible;
+    flex-direction: row;
+    flex-basis: initial;
+    width: 50px;
+    height: 50px;
+}
+
+#CustomDropdown Label {
+    display: none;
+}
+
+#CustomSlider Label {
+    display: none;
+}
+
+#CustomSlider .unity-base-field__input {
+    align-self: center;
+}
+
+.settingsOption {
+}
+
+.settingsOption Label {
+    -unity-text-align: upper-right;
+    width: 250px;
+}
+
+.settingsOption #Spacer {
+    width: 50px;
+}
