@@ -4,8 +4,25 @@ using UnityEngine.UIElements;
 
 namespace BambuFramework.UI
 {
+    [RequireComponent(typeof(UIDocument))]
     public abstract class MenuScreen : MonoBehaviour
     {
+        private UIDocument uiDocument;
+        protected UIDocument UiDocument
+        {
+            get
+            {
+                if (uiDocument == null)
+                {
+                    uiDocument = GetComponent<UIDocument>();
+                }
+
+                return uiDocument;
+            }
+        }
+
+        protected UIManager uiManager;
+
         public bool IsActive { get => Root.visible; }
 
         protected abstract Button firstButton { get; }
@@ -17,7 +34,7 @@ namespace BambuFramework.UI
             {
                 if (root == null)
                 {
-                    root = GetComponent<UIDocument>().rootVisualElement;
+                    root = UiDocument.rootVisualElement;
                 }
 
                 return root;
@@ -25,6 +42,11 @@ namespace BambuFramework.UI
         }
 
         protected bool isVisible => Root.visible;
+
+        public void Init(UIManager uiManager)
+        {
+            this.uiManager = uiManager;
+        }
 
         private void Update()
         {
@@ -34,17 +56,21 @@ namespace BambuFramework.UI
 
         protected abstract void UpdateMenu();
 
-        public void Show()
+        public virtual void Show(bool sortingOrder = true)
         {
-            BambuLogger.Log($"Showing: {nameof(gameObject)}", ELogCategory.UI);
+            BambuLogger.Log($"Showing: {gameObject.name}", ELogCategory.UI);
             Root.visible = true;
             Root.schedule.Execute(() => firstButton?.Focus()).StartingIn(1);
+
+            if (sortingOrder) uiDocument.sortingOrder = 1;
         }
 
-        public void Hide()
+        public virtual void Hide(bool sortingOrder = true)
         {
-            BambuLogger.Log($"Hiding: {nameof(gameObject)}", ELogCategory.UI);
+            BambuLogger.Log($"Hiding: {gameObject.name}", ELogCategory.UI);
             Root.visible = false;
+
+            if (sortingOrder) uiDocument.sortingOrder = -1;
         }
     }
 }

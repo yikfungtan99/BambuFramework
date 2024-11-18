@@ -10,6 +10,7 @@ namespace BambuFramework
         protected override Button firstButton => null;
 
         private TabView tabView;
+        private Button btnBack;
         private int tabCount;
 
         private void OnEnable()
@@ -22,12 +23,20 @@ namespace BambuFramework
                 return;
             }
 
+            btnBack = Root.Q<Button>("btnBack");
+            btnBack.clicked += Back;
+
             tabCount = tabView.childCount;
 
             // Initialize the first tab to be selected
             tabView.selectedTabIndex = 0;
             SetFocusOnTab(tabView.selectedTabIndex);
             Hide();
+        }
+
+        private void Back()
+        {
+            uiManager.HideSettings();
         }
 
         protected override void UpdateMenu()

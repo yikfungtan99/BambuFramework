@@ -1,4 +1,3 @@
-using BambuFramework.SceneManagement;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -32,12 +31,12 @@ namespace BambuFramework.UI
 
         private void Setting()
         {
-
+            uiManager.ShowSettings();
         }
 
         private void MainMenu()
         {
-            SceneManager.Instance.LoadMainMenu();
+            uiManager.ShowMainMenu();
         }
 
         // Update is called once per frame

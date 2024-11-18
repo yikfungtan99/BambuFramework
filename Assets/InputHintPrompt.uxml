@@ -1,0 +1,6 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:VisualElement name="InputPrompt" style="flex-grow: 0; flex-direction: row; width: 221px; align-items: center; justify-content: flex-start; align-content: auto; height: 44px; margin-top: 0; margin-right: 15px; margin-bottom: 0; margin-left: 15px;">
+        <engine:VisualElement name="imgIcon" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/BambuFramework/Assets/UI/Keyboard%20&amp;%20Mouse/Dark/Esc_Key_Dark.png?fileID=2800000&amp;guid=af36ed87f74e224428f5fb6c809ae22e&amp;type=3#Esc_Key_Dark&quot;); flex-direction: column; flex-basis: auto; align-items: auto; align-content: auto; justify-content: center; background-color: rgba(0, 0, 0, 0); background-size: 70% 70%; width: 100px; height: 100px;" />
+        <engine:Label text="BACK" name="Label" style="font-size: 24px; color: rgb(255, 255, 255); margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+    </engine:VisualElement>
+</engine:UXML>

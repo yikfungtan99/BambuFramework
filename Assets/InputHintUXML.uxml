@@ -1,0 +1,4 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/SampleStyle.uss?fileID=7433441132597879392&amp;guid=1d7a8dbe1f59a344b9721eedabebb58c&amp;type=3#SampleStyle" />
+    <engine:VisualElement name="Menu" style="flex-grow: 0; width: 100%; background-size: 100% 100%; font-size: 100px; padding-top: 5px; padding-right: 25px; padding-bottom: 5px; padding-left: 25px; align-items: center; justify-content: flex-start; height: 8%; bottom: -92%; right: auto; align-self: center; align-content: auto; top: auto; flex-direction: row; -unity-text-outline-color: rgba(0, 0, 0, 0); background-color: rgba(0, 0, 0, 0.5); margin-right: 0; margin-left: 0; opacity: 1;" />
+</engine:UXML>

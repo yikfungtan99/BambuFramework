@@ -9,6 +9,10 @@
     border-bottom-width: 0;
     border-left-width: 0;
     opacity: 1;
+    -unity-font-style: normal;
+    flex-direction: row;
+    align-items: stretch;
+    align-content: flex-start;
 }
 
 .customButton:hover {
@@ -23,16 +27,7 @@
 }
 
 #CustomToggle .unity-toggle__checkmark {
-    align-items: auto;
-    justify-content: flex-start;
-    flex-grow: 1;
-    flex-shrink: 0;
-    align-content: auto;
-    overflow: visible;
-    display: flex;
-    visibility: visible;
-    flex-direction: row;
-    flex-basis: initial;
+    flex-grow: 0;
     width: 50px;
     height: 50px;
 }
@@ -65,5 +60,9 @@
 }
 
 #sliderTextField Label {
+    display: none;
+}
+
+Toggle Label {
     display: none;
 }
