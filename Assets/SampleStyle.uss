@@ -43,6 +43,9 @@
 
 #CustomSlider Label {
     display: none;
+    -unity-text-align: upper-center;
+    width: 15px;
+    font-size: 14px;
 }
 
 #CustomSlider .unity-base-field__input {
@@ -52,11 +55,15 @@
 .settingsOption {
 }
 
-.settingsOption Label {
+.settingsOption #settingLabel {
     -unity-text-align: upper-right;
     width: 250px;
 }
 
 .settingsOption #Spacer {
     width: 50px;
+}
+
+#sliderTextField Label {
+    display: none;
 }
