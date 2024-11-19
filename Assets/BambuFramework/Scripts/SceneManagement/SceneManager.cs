@@ -14,7 +14,6 @@ namespace BambuFramework.SceneManagement
     public class SceneManager : SingletonBehaviour<SceneManager>
     {
         [SerializeField] private SceneReference[] initialPermanentScenes;
-        [SerializeField] private SceneReference mainMenuScene;
         [SerializeField] private SceneReference[] gameScenes;
 
         private List<SceneReference> permanentSceneLayer = new List<SceneReference>();
@@ -22,13 +21,7 @@ namespace BambuFramework.SceneManagement
 
         private void Start()
         {
-            LoadMainMenu();
             AddPermanentScenes(initialPermanentScenes);
-        }
-
-        public void LoadMainMenu()
-        {
-            SwapScene(mainMenuScene);
         }
 
         public void LoadGameScenes()

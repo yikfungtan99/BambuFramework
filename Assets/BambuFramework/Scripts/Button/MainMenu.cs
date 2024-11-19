@@ -12,14 +12,19 @@ namespace BambuFramework.UI
 
         protected override Button firstButton => playButton;
 
-        protected void Start()
+        protected void Awake()
         {
             playButton = Root.Q<Button>("btnPlay");
             settingButton = Root.Q<Button>("btnSetting");
             exitButton = Root.Q<Button>("btnExit");
 
+            playButton.clicked -= Play;
             playButton.clicked += Play;
+
+            settingButton.clicked -= Setting;
             settingButton.clicked += Setting;
+
+            exitButton.clicked -= Exit;
             exitButton.clicked += Exit;
 
             Show();
@@ -32,9 +37,16 @@ namespace BambuFramework.UI
             Root.schedule.Execute(() => firstButton?.Focus()).StartingIn(1);
         }
 
+        public override void Hide(bool sortingOrder = false)
+        {
+            base.Hide(sortingOrder);
+        }
+
         private void Play()
         {
             GameManager.Instance.Play();
+            Hide();
+            uiManager.ResetActive();
         }
 
         public void Setting()

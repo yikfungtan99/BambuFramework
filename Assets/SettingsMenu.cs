@@ -13,7 +13,7 @@ namespace BambuFramework
         private Button btnBack;
         private int tabCount;
 
-        private void OnEnable()
+        private void Awake()
         {
             tabView = Root.Q<TabView>("TabView"); // Make sure your TabView has the "TabView" name or update this accordingly
 
@@ -31,12 +31,11 @@ namespace BambuFramework
             // Initialize the first tab to be selected
             tabView.selectedTabIndex = 0;
             SetFocusOnTab(tabView.selectedTabIndex);
-            Hide();
         }
 
         private void Back()
         {
-            uiManager.HideSettings();
+            uiManager.ReturnToPrevious();
         }
 
         protected override void UpdateMenu()

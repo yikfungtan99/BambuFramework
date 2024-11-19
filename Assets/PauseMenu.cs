@@ -11,7 +11,7 @@ namespace BambuFramework.UI
         private Button settingButton;
         private Button mainMenuButton;
 
-        protected void Start()
+        protected void Awake()
         {
             resumeButton = Root.Q<Button>("btnResume");
             settingButton = Root.Q<Button>("btnSetting");
@@ -27,6 +27,7 @@ namespace BambuFramework.UI
         private void Resume()
         {
             Hide();
+            uiManager.ResetActive();
         }
 
         private void Setting()
@@ -44,7 +45,7 @@ namespace BambuFramework.UI
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Show();
+                uiManager.ShowPause();
             }
         }
     }

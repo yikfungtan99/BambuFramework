@@ -23,7 +23,7 @@ namespace BambuFramework.UI
 
         protected UIManager uiManager;
 
-        public bool IsActive { get => Root.visible; }
+        public GameObject GameObject { get => uiDocument.gameObject; }
 
         protected abstract Button firstButton { get; }
         protected Button lastFocusedButton;
@@ -50,7 +50,6 @@ namespace BambuFramework.UI
 
         private void Update()
         {
-            if (!IsActive) return;
             UpdateMenu();
         }
 
@@ -59,6 +58,7 @@ namespace BambuFramework.UI
         public virtual void Show(bool sortingOrder = true)
         {
             BambuLogger.Log($"Showing: {gameObject.name}", ELogCategory.UI);
+
             Root.visible = true;
             Root.schedule.Execute(() => firstButton?.Focus()).StartingIn(1);
 
@@ -68,8 +68,8 @@ namespace BambuFramework.UI
         public virtual void Hide(bool sortingOrder = true)
         {
             BambuLogger.Log($"Hiding: {gameObject.name}", ELogCategory.UI);
-            Root.visible = false;
 
+            Root.visible = false;
             if (sortingOrder) uiDocument.sortingOrder = -1;
         }
     }

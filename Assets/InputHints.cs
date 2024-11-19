@@ -37,8 +37,20 @@ namespace BambuFramework.UI
 
             currentHintsIndex = index;
 
+            if (currentHintsIndex == -1)
+            {
+                Hide();
+                return;
+            }
+
             // Get the list of prompts for the given index
             var prompts = inputHintPrompts.InputPrompts[index];
+
+            if (prompts == null)
+            {
+                Hide();
+                return;
+            }
 
             // Ensure enough TemplateContainers exist in the pool
             for (int i = existingInputHintPromptList.Count; i < prompts.Length; i++)
