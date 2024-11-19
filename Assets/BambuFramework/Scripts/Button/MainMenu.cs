@@ -30,7 +30,7 @@ namespace BambuFramework.UI
             Show();
         }
 
-        public override void Show(bool sortingOrder = true)
+        public override void Show(Player player = null, bool sortingOrder = true)
         {
             BambuLogger.Log($"Showing: {gameObject.name}", ELogCategory.UI);
             Root.visible = true;
@@ -51,7 +51,7 @@ namespace BambuFramework.UI
 
         public void Setting()
         {
-            UIManager.Instance.ShowSettings();
+            UIManager.Instance.ShowSettings(PlayerManager.Instance.HostPlayer);
         }
 
         public void Exit()

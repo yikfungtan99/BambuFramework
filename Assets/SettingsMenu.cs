@@ -1,6 +1,5 @@
 using BambuFramework.UI;
 using System.Linq;
-using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 namespace BambuFramework
@@ -12,6 +11,8 @@ namespace BambuFramework
         private TabView tabView;
         private Button btnBack;
         private int tabCount;
+
+        private InputSystem_Actions inputActions;
 
         private void Awake()
         {
@@ -33,6 +34,24 @@ namespace BambuFramework
             SetFocusOnTab(tabView.selectedTabIndex);
         }
 
+        public override void Show(Player player = null, bool sortingOrder = true)
+        {
+            base.Show(player, sortingOrder);
+
+            inputActions = player.InputActions;
+
+            inputActions.UI.NextTab.performed += ctx => NavigateTabs(1);
+            inputActions.UI.PreviousTab.performed += ctx => NavigateTabs(-1);
+        }
+
+        public override void Hide(bool sortingOrder = true)
+        {
+            base.Hide(sortingOrder);
+
+            if (inputActions != null) inputActions.UI.NextTab.performed -= ctx => NavigateTabs(1);
+            if (inputActions != null) inputActions.UI.PreviousTab.performed -= ctx => NavigateTabs(-1);
+        }
+
         private void Back()
         {
             uiManager.ReturnToPrevious();
@@ -40,34 +59,12 @@ namespace BambuFramework
 
         protected override void UpdateMenu()
         {
-            if (tabView == null) return;
 
-            // Keyboard navigation
-            if (Keyboard.current.eKey.wasPressedThisFrame) // E for next tab
-            {
-                NavigateTabs(1);
-            }
-            else if (Keyboard.current.qKey.wasPressedThisFrame) // Q for previous tab
-            {
-                NavigateTabs(-1);
-            }
-
-            // Gamepad navigation
-            if (Gamepad.current != null)
-            {
-                if (Gamepad.current.dpad.right.wasPressedThisFrame) // D-Pad right for next tab
-                {
-                    NavigateTabs(1);
-                }
-                else if (Gamepad.current.dpad.left.wasPressedThisFrame) // D-Pad left for previous tab
-                {
-                    NavigateTabs(-1);
-                }
-            }
         }
 
         private void NavigateTabs(int direction)
         {
+            if (tabView == null) return;
             // Update selected index and wrap around if necessary
             tabView.selectedTabIndex = (tabView.selectedTabIndex + direction + tabCount) % tabCount;
             SetFocusOnTab(tabView.selectedTabIndex);
@@ -75,6 +72,7 @@ namespace BambuFramework
 
         private void SetFocusOnTab(int index)
         {
+            if (tabView == null) return;
             // Highlight the currently selected tab header
             var selectedTab = tabView.Children().ElementAt(index) as VisualElement;
             selectedTab?.Focus();

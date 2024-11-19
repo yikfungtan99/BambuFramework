@@ -42,6 +42,9 @@ namespace BambuFramework.UI
         }
 
         protected bool isVisible => Root.visible;
+        protected bool isActivated => isVisible;
+
+        protected Player initiatedPlayer;
 
         public void Init(UIManager uiManager)
         {
@@ -50,12 +53,14 @@ namespace BambuFramework.UI
 
         private void Update()
         {
+            if (!isActivated) return;
+
             UpdateMenu();
         }
 
         protected abstract void UpdateMenu();
 
-        public virtual void Show(bool sortingOrder = true)
+        public virtual void Show(Player player = null, bool sortingOrder = true)
         {
             BambuLogger.Log($"Showing: {gameObject.name}", ELogCategory.UI);
 
@@ -63,6 +68,8 @@ namespace BambuFramework.UI
             Root.schedule.Execute(() => firstButton?.Focus()).StartingIn(1);
 
             if (sortingOrder) uiDocument.sortingOrder = 1;
+
+            initiatedPlayer = player;
         }
 
         public virtual void Hide(bool sortingOrder = true)

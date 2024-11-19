@@ -1,4 +1,3 @@
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace BambuFramework.UI
@@ -32,7 +31,7 @@ namespace BambuFramework.UI
 
         private void Setting()
         {
-            uiManager.ShowSettings();
+            uiManager.ShowSettings(initiatedPlayer);
         }
 
         private void MainMenu()
@@ -43,10 +42,7 @@ namespace BambuFramework.UI
         // Update is called once per frame
         protected override void UpdateMenu()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                uiManager.ShowPause();
-            }
+
         }
     }
 }

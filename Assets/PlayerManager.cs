@@ -3,12 +3,14 @@ using UnityEngine;
 
 namespace BambuFramework
 {
-    public class PlayerManager : MonoBehaviour
+    public class PlayerManager : SingletonBehaviour<PlayerManager>
     {
         [SerializeField] private Player playerPrefab;
         [SerializeField] private Player hostPlayer;
 
         private List<Player> playerList = new List<Player>();
+
+        public Player HostPlayer { get => hostPlayer; }
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()

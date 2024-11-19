@@ -42,17 +42,17 @@ namespace BambuFramework.UI
             ActivateScreen(mainMenu);
         }
 
-        public void ShowPause()
+        public void ShowPause(Player player)
         {
-            ActivateScreen(pauseMenu);
+            ActivateScreen(pauseMenu, player);
         }
 
-        public void ShowSettings()
+        public void ShowSettings(Player player)
         {
-            ActivateScreen(settingsMenu);
+            ActivateScreen(settingsMenu, player);
         }
 
-        private void ActivateScreen(MenuScreen menuScreen)
+        private void ActivateScreen(MenuScreen menuScreen, Player player = null)
         {
             if (activeScreen != null)
             {
@@ -67,7 +67,7 @@ namespace BambuFramework.UI
 
             activeScreen = menuScreen;
 
-            activeScreen.Show();
+            activeScreen.Show(player);
 
             int index = menuScreenInputHintKVP.ContainsKey(activeScreen) ? menuScreenInputHintKVP[activeScreen] : -1;
             ShowInputHints(index);

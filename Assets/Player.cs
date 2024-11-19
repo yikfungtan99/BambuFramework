@@ -1,3 +1,4 @@
+using BambuFramework.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,28 +6,69 @@ namespace BambuFramework
 {
     public class Player : MonoBehaviour
     {
-        private PlayerInput playerInput;
+        private InputSystem_Actions inputActions;
+        public InputSystem_Actions InputActions { get => inputActions; }
 
-        public PlayerInput PlayerInput { get => playerInput; }
+        private GameManager gameManager;
 
-        private void Awake()
+
+        private void Start()
         {
-            playerInput = GetComponent<PlayerInput>();
+            inputActions = new InputSystem_Actions();
+
+            inputActions.Player.Pause.performed += OnPause;
+
+            gameManager = GameManager.Instance;
+            gameManager.OnGameStart += SwitchToGameActionMap;
+
+            ToggleActionMap(inputActions.UI);
+        }
+
+        private void OnDestroy()
+        {
+            if (gameManager != null) gameManager.OnGameStart -= SwitchToGameActionMap;
+        }
+
+        private void Update()
+        {
+
         }
 
         private void OnEnable()
         {
-            playerInput.onControlsChanged += OnChange;
+
         }
 
         private void OnDisable()
         {
-            playerInput.onControlsChanged -= OnChange;
+
         }
 
         private void OnChange(PlayerInput input)
         {
 
+        }
+
+        private void OnPause(InputAction.CallbackContext context)
+        {
+            // Call ShowPause method on UIManager when Pause action is triggered
+            UIManager.Instance.ShowPause(this);
+        }
+
+        public void SwitchToGameActionMap()
+        {
+            ToggleActionMap(inputActions.Player);
+        }
+
+        public void ToggleActionMap(InputActionMap actionMap)
+        {
+            if (actionMap.enabled)
+            {
+                return;
+            }
+
+            inputActions.Disable();
+            actionMap.Enable();
         }
     }
 }
