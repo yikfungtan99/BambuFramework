@@ -51,21 +51,16 @@ namespace BambuFramework.UI
                 return;
             }
 
-            // Find the tab container named "tabGameplay"
-            var gameplayTab = tabView.Q<VisualElement>("tabGameplay");
-
-            if (gameplayTab == null)
+            foreach (SettingsTab tab in settingsContainer.Tabs)
             {
-                Bambu.Log("tabGameplay not found in TabView!");
-                return;
-            }
+                var tabInstance = tabView.Q<VisualElement>($"tab{tab.TabName}");
 
-            foreach (var settingOption in settingsContainer.settingOptions)
-            {
-                var settingElement = settingOption.SpawnUI();
+                foreach (SettingOption settingOption in tab.SettingOptions)
+                {
+                    var settingElement = settingOption.SpawnUI();
 
-                // Add the settingElement to the gameplayTab
-                gameplayTab.Add(settingElement);
+                    tabInstance.Add(settingElement);
+                }
             }
         }
 

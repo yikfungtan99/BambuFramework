@@ -206,3 +206,226 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: Tabs
+      Entry: 7
+      Data: 9|System.Collections.Generic.List`1[[BambuFramework.UI.SettingsTab, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 3
+    - Name: 
+      Entry: 7
+      Data: 10|BambuFramework.UI.SettingsTab, Assembly-CSharp
+    - Name: TabName
+      Entry: 1
+      Data: Gameplay
+    - Name: SettingOptions
+      Entry: 7
+      Data: 11|System.Collections.Generic.List`1[[BambuFramework.UI.SettingOption,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 4
+    - Name: 
+      Entry: 7
+      Data: 12|BambuFramework.UI.ToggleSettingOption, Assembly-CSharp
+    - Name: Title
+      Entry: 1
+      Data: CONSOLE
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 13|BambuFramework.UI.DropdownSettingOption, Assembly-CSharp
+    - Name: Title
+      Entry: 1
+      Data: DROPDOWN TEST
+    - Name: baseOptions
+      Entry: 7
+      Data: 14|System.String[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 4
+    - Name: 
+      Entry: 1
+      Data: OPTION 1
+    - Name: 
+      Entry: 1
+      Data: OPTION 2
+    - Name: 
+      Entry: 1
+      Data: OPTION 3
+    - Name: 
+      Entry: 1
+      Data: OPTION 4
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 15|BambuFramework.UI.CyclerSettingOption, Assembly-CSharp
+    - Name: Title
+      Entry: 1
+      Data: CYCLER TEST
+    - Name: baseOptions
+      Entry: 7
+      Data: 16|System.String[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 4
+    - Name: 
+      Entry: 1
+      Data: OPTION 1
+    - Name: 
+      Entry: 1
+      Data: OPTION 2
+    - Name: 
+      Entry: 1
+      Data: OPTION 3
+    - Name: 
+      Entry: 1
+      Data: OPTION 4
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 17|BambuFramework.UI.SliderSettingOption, Assembly-CSharp
+    - Name: Title
+      Entry: 1
+      Data: SLIDER TEST
+    - Name: minValue
+      Entry: 4
+      Data: 0
+    - Name: maxValue
+      Entry: 4
+      Data: 100
+    - Name: defaultValue
+      Entry: 4
+      Data: 50
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 18|BambuFramework.UI.SettingsTab, Assembly-CSharp
+    - Name: TabName
+      Entry: 1
+      Data: Video
+    - Name: SettingOptions
+      Entry: 7
+      Data: 19|System.Collections.Generic.List`1[[BambuFramework.UI.SettingOption,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 20|BambuFramework.UI.DropdownSettingOption, Assembly-CSharp
+    - Name: Title
+      Entry: 1
+      Data: DROPDOWN TEST
+    - Name: baseOptions
+      Entry: 7
+      Data: 21|System.String[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 4
+    - Name: 
+      Entry: 1
+      Data: OPTION 1
+    - Name: 
+      Entry: 1
+      Data: OPTION 2
+    - Name: 
+      Entry: 1
+      Data: OPTION 3
+    - Name: 
+      Entry: 1
+      Data: OPTION 4
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 22|BambuFramework.UI.ToggleSettingOption, Assembly-CSharp
+    - Name: Title
+      Entry: 1
+      Data: CONSOLE
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 23|BambuFramework.UI.SettingsTab, Assembly-CSharp
+    - Name: TabName
+      Entry: 1
+      Data: Audio
+    - Name: SettingOptions
+      Entry: 7
+      Data: 24|System.Collections.Generic.List`1[[BambuFramework.UI.SettingOption,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 25|BambuFramework.UI.ToggleSettingOption, Assembly-CSharp
+    - Name: Title
+      Entry: 1
+      Data: CONSOLE
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
