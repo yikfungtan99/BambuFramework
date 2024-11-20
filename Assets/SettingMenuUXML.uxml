@@ -1,36 +1,17 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:Template name="settingToggle" src="project://database/Assets/settingToggle.uxml?fileID=9197481963319205126&amp;guid=6dda591e928435a419f71c97807f7c2b&amp;type=3#settingToggle" />
+    <engine:Template name="settingDropdown" src="project://database/Assets/settingDropdown.uxml?fileID=9197481963319205126&amp;guid=cd4e02df60850624e9f4bdf5c7ea776a&amp;type=3#settingDropdown" />
+    <engine:Template name="settingSlider" src="project://database/Assets/settingSlider.uxml?fileID=9197481963319205126&amp;guid=ea808c59f54927c42a218e5fcbaebd75&amp;type=3#settingSlider" />
+    <engine:Template name="settingCycler" src="project://database/Assets/settingCycler.uxml?fileID=9197481963319205126&amp;guid=3b86d5835a44e3341b73f1907fcb5352&amp;type=3#settingCycler" />
     <Style src="project://database/Assets/SampleStyle.uss?fileID=7433441132597879392&amp;guid=1d7a8dbe1f59a344b9721eedabebb58c&amp;type=3#SampleStyle" />
     <Style src="project://database/Assets/TabbedMenu.uss?fileID=7433441132597879392&amp;guid=9f41a500ff4d1a44c8e289d96e05c119&amp;type=3#TabbedMenu" />
     <engine:VisualElement name="Main" style="flex-grow: 1; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; background-image: url(&quot;project://database/Assets/BambuFramework/1x1.png?fileID=2800000&amp;guid=ba3ed740f6fc585439f363eac5c1c913&amp;type=3#1x1&quot;); -unity-background-image-tint-color: rgb(34, 34, 34); background-color: rgb(255, 255, 255); padding-top: 80px; padding-right: 80px; padding-bottom: 80px; padding-left: 80px;">
         <engine:TabView focusable="false" name="TabView" style="height: 798px; align-items: stretch;">
             <engine:Tab label="GAMEPLAY" name="tabGameplay" focusable="true" class="settingsTab" style="align-items: flex-start; align-content: auto; justify-content: flex-start; padding-top: 35px; padding-right: 35px; padding-bottom: 35px; padding-left: 35px; height: 768px;">
-                <engine:VisualElement name="settingToggle" class="settingsOption" style="flex-grow: 1; flex-direction: row; width: 1000px; justify-content: flex-start; align-items: center; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px; align-content: stretch;">
-                    <engine:Label text="TOGGLE" name="settingLabel" style="font-size: 34px; color: rgb(255, 255, 255);" />
-                    <engine:VisualElement name="Spacer" style="flex-grow: 0;" />
-                    <engine:Toggle label="Toggle" name="CustomToggle" style="width: 194px;" />
-                </engine:VisualElement>
-                <engine:VisualElement name="settingDropdown" class="settingsOption" style="flex-grow: 1; flex-direction: row; width: 1000px; justify-content: flex-start; align-items: center; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px; align-content: stretch; -unity-text-align: upper-left;">
-                    <engine:Label text="DROPDOWN" name="settingLabel" style="font-size: 34px; color: rgb(255, 255, 255);" />
-                    <engine:VisualElement name="Spacer" />
-                    <engine:DropdownField label="Dropdown" name="CustomDropdown" style="width: 250px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
-                </engine:VisualElement>
-                <engine:VisualElement name="settingSlider" class="settingsOption" style="flex-grow: 1; flex-direction: row; width: 1000px; justify-content: flex-start; align-items: center; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px; align-content: stretch;">
-                    <engine:Label text="SLIDER" name="settingLabel" style="font-size: 34px; color: rgb(255, 255, 255);" />
-                    <engine:VisualElement name="Spacer" style="flex-grow: 0;" />
-                    <engine:VisualElement style="flex-grow: 0; flex-direction: row; width: 250px; justify-content: space-evenly;">
-                        <engine:Slider label="Slider" value="42" high-value="100" name="CustomSlider" style="width: 197px; align-self: auto; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: rgb(255, 255, 255); justify-content: flex-start; align-items: auto; align-content: auto;" />
-                        <engine:TextField value="12" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
-                    </engine:VisualElement>
-                </engine:VisualElement>
-                <engine:VisualElement name="settingCycler" class="settingsOption" style="flex-grow: 1; flex-direction: row; width: 1000px; justify-content: flex-start; align-items: center; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px; align-content: stretch;">
-                    <engine:Label text="CYCLER" name="settingLabel" style="font-size: 34px; color: rgb(255, 255, 255);" />
-                    <engine:VisualElement name="Spacer" style="flex-grow: 0;" />
-                    <engine:VisualElement style="flex-grow: 0; height: 54px; width: 256px; flex-direction: row; justify-content: space-between;">
-                        <engine:Button text="&lt;" name="Button" style="width: 40px; font-size: 40px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
-                        <engine:Label text="Label" style="width: 147px; color: rgb(255, 255, 255); -unity-text-align: middle-center; font-size: 24px;" />
-                        <engine:Button text="&gt;" name="Button" style="width: 40px; font-size: 40px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
-                    </engine:VisualElement>
-                </engine:VisualElement>
+                <engine:Instance template="settingToggle" name="settingToggle" style="display: none;" />
+                <engine:Instance template="settingDropdown" name="settingDropdown" style="display: none;" />
+                <engine:Instance template="settingSlider" name="settingSlider" style="display: none;" />
+                <engine:Instance template="settingCycler" name="settingCycler" style="display: none;" />
             </engine:Tab>
             <engine:Tab label="VIDEO" name="tabVideo" focusable="true" tabindex="1" />
             <engine:Tab label="AUDIO" name="tabAudio" focusable="true" tabindex="2" />

@@ -1,0 +1,208 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 220dd9d735131c0469fc1d0fa6a06804, type: 3}
+  m_Name: SettingsContainer
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 9197481963319205126, guid: 6dda591e928435a419f71c97807f7c2b, type: 3}
+    - {fileID: 9197481963319205126, guid: cd4e02df60850624e9f4bdf5c7ea776a, type: 3}
+    - {fileID: 9197481963319205126, guid: ea808c59f54927c42a218e5fcbaebd75, type: 3}
+    - {fileID: 9197481963319205126, guid: 3b86d5835a44e3341b73f1907fcb5352, type: 3}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: SettingOptionsTemplateKVP
+      Entry: 7
+      Data: 0|System.Collections.Generic.Dictionary`2[[BambuFramework.UI.ESettingOptions,
+        Assembly-CSharp],[UnityEngine.UIElements.VisualTreeAsset, UnityEngine.UIElementsModule]],
+        mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[BambuFramework.UI.ESettingOptions,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 4
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 0
+    - Name: $v
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 1
+    - Name: $v
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 2
+    - Name: $v
+      Entry: 10
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 3
+    - Name: $v
+      Entry: 10
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: settingOptions
+      Entry: 7
+      Data: 2|System.Collections.Generic.List`1[[BambuFramework.UI.SettingOption,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 4
+    - Name: 
+      Entry: 7
+      Data: 3|BambuFramework.UI.ToggleSettingOption, Assembly-CSharp
+    - Name: Title
+      Entry: 1
+      Data: CONSOLE
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|BambuFramework.UI.DropdownSettingOption, Assembly-CSharp
+    - Name: Title
+      Entry: 1
+      Data: DROPDOWN TEST
+    - Name: baseOptions
+      Entry: 7
+      Data: 5|System.String[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 4
+    - Name: 
+      Entry: 1
+      Data: OPTION 1
+    - Name: 
+      Entry: 1
+      Data: OPTION 2
+    - Name: 
+      Entry: 1
+      Data: OPTION 3
+    - Name: 
+      Entry: 1
+      Data: OPTION 4
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 6|BambuFramework.UI.CyclerSettingOption, Assembly-CSharp
+    - Name: Title
+      Entry: 1
+      Data: CYCLER TEST
+    - Name: baseOptions
+      Entry: 7
+      Data: 7|System.String[], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 4
+    - Name: 
+      Entry: 1
+      Data: OPTION 1
+    - Name: 
+      Entry: 1
+      Data: OPTION 2
+    - Name: 
+      Entry: 1
+      Data: OPTION 3
+    - Name: 
+      Entry: 1
+      Data: OPTION 4
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 8|BambuFramework.UI.SliderSettingOption, Assembly-CSharp
+    - Name: Title
+      Entry: 1
+      Data: SLIDER TEST
+    - Name: minValue
+      Entry: 4
+      Data: 0
+    - Name: maxValue
+      Entry: 4
+      Data: 100
+    - Name: defaultValue
+      Entry: 4
+      Data: 50
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 

@@ -1,0 +1,53 @@
+#CustomToggle Label {
+    display: none;
+}
+
+#CustomToggle .unity-toggle__checkmark {
+    flex-grow: 0;
+    width: 50px;
+    height: 50px;
+}
+
+#CustomDropdown Label {
+    display: none;
+}
+
+#CustomSlider Label {
+    display: none;
+    -unity-text-align: upper-center;
+    width: 15px;
+    font-size: 14px;
+}
+
+#CustomSlider .unity-base-field__input {
+    align-self: center;
+}
+
+.settingsOption {
+}
+
+.settingsOption #settingLabel {
+    -unity-text-align: upper-right;
+    width: 250px;
+}
+
+.settingsOption #Spacer {
+    width: 50px;
+}
+
+#sliderTextField Label {
+    display: none;
+}
+
+#CustomToggle Label {
+    display: none;
+}
+
+#CustomTextField .unity-text-element {
+    align-self: auto;
+    -unity-text-align: upper-center;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: auto;
+    align-content: auto;
+}

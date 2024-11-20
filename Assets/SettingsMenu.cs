@@ -1,11 +1,15 @@
-using BambuFramework.UI;
+using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace BambuFramework
+namespace BambuFramework.UI
 {
     public class SettingsMenu : MenuScreen
     {
+        [InlineEditor]
+        [SerializeField] private SettingsContainer settingsContainer;
         protected override Button firstButton => null;
 
         private TabView tabView;
@@ -13,6 +17,8 @@ namespace BambuFramework
         private int tabCount;
 
         private InputSystem_Actions inputActions;
+
+        private List<Focusable> focussable;
 
         private void Awake()
         {
@@ -27,11 +33,40 @@ namespace BambuFramework
             btnBack = Root.Q<Button>("btnBack");
             btnBack.clicked += Back;
 
+            // Instantiate settings options
+            PopulateSettingsOptions();
+
             tabCount = tabView.childCount;
 
             // Initialize the first tab to be selected
             tabView.selectedTabIndex = 0;
             SetFocusOnTab(tabView.selectedTabIndex);
+        }
+
+        private void PopulateSettingsOptions()
+        {
+            if (settingsContainer == null || settingsContainer.settingOptions == null)
+            {
+                Bambu.Log("SettingsContainer or settingOptions is not assigned!");
+                return;
+            }
+
+            // Find the tab container named "tabGameplay"
+            var gameplayTab = tabView.Q<VisualElement>("tabGameplay");
+
+            if (gameplayTab == null)
+            {
+                Bambu.Log("tabGameplay not found in TabView!");
+                return;
+            }
+
+            foreach (var settingOption in settingsContainer.settingOptions)
+            {
+                var settingElement = settingOption.SpawnUI();
+
+                // Add the settingElement to the gameplayTab
+                gameplayTab.Add(settingElement);
+            }
         }
 
         public override void Show(Player player = null, bool sortingOrder = true)
