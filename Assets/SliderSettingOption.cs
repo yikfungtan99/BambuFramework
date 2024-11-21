@@ -97,7 +97,22 @@ namespace BambuFramework.UI
 
             fs.Add(slider);
 
+            slider.RegisterCallback<FocusEvent>((e) => Focus(uiInstance));
+            slider.RegisterCallback<BlurEvent>((e) => Blur(uiInstance));
+
             return uiInstance;
+        }
+
+        protected override void Focus(VisualElement template)
+        {
+            Color initColor = template.style.backgroundColor.value;
+            template.style.backgroundColor = new Color(initColor.r, initColor.g, initColor.b, 155);
+        }
+
+        protected override void Blur(VisualElement template)
+        {
+            Color initColor = template.style.backgroundColor.value;
+            template.style.backgroundColor = new Color(initColor.r, initColor.g, initColor.b, 0);
         }
     }
 }

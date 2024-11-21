@@ -42,7 +42,6 @@ namespace BambuFramework.UI
 
             // Initialize the first tab to be selected
             tabView.selectedTabIndex = 0;
-            SetFocusOnTab(tabView.selectedTabIndex);
         }
 
         private void PopulateSettingsOptions()

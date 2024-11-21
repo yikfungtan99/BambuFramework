@@ -23,5 +23,8 @@ namespace BambuFramework.UI
 
             return uiInstance;
         }
+
+        protected abstract void Focus(VisualElement v);
+        protected abstract void Blur(VisualElement v);
     }
 }

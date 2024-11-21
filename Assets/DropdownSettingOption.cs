@@ -42,14 +42,22 @@ namespace BambuFramework.UI
 
             fs.Add(dropdown);
 
-            dropdown.RegisterCallback<FocusEvent>(Focus);
+            dropdown.RegisterCallback<FocusEvent>((e) => Focus(uiInstance));
+            dropdown.RegisterCallback<BlurEvent>((e) => Blur(uiInstance));
 
             return uiInstance;
         }
 
-        private void Focus(FocusEvent evt)
+        protected override void Focus(VisualElement template)
         {
-            Bambu.Log("HI");
+            Color initColor = template.style.backgroundColor.value;
+            template.style.backgroundColor = new Color(initColor.r, initColor.g, initColor.b, 155);
+        }
+
+        protected override void Blur(VisualElement template)
+        {
+            Color initColor = template.style.backgroundColor.value;
+            template.style.backgroundColor = new Color(initColor.r, initColor.g, initColor.b, 0);
         }
     }
 }
