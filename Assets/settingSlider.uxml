@@ -5,7 +5,7 @@
         <engine:VisualElement name="Spacer" style="flex-grow: 0;" />
         <engine:VisualElement style="flex-grow: 0; flex-direction: row; width: 250px; justify-content: space-evenly;">
             <engine:Slider label="Slider" value="42" high-value="100" name="CustomSlider" style="width: 197px; align-self: auto; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: rgb(255, 255, 255); justify-content: flex-start; align-items: auto; align-content: auto;" />
-            <engine:TextField value="12" name="CustomTextField" style="width: 50px; max-width: 50px; min-width: 50px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 5px; -unity-text-align: upper-center; font-size: 14px; align-self: center;" />
+            <engine:TextField value="12" name="CustomTextField" focusable="false" style="width: 50px; max-width: 50px; min-width: 50px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 5px; -unity-text-align: upper-center; font-size: 14px; align-self: center;" />
         </engine:VisualElement>
     </engine:VisualElement>
 </engine:UXML>

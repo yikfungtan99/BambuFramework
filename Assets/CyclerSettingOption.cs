@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace BambuFramework.UI
@@ -12,10 +13,10 @@ namespace BambuFramework.UI
         public string[] CyclerOptions => baseOptions;
         public override ESettingOptions SettingsOption => ESettingOptions.CYCLER;
 
-        public override TemplateContainer SpawnUI()
+        public override TemplateContainer SpawnUI(out List<Focusable> fs)
         {
             // Clone the base template
-            TemplateContainer uiInstance = base.SpawnUI();
+            TemplateContainer uiInstance = base.SpawnUI(out fs);
 
             // Query the components in the template
             var label = uiInstance.Q<Label>("lblCurrentOption");
@@ -55,6 +56,9 @@ namespace BambuFramework.UI
                     }
                 };
             }
+
+            fs.Add(prevButton);
+            fs.Add(nextButton);
 
             return uiInstance;
         }

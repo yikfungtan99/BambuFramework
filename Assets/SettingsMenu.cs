@@ -18,7 +18,9 @@ namespace BambuFramework.UI
 
         private InputSystem_Actions inputActions;
 
-        private List<Focusable> focussable;
+        private List<Focusable> focussables = new List<Focusable>();
+
+        private int currentSettingIndex;
 
         private void Awake()
         {
@@ -51,13 +53,17 @@ namespace BambuFramework.UI
                 return;
             }
 
+            focussables.Clear();
+
             foreach (SettingsTab tab in settingsContainer.Tabs)
             {
                 var tabInstance = tabView.Q<VisualElement>($"tab{tab.TabName}");
 
                 foreach (SettingOption settingOption in tab.SettingOptions)
                 {
-                    var settingElement = settingOption.SpawnUI();
+                    var settingElement = settingOption.SpawnUI(out List<Focusable> fs);
+
+                    focussables.AddRange(fs);
 
                     tabInstance.Add(settingElement);
                 }
@@ -72,14 +78,37 @@ namespace BambuFramework.UI
 
             inputActions.UI.NextTab.performed += ctx => NavigateTabs(1);
             inputActions.UI.PreviousTab.performed += ctx => NavigateTabs(-1);
+            inputActions.UI.Exit.performed += ctx => Back();
         }
 
         public override void Hide(bool sortingOrder = true)
         {
             base.Hide(sortingOrder);
 
-            if (inputActions != null) inputActions.UI.NextTab.performed -= ctx => NavigateTabs(1);
-            if (inputActions != null) inputActions.UI.PreviousTab.performed -= ctx => NavigateTabs(-1);
+            if (inputActions != null)
+            {
+                inputActions.UI.NextTab.performed -= ctx => NavigateTabs(1);
+                inputActions.UI.PreviousTab.performed -= ctx => NavigateTabs(-1);
+                inputActions.UI.Exit.performed -= ctx => Back();
+            }
+        }
+
+        private void SetFocusOnSetting(int index)
+        {
+            if (focussables == null || focussables.Count == 0) return;
+
+            // Remove focus from the previous setting
+            if (focussables.Count > index)
+            {
+                var previousSetting = focussables[currentSettingIndex];
+                previousSetting?.Blur();
+            }
+
+            // Apply focus to the new setting
+            var selectedSetting = focussables[index];
+
+            Bambu.Log(selectedSetting.ToString());
+            selectedSetting?.Focus();
         }
 
         private void Back()

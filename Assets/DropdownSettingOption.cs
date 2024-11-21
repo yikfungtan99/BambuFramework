@@ -11,10 +11,10 @@ namespace BambuFramework.UI
         public string[] DropdownOptions { get => baseOptions; }
         public override ESettingOptions SettingsOption => ESettingOptions.DROPDOWN;
 
-        public override TemplateContainer SpawnUI()
+        public override TemplateContainer SpawnUI(out List<Focusable> fs)
         {
             // Clone the base template
-            TemplateContainer uiInstance = base.SpawnUI();
+            TemplateContainer uiInstance = base.SpawnUI(out fs);
 
             // Query the Dropdown element
             var dropdown = uiInstance.Q<DropdownField>("CustomDropdown");
@@ -40,7 +40,16 @@ namespace BambuFramework.UI
                 Bambu.Log("DropdownField with the name 'settingDropdown' was not found in the UI template.");
             }
 
+            fs.Add(dropdown);
+
+            dropdown.RegisterCallback<FocusEvent>(Focus);
+
             return uiInstance;
+        }
+
+        private void Focus(FocusEvent evt)
+        {
+            Bambu.Log("HI");
         }
     }
 }

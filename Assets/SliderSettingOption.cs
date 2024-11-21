@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace BambuFramework.UI
@@ -16,10 +17,10 @@ namespace BambuFramework.UI
 
         public override ESettingOptions SettingsOption => ESettingOptions.SLIDER;
 
-        public override TemplateContainer SpawnUI()
+        public override TemplateContainer SpawnUI(out List<Focusable> fs)
         {
             // Clone the base template
-            TemplateContainer uiInstance = base.SpawnUI();
+            TemplateContainer uiInstance = base.SpawnUI(out fs);
 
             // Query the slider and text field elements
             var slider = uiInstance.Q<Slider>("CustomSlider");
@@ -93,6 +94,8 @@ namespace BambuFramework.UI
             {
                 Bambu.Log("TextField element with the name 'sliderValueField' was not found in the UI template.");
             }
+
+            fs.Add(slider);
 
             return uiInstance;
         }
