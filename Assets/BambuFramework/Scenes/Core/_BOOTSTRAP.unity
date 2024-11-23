@@ -177,6 +177,7 @@ GameObject:
   m_Component:
   - component: {fileID: 68519154}
   - component: {fileID: 68519153}
+  - component: {fileID: 68519155}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -212,6 +213,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &68519155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68519152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nonRigidbodyVelocity: 0
+  attenuationObject: {fileID: 0}
 --- !u!1 &91083871
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,30 +734,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1099267042}
-  - component: {fileID: 1099267041}
+  - component: {fileID: 1099267043}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: MusicManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1099267041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1099267040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fea4f658efe02aa4b82c22a21796b3fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioRef:
-    eventName: 
-    isLooping: 0
-    description: 
 --- !u!4 &1099267042
 Transform:
   m_ObjectHideFlags: 0
@@ -758,6 +757,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1099267043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099267040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fea4f658efe02aa4b82c22a21796b3fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioRef:
+    eventName: music_menu
+    isLooping: 0
+    description: 
 --- !u!114 &1158011689 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7411663688332556804, guid: 22fc80476aeb7bc499f2bdb9af50e70f,

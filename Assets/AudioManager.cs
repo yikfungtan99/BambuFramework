@@ -25,7 +25,7 @@ namespace BambuFramework.Audio
         /// </summary>
         private void InitializeAudioBuses()
         {
-            audioBuses[EAudioChannel.MASTER] = RuntimeManager.GetBus("bus:/MASTER");
+            audioBuses[EAudioChannel.MASTER] = RuntimeManager.GetBus("bus:/");
             audioBuses[EAudioChannel.SFX] = RuntimeManager.GetBus("bus:/SFX");
             audioBuses[EAudioChannel.MUSIC] = RuntimeManager.GetBus("bus:/MUSIC");
         }
@@ -93,7 +93,7 @@ namespace BambuFramework.Audio
         /// <summary>
         /// Plays a looping audio attached to the specified game object.
         /// </summary>
-        public void PlayLoopingAudio(string eventName, GameObject parentObject)
+        public void PlayLoopingAudio(string eventName)
         {
             var audioEvent = audioContainer.GetAudioEvent(eventName);
 
@@ -103,15 +103,15 @@ namespace BambuFramework.Audio
                 return;
             }
 
-            if (loopingInstances.ContainsKey(parentObject))
+            if (loopingInstances.ContainsKey(gameObject))
             {
-                Debug.LogWarning($"A looping sound is already playing on {parentObject.name}");
+                Debug.LogWarning($"A looping sound is already playing on {gameObject.name}");
                 return;
             }
 
             // Create an emitter as a child of the parentObject
             var emitter = new GameObject($"Emitter_{eventName}");
-            emitter.transform.SetParent(parentObject.transform);
+            emitter.transform.SetParent(gameObject.transform);
             emitter.transform.localPosition = Vector3.zero;
 
             // Create the FMOD instance
@@ -120,7 +120,7 @@ namespace BambuFramework.Audio
             instance.start();
 
             // Store the event instance for later management
-            loopingInstances[parentObject] = instance;
+            loopingInstances[gameObject] = instance;
         }
 
         /// <summary>

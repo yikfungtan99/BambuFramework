@@ -22,13 +22,13 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   audioEvents:
-  - eventName: Music
+  - eventName: music_menu
     channel: 0
     eventReference:
       Guid:
-        Data1: 0
-        Data2: 0
-        Data3: 0
-        Data4: 0
-      Path: 
+        Data1: 1528574828
+        Data2: 1091093793
+        Data3: -611202156
+        Data4: 2108089356
+      Path: event:/Bocchi the rock
     description: 
