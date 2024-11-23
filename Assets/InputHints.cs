@@ -39,6 +39,7 @@ namespace BambuFramework.UI
 
             if (currentHintsIndex == -1)
             {
+                Bambu.Log($"return");
                 Hide();
                 return;
             }
@@ -48,6 +49,7 @@ namespace BambuFramework.UI
 
             if (prompts == null)
             {
+                Bambu.Log($"return");
                 Hide();
                 return;
             }
@@ -79,8 +81,9 @@ namespace BambuFramework.UI
             {
                 existingInputHintPromptList[i].style.display = DisplayStyle.None; // Hide the excess containers
             }
-        }
 
+            Root.visible = true;
+        }
 
         protected override void UpdateMenu()
         {
@@ -90,6 +93,7 @@ namespace BambuFramework.UI
         public override void Hide(bool sortingOrder = false)
         {
             base.Hide(sortingOrder);
+            currentHintsIndex = -1;
         }
     }
 }
