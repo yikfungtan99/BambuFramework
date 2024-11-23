@@ -1,4 +1,3 @@
-using BambuFramework.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -52,7 +51,7 @@ namespace BambuFramework
         private void OnPause(InputAction.CallbackContext context)
         {
             // Call ShowPause method on UIManager when Pause action is triggered
-            UIManager.Instance.ShowPause(this);
+            GameManager.Instance.Pause(this);
         }
 
         public void SwitchToGameActionMap()

@@ -769,7 +769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fea4f658efe02aa4b82c22a21796b3fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioRef:
+  mainMenuMusic:
     eventName: music_menu
     isLooping: 0
     description: 

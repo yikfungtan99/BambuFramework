@@ -67,7 +67,7 @@ namespace BambuFramework.UI
             }
             else
             {
-                Bambu.Log("DropdownField with the name 'settingDropdown' was not found in the UI template.");
+                Bambu.Log("DropdownField with the name 'settingDropdown' was not found in the UI template.", Debugging.ELogCategory.UI);
             }
 
             return uiInstance;

@@ -21,3 +21,15 @@ MonoBehaviour:
     showInEditor: 1
     showInBuild: 1
     logColor: {r: 0.67071193, g: 0.9056604, b: 0.5596298, a: 1}
+  - error: 2
+    showInEditor: 1
+    showInBuild: 1
+    logColor: {r: 0.5970096, g: 0.9811321, b: 0.91961026, a: 1}
+  - error: 3
+    showInEditor: 1
+    showInBuild: 1
+    logColor: {r: 0.8301887, g: 0.5521538, b: 0.7802729, a: 1}
+  - error: 4
+    showInEditor: 1
+    showInBuild: 1
+    logColor: {r: 0.8490566, g: 0.70632637, b: 0.38047346, a: 1}

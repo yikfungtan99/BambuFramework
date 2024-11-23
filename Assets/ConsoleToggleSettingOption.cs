@@ -24,7 +24,7 @@ namespace BambuFramework.UI
                 {
                     // Update the GameplayConsole setting in SettingsManager
                     SettingsManager.Instance.SetGameplayConsole(evt.newValue);
-                    Bambu.Log($"Gameplay Console set to: {evt.newValue}");
+                    Bambu.Log($"Gameplay Console set to: {evt.newValue}", Debugging.ELogCategory.UI);
                 });
             }
             else

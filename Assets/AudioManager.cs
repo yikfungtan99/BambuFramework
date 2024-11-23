@@ -39,6 +39,7 @@ namespace BambuFramework.Audio
 
             if (audioBuses.TryGetValue(channel, out var bus))
             {
+                Bambu.Log($"{channel}: {volume}", Debugging.ELogCategory.AUDIO);
                 bus.setVolume(normalizedVolume);
             }
             else

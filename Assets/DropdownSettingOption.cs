@@ -13,8 +13,6 @@ namespace BambuFramework.UI
 
         public override TemplateContainer SpawnUI(out List<Focusable> fs)
         {
-            Bambu.Log("SPAWN UI");
-
             // Clone the base template
             TemplateContainer uiInstance = base.SpawnUI(out fs);
 
@@ -34,12 +32,12 @@ namespace BambuFramework.UI
                 // Optionally, add a callback for when the dropdown value changes
                 dropdown.RegisterValueChangedCallback(evt =>
                 {
-                    Bambu.Log($"Dropdown value changed to: {evt.newValue}");
+                    Bambu.Log($"Dropdown value changed to: {evt.newValue}", Debugging.ELogCategory.UI);
                 });
             }
             else
             {
-                Bambu.Log("DropdownField with the name 'settingDropdown' was not found in the UI template.");
+                Bambu.Log("DropdownField with the name 'settingDropdown' was not found in the UI template.", Debugging.ELogCategory.UI);
             }
 
             fs.Add(dropdown);

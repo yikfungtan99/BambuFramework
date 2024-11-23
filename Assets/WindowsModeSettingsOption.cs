@@ -49,7 +49,7 @@ namespace BambuFramework.UI
                     currentIndex = dropdown.index;
                     ApplyWindowModeSetting(currentIndex);
                     //if (label != null) label.text = DropdownOptions[currentIndex];  // Update label text
-                    Bambu.Log($"Window mode changed to: {DropdownOptions[currentIndex]}");
+                    Bambu.Log($"Window mode changed to: {DropdownOptions[currentIndex]}", Debugging.ELogCategory.UI);
                 });
             }
 

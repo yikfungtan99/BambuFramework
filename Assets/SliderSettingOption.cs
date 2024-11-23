@@ -49,12 +49,12 @@ namespace BambuFramework.UI
                         textField.value = ((int)newValue).ToString();
                     }
 
-                    Bambu.Log($"Slider changed to: {newValue}");
+                    Bambu.Log($"Slider changed to: {newValue}", Debugging.ELogCategory.UI);
                 });
             }
             else
             {
-                Bambu.Log("Slider element with the name 'settingSlider' was not found in the UI template.");
+                Bambu.Log("Slider element with the name 'settingSlider' was not found in the UI template.", Debugging.ELogCategory.UI);
             }
 
             // Configure the text field
@@ -76,7 +76,7 @@ namespace BambuFramework.UI
                         // Update the text field to reflect the clamped value
                         textField.SetValueWithoutNotify(newValue.ToString());
 
-                        Bambu.Log($"TextField changed to: {newValue}");
+                        Bambu.Log($"TextField changed to: {newValue}", Debugging.ELogCategory.UI);
                     }
                     else
                     {
@@ -86,13 +86,13 @@ namespace BambuFramework.UI
                             textField.SetValueWithoutNotify(((int)slider.value).ToString());
                         }
 
-                        Bambu.Log("Invalid input in TextField. Resetting to current slider value.");
+                        Bambu.Log("Invalid input in TextField. Resetting to current slider value.", Debugging.ELogCategory.UI);
                     }
                 });
             }
             else
             {
-                Bambu.Log("TextField element with the name 'sliderValueField' was not found in the UI template.");
+                Bambu.Log("TextField element with the name 'sliderValueField' was not found in the UI template.", Debugging.ELogCategory.UI);
             }
 
             fs.Add(slider);

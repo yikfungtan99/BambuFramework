@@ -30,44 +30,66 @@ namespace BambuFramework.Settings
         }
         public int VideoWindowMode { get; private set; }
         public int VideoFramerate { get; private set; }
-        public float AudioMaster { get; private set; }
-        public float AudioSFX { get; private set; }
-        public float AudioMusic { get; private set; }
+
+        public int AudioMaster { get; private set; }
+        public int AudioSFX { get; private set; }
+        public int AudioMusic { get; private set; }
 
         private void Start()
         {
             settingsContainer = SettingsContainer.Instance;
+
             LoadSettings();
         }
 
         public void SaveSettings()
         {
-            PlayerPrefs.SetInt(KEY_SETTING_GAMEPLAY_CONSOLE, GameplayConsole ? 1 : 0);
+            SaveGameplaySettings();
 
+            SaveVideoSettings();
+
+            SaveAudioSettings();
+
+            PlayerPrefs.Save();
+        }
+
+        private void SaveGameplaySettings()
+        {
+            PlayerPrefs.SetInt(KEY_SETTING_GAMEPLAY_CONSOLE, GameplayConsole ? 1 : 0);
+        }
+
+        private void SaveVideoSettings()
+        {
             PlayerPrefs.SetInt(KEY_SETTING_VIDEO_RESOLUTION + "_Width", VideoResolution.x);
             PlayerPrefs.SetInt(KEY_SETTING_VIDEO_RESOLUTION + "_Height", VideoResolution.y);
 
             PlayerPrefs.SetInt(KEY_SETTING_VIDEO_WINDOW_MODE, VideoWindowMode);
             PlayerPrefs.SetInt(KEY_SETTING_VIDEO_FRAMERATE, VideoFramerate);
+        }
 
-            PlayerPrefs.SetFloat(KEY_SETTING_AUDIO_MASTER, AudioMaster);
-            PlayerPrefs.SetFloat(KEY_SETTING_AUDIO_SFX, AudioSFX);
-            PlayerPrefs.SetFloat(KEY_SETTING_AUDIO_MUSIC, AudioMusic);
-
-            PlayerPrefs.Save();
+        private void SaveAudioSettings()
+        {
+            PlayerPrefs.SetInt(KEY_SETTING_AUDIO_MASTER, AudioMaster);
+            PlayerPrefs.SetInt(KEY_SETTING_AUDIO_SFX, AudioSFX);
+            PlayerPrefs.SetInt(KEY_SETTING_AUDIO_MUSIC, AudioMusic);
         }
 
         public void LoadSettings()
         {
             GameplayConsole = PlayerPrefs.GetInt(KEY_SETTING_GAMEPLAY_CONSOLE, 0) == 1;
+            SetGameplayConsole(GameplayConsole);
 
-            LoadVideoResolution();
             VideoWindowMode = PlayerPrefs.GetInt(KEY_SETTING_VIDEO_WINDOW_MODE, 1);
             VideoFramerate = PlayerPrefs.GetInt(KEY_SETTING_VIDEO_FRAMERATE, 0);
+            LoadVideoResolution();
 
-            AudioMaster = PlayerPrefs.GetFloat(KEY_SETTING_AUDIO_MASTER, 50f);
-            AudioSFX = PlayerPrefs.GetFloat(KEY_SETTING_AUDIO_SFX, 50f);
-            AudioMusic = PlayerPrefs.GetFloat(KEY_SETTING_AUDIO_MUSIC, 50f);
+            AudioMaster = PlayerPrefs.GetInt(KEY_SETTING_AUDIO_MASTER, 50);
+            AudioSFX = PlayerPrefs.GetInt(KEY_SETTING_AUDIO_SFX, 50);
+            AudioMusic = PlayerPrefs.GetInt(KEY_SETTING_AUDIO_MUSIC, 50);
+
+            SetAudioMaster(AudioMaster);
+            SetAudioSFX(AudioSFX);
+            SetAudioMusic(AudioMusic);
         }
 
         public void LoadVideoResolution()
@@ -81,7 +103,7 @@ namespace BambuFramework.Settings
         {
             VideoResolution = resolution;
             Screen.SetResolution(VideoResolution.x, VideoResolution.y, IsFullScreen);
-            SaveSettings();
+            SaveVideoSettings();
         }
 
         public void SetGameplayConsole(bool value)
@@ -90,7 +112,7 @@ namespace BambuFramework.Settings
 
             DebugLogManager.Instance.gameObject.SetActive(GameplayConsole);
 
-            SaveSettings();
+            SaveGameplaySettings();
         }
 
         public void SetVideoWindowMode(int value)
@@ -116,7 +138,7 @@ namespace BambuFramework.Settings
             }
 
             Screen.SetResolution(VideoResolution.x, VideoResolution.y, IsFullScreen);
-            SaveSettings();
+            SaveVideoSettings();
         }
 
         public void SetVideoFramerate(int value)
@@ -126,28 +148,28 @@ namespace BambuFramework.Settings
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = settingsContainer.VideoFrameRates[VideoFramerate];
 
-            SaveSettings();
+            SaveVideoSettings();
         }
 
-        public void SetAudioMaster(float value)
+        public void SetAudioMaster(int value)
         {
             AudioMaster = value;
             AudioManager.Instance.SetChannelVolume(EAudioChannel.MASTER, AudioMaster);
-            SaveSettings();
+            SaveAudioSettings();
         }
 
-        public void SetAudioSFX(float value)
+        public void SetAudioSFX(int value)
         {
             AudioSFX = value;
             AudioManager.Instance.SetChannelVolume(EAudioChannel.SFX, AudioSFX);
-            SaveSettings();
+            SaveAudioSettings();
         }
 
-        public void SetAudioMusic(float value)
+        public void SetAudioMusic(int value)
         {
             AudioMusic = value;
             AudioManager.Instance.SetChannelVolume(EAudioChannel.MUSIC, AudioMusic);
-            SaveSettings();
+            SaveAudioSettings();
         }
 
         public void ResetVideoSettings()
@@ -164,7 +186,7 @@ namespace BambuFramework.Settings
             PlayerPrefs.Save();
         }
 
-        public void SetAudioVolume(EAudioChannel channel, float volume)
+        public void SetAudioVolume(EAudioChannel channel, int volume)
         {
             switch (channel)
             {

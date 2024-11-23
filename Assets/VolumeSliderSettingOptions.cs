@@ -44,7 +44,7 @@ namespace BambuFramework.UI
                         textField.value = ((int)newValue).ToString();
                     }
                     ApplyVolumeSetting(newValue);
-                    Bambu.Log($"{channel} volume changed to: {newValue}");
+                    Bambu.Log($"{channel} volume changed to: {newValue}", Debugging.ELogCategory.UI);
                 });
             }
 
@@ -58,7 +58,7 @@ namespace BambuFramework.UI
                         if (slider != null) slider.value = newValue;
                         textField.SetValueWithoutNotify(newValue.ToString());
                         ApplyVolumeSetting(newValue);
-                        Bambu.Log($"{channel} volume changed to: {newValue}");
+                        Bambu.Log($"{channel} volume changed to: {newValue}", Debugging.ELogCategory.UI);
                     }
                     else
                     {
@@ -66,7 +66,7 @@ namespace BambuFramework.UI
                         {
                             textField.SetValueWithoutNotify(((int)slider.value).ToString());
                         }
-                        Bambu.Log($"Invalid input in TextField for {channel}. Resetting to current slider value.");
+                        Bambu.Log($"Invalid input in TextField for {channel}. Resetting to current slider value.", Debugging.ELogCategory.UI);
                     }
                 });
             }
@@ -84,8 +84,7 @@ namespace BambuFramework.UI
         {
             // This method can be overridden in subclasses to apply the setting to specific systems
             // For example, master volume, music volume, or SFX volume
-            SettingsManager.Instance.SetAudioVolume(channel, volume);
-            Bambu.Log($"Applied {channel} volume: {volume}");
+            SettingsManager.Instance.SetAudioVolume(channel, Mathf.FloorToInt(volume));
         }
 
         protected override void Focus(VisualElement template)
