@@ -33,6 +33,8 @@ MonoBehaviour:
     - Assembly-CSharp
     - Assembly-CSharp-firstpass
     - Eflatun.SceneReference
+    - FMODUnity
+    - FMODUnityResonance
     - IngameDebugConsole.Runtime
     - Sirenix.OdinInspector.Modules.Unity.Addressables
     showAdvancedSettings: 0
