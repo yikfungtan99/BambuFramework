@@ -1,4 +1,4 @@
-﻿namespace BambuFramework.UI
+﻿namespace BambuFramework.Audio
 {
     public enum EAudioChannel
     {
