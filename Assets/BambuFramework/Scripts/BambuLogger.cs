@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace BambuFramework.Debugging
@@ -12,7 +13,7 @@ namespace BambuFramework.Debugging
     }
 
     [System.Serializable]
-    public class BambuLog
+    public class BambuLogConfig
     {
         [SerializeField] private ELogCategory error;
         public ELogCategory Error => error;
@@ -31,33 +32,73 @@ namespace BambuFramework.Debugging
 #endif
 
 #if !UNITY_EDITOR
-        return showInBuild;
+            return showInBuild;
 #endif
         }
     }
 
-    public class BambuLogger : SingletonBehaviour<BambuLogger>
+    public static class BambuLogger
     {
-        [SerializeField] private bool showLogs = false;
+        // Static reference to hold the configuration (will be set via editor script)
+        private static BambuLoggerConfig config;
 
-        [SerializeField] private List<BambuLog> logs;
+        private static List<BambuLogConfig> logs = new List<BambuLogConfig>(); // Store registered LogConfigurations
+
+        static BambuLogger()
+        {
+            InitializeConfig();
+        }
+
+        // Method to initialize config at editor time
+        private static void InitializeConfig()
+        {
+            if (config == null)
+            {
+                // Find all assets of type BambuLoggerConfig in the Resources folder
+                string[] guids = AssetDatabase.FindAssets("t:BambuLoggerConfig", new[] { "Assets/Resources" });
+
+                // Check if any assets were found
+                if (guids.Length > 0)
+                {
+                    // Get the first asset found and load it
+                    string assetPath = AssetDatabase.GUIDToAssetPath(guids[0]);
+                    config = AssetDatabase.LoadAssetAtPath<BambuLoggerConfig>(assetPath);
+
+                    if (config != null)
+                    {
+                        logs = config.LogConfigurations;
+                        Debug.Log("BambuLoggerConfig loaded: " + config.name);
+                    }
+                    else
+                    {
+                        Debug.LogError("Failed to load BambuLoggerConfig from Resources.");
+                    }
+                }
+                else
+                {
+                    Debug.LogError("No BambuLoggerConfig assets found in Resources.");
+                }
+            }
+        }
 
         public static void Log(object obj, ELogCategory cat = ELogCategory.GENERIC)
         {
-            Instance.LogInternal(obj, cat);
+            LogInternal(obj, cat);
         }
 
-        public void LogInternal(object obj, ELogCategory cat)
+        private static void LogInternal(object obj, ELogCategory cat)
         {
-            if (!showLogs) return;
-
-            BambuLog target = logs.Find(x => x.Error == cat);
+            BambuLogConfig target = logs.Find(x => x.Error == cat);
             if (target == null) return;
             if (!target.Show) return;
 
             string logMessage = $"{cat}: ";
 
-            UnityEngine.Debug.Log(string.Format("<color=#{0:X2}{1:X2}{2:X2}>{3}</color>", (byte)(target.LogColor.r * 255f), (byte)(target.LogColor.g * 255f), (byte)(target.LogColor.b * 255f), logMessage) + obj);
+            Debug.Log(string.Format("<color=#{0:X2}{1:X2}{2:X2}>{3}</color>",
+                (byte)(target.LogColor.r * 255f),
+                (byte)(target.LogColor.g * 255f),
+                (byte)(target.LogColor.b * 255f),
+                logMessage) + obj);
         }
     }
 }
