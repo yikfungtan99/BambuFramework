@@ -35,9 +35,11 @@ namespace BambuFramework.Audio
         /// </summary>
         public void SetChannelVolume(EAudioChannel channel, float volume)
         {
+            float normalizedVolume = Mathf.Clamp(volume / 100f, 0f, 1f);
+
             if (audioBuses.TryGetValue(channel, out var bus))
             {
-                bus.setVolume(volume);
+                bus.setVolume(normalizedVolume);
             }
             else
             {

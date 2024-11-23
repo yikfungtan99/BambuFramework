@@ -132,18 +132,21 @@ namespace BambuFramework.Settings
         public void SetAudioMaster(float value)
         {
             AudioMaster = value;
+            AudioManager.Instance.SetChannelVolume(EAudioChannel.MASTER, AudioMaster);
             SaveSettings();
         }
 
         public void SetAudioSFX(float value)
         {
             AudioSFX = value;
+            AudioManager.Instance.SetChannelVolume(EAudioChannel.SFX, AudioSFX);
             SaveSettings();
         }
 
         public void SetAudioMusic(float value)
         {
             AudioMusic = value;
+            AudioManager.Instance.SetChannelVolume(EAudioChannel.MUSIC, AudioMusic);
             SaveSettings();
         }
 
