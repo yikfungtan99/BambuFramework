@@ -1,4 +1,5 @@
 using BambuFramework.UI;
+using IngameDebugConsole;
 using UnityEngine;
 
 namespace BambuFramework.Settings
@@ -19,6 +20,13 @@ namespace BambuFramework.Settings
 
         public bool GameplayConsole { get; private set; }
         public Vector2Int VideoResolution { get; private set; }
+        public bool IsFullScreen
+        {
+            get
+            {
+                return VideoWindowMode == 0;
+            }
+        }
         public int VideoWindowMode { get; private set; }
         public int VideoFramerate { get; private set; }
         public float AudioMaster { get; private set; }
@@ -71,33 +79,42 @@ namespace BambuFramework.Settings
         public void SetVideoResolution(Vector2Int resolution)
         {
             VideoResolution = resolution;
+            Screen.SetResolution(VideoResolution.x, VideoResolution.y, IsFullScreen);
             SaveSettings();
         }
 
         public void SetGameplayConsole(bool value)
         {
             GameplayConsole = value;
+
+            DebugLogManager.Instance.gameObject.SetActive(GameplayConsole);
+
             SaveSettings();
         }
 
         public void SetVideoWindowMode(int value)
         {
             VideoWindowMode = value;
+            Bambu.Log(VideoWindowMode);
 
             // Apply the actual window mode change to the application (this could be different based on your implementation)
             switch (VideoWindowMode)
             {
                 case 0: // Fullscreen
+                    Screen.fullScreen = true;
                     Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
                     break;
                 case 1: // Windowed
+                    Screen.fullScreen = false;
                     Screen.fullScreenMode = FullScreenMode.Windowed;
                     break;
                 case 2: // Windowed (Borderless)
+                    Screen.fullScreen = false;
                     Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
                     break;
             }
 
+            Screen.SetResolution(VideoResolution.x, VideoResolution.y, IsFullScreen);
             SaveSettings();
         }
 

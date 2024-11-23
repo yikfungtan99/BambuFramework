@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BambuFramework.Debug
+namespace BambuFramework.Debugging
 {
     public enum ELogCategory
     {

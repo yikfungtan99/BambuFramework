@@ -29,17 +29,15 @@ namespace BambuFramework.UI
             // Create the base UI instance using the inherited method
             TemplateContainer uiInstance = base.SpawnUI(out fs);
 
-            // Query the components in the template (dropdown and label)
-            var label = uiInstance.Q<Label>("lblCurrentOption");
-            var dropdown = uiInstance.Q<DropdownField>("dropdownWindowMode");
+            var dropdown = uiInstance.Q<DropdownField>("CustomDropdown");
 
             // Set initial value for dropdown based on current window mode setting
             currentIndex = SettingsManager.Instance.VideoWindowMode;  // Assuming GetWindowMode returns an index for the selected window mode
 
-            if (label != null && DropdownOptions != null && DropdownOptions.Length > 0)
-            {
-                label.text = DropdownOptions[currentIndex];  // Display the current window mode name in the label
-            }
+            //if (label != null && DropdownOptions != null && DropdownOptions.Length > 0)
+            //{
+            //    label.text = DropdownOptions[currentIndex];  // Display the current window mode name in the label
+            //}
 
             // Initialize the dropdown field
             if (dropdown != null)
@@ -50,7 +48,7 @@ namespace BambuFramework.UI
                 {
                     currentIndex = dropdown.index;
                     ApplyWindowModeSetting(currentIndex);
-                    if (label != null) label.text = DropdownOptions[currentIndex];  // Update label text
+                    //if (label != null) label.text = DropdownOptions[currentIndex];  // Update label text
                     Bambu.Log($"Window mode changed to: {DropdownOptions[currentIndex]}");
                 });
             }

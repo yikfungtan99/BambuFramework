@@ -13,6 +13,8 @@ namespace BambuFramework.UI
 
         public override TemplateContainer SpawnUI(out List<Focusable> fs)
         {
+            Bambu.Log("SPAWN UI");
+
             // Clone the base template
             TemplateContainer uiInstance = base.SpawnUI(out fs);
 

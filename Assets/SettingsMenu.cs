@@ -35,9 +35,6 @@ namespace BambuFramework.UI
             // Instantiate settings options
             PopulateSettingsOptions();
 
-            btnBack = tabView.Q<Button>("btnBack");
-            btnBack.clicked += Back;
-
             tabCount = tabView.childCount;
 
             // Initialize the first tab to be selected
@@ -57,6 +54,9 @@ namespace BambuFramework.UI
             foreach (SettingsTab tab in settingsContainer.Tabs)
             {
                 var tabInstance = tabView.Q<Tab>($"tab{tab.TabName}");
+
+                btnBack = tabInstance.Q<Button>("btnBack");
+                btnBack.clicked += Back;
 
                 tabView.Add(tabInstance);
 

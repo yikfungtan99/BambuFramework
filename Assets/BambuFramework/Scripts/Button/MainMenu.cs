@@ -1,4 +1,4 @@
-using BambuFramework.Debug;
+using BambuFramework.Debugging;
 using UnityEngine;
 using UnityEngine.UIElements;
 

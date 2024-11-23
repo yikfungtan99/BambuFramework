@@ -306,6 +306,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11440770, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11440770, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 11440770, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 11490438, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_BlockingMask.m_Bits
       value: 55
@@ -316,6 +328,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22426080, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22426080, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
+      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22428984, guid: 67117722a812a2e46ab8cb8eafbf5f5e, type: 3}
@@ -676,19 +692,19 @@ MonoBehaviour:
   logs:
   - error: 0
     showInEditor: 1
-    showInBuild: 0
+    showInBuild: 1
     logColor: {r: 1, g: 1, b: 1, a: 1}
   - error: 1
     showInEditor: 1
-    showInBuild: 0
+    showInBuild: 1
     logColor: {r: 0.023985408, g: 0.46226418, b: 0.13523589, a: 1}
   - error: 2
     showInEditor: 1
-    showInBuild: 0
+    showInBuild: 1
     logColor: {r: 0.31229973, g: 0.5471698, b: 0.51713604, a: 1}
   - error: 3
     showInEditor: 1
-    showInBuild: 0
+    showInBuild: 1
     logColor: {r: 0.990566, g: 0.9321851, b: 0.43454072, a: 1}
 --- !u!4 &795129631
 Transform:
