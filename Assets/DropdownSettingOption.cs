@@ -8,7 +8,7 @@ namespace BambuFramework.UI
     public class DropdownSettingOption : SettingOption
     {
         [SerializeField] private string[] baseOptions;
-        public string[] DropdownOptions { get => baseOptions; }
+        public virtual string[] DropdownOptions { get => baseOptions; }
         public override ESettingOptions SettingsOption => ESettingOptions.DROPDOWN;
 
         public override TemplateContainer SpawnUI(out List<Focusable> fs)

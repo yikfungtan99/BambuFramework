@@ -10,7 +10,7 @@ namespace BambuFramework.UI
     public class SettingsContainer : SingletonSerializedScriptableObject<SettingsContainer>
     {
         public Dictionary<ESettingOptions, VisualTreeAsset> SettingOptionsTemplateKVP = new Dictionary<ESettingOptions, VisualTreeAsset>();
-        public List<SettingOption> settingOptions;
+        public List<int> VideoFrameRates;
 
         // List of tabs, each containing its own setting options
         [OdinSerialize][NonSerialized] public List<SettingsTab> Tabs = new List<SettingsTab>();

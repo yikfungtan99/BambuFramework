@@ -1,98 +1,73 @@
-﻿using System.Collections.Generic;
+﻿using BambuFramework.Settings;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace BambuFramework.UI
 {
-    [System.Serializable]
-    public class SliderSettingOption : SettingOption
+    public class VolumeSliderSettingOption : SliderSettingOption
     {
-        [SerializeField] private float minValue = 0f;
-        [SerializeField] private float maxValue = 100f;
-        [SerializeField] private float defaultValue = 50f;
+        // Overrideable properties for setting different volume types (Master, SFX, Music)
+        [SerializeField] private EAudioChannel channel;
 
-        public virtual float MinValue => minValue;
-        public virtual float MaxValue => maxValue;
-        public virtual float DefaultValue => defaultValue;
+        // These can be overridden in derived classes to set specific volume ranges
+        public override float MinValue => 0f;
+        public override float MaxValue => 100f;
+        public override float DefaultValue => SettingsManager.Instance.GetAudioVolume(channel);
 
-        public override ESettingOptions SettingsOption => ESettingOptions.SLIDER;
-
+        // Override the UI logic, keeping the functionality reusable
         public override TemplateContainer SpawnUI(out List<Focusable> fs)
         {
-            // Clone the base template
             TemplateContainer uiInstance = base.SpawnUI(out fs);
 
-            // Query the slider and text field elements
             var slider = uiInstance.Q<Slider>("CustomSlider");
             var textField = uiInstance.Q<TextField>("CustomTextField");
 
-            // Configure the slider
             if (slider != null)
             {
                 slider.lowValue = MinValue;
                 slider.highValue = MaxValue;
                 slider.value = DefaultValue;
 
-                // Update the text field with the initial slider value
                 if (textField != null)
                 {
-                    textField.value = ((int)DefaultValue).ToString(); // Display one decimal place
+                    textField.value = ((int)DefaultValue).ToString();
                 }
 
-                // Synchronize the slider with the text field
+                // Update text field on slider change
                 slider.RegisterValueChangedCallback(evt =>
                 {
                     float newValue = evt.newValue;
-
                     if (textField != null)
                     {
                         textField.value = ((int)newValue).ToString();
                     }
-
-                    Bambu.Log($"Slider changed to: {newValue}");
+                    ApplyVolumeSetting(newValue);
+                    Bambu.Log($"{channel} volume changed to: {newValue}");
                 });
             }
-            else
-            {
-                Bambu.Log("Slider element with the name 'settingSlider' was not found in the UI template.");
-            }
 
-            // Configure the text field
             if (textField != null)
             {
                 textField.RegisterValueChangedCallback(evt =>
                 {
                     if (float.TryParse(evt.newValue, out float newValue))
                     {
-                        // Clamp the value within the slider range
                         newValue = Mathf.Clamp(newValue, MinValue, MaxValue);
-
-                        // Update the slider value
-                        if (slider != null)
-                        {
-                            slider.value = newValue;
-                        }
-
-                        // Update the text field to reflect the clamped value
+                        if (slider != null) slider.value = newValue;
                         textField.SetValueWithoutNotify(newValue.ToString());
-
-                        Bambu.Log($"TextField changed to: {newValue}");
+                        ApplyVolumeSetting(newValue);
+                        Bambu.Log($"{channel} volume changed to: {newValue}");
                     }
                     else
                     {
-                        // Reset the text field to the slider's current value if parsing fails
                         if (slider != null)
                         {
                             textField.SetValueWithoutNotify(((int)slider.value).ToString());
                         }
-
-                        Bambu.Log("Invalid input in TextField. Resetting to current slider value.");
+                        Bambu.Log($"Invalid input in TextField for {channel}. Resetting to current slider value.");
                     }
                 });
-            }
-            else
-            {
-                Bambu.Log("TextField element with the name 'sliderValueField' was not found in the UI template.");
             }
 
             fs.Add(slider);
@@ -101,6 +76,15 @@ namespace BambuFramework.UI
             slider.RegisterCallback<BlurEvent>((e) => Blur(uiInstance));
 
             return uiInstance;
+        }
+
+        // Apply the volume setting (use a specific method in derived classes for actual setting)
+        protected virtual void ApplyVolumeSetting(float volume)
+        {
+            // This method can be overridden in subclasses to apply the setting to specific systems
+            // For example, master volume, music volume, or SFX volume
+            SettingsManager.Instance.SetAudioVolume(channel, volume);
+            Bambu.Log($"Applied {channel} volume: {volume}");
         }
 
         protected override void Focus(VisualElement template)

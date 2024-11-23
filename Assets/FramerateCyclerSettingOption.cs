@@ -1,21 +1,37 @@
-﻿using System.Collections.Generic;
+﻿using BambuFramework.Settings;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace BambuFramework.UI
 {
     [System.Serializable]
-    public class CyclerSettingOption : SettingOption
+    public class FramerateCyclerSettingOption : CyclerSettingOption
     {
-        [SerializeField] private List<string> baseOptions = new List<string>();
-        private int currentIndex = 0;
+        private int currentIndex;
 
-        public virtual List<string> CyclerOptions => baseOptions;
-        public override ESettingOptions SettingsOption => ESettingOptions.CYCLER;
+        private List<string> frameRates = new List<string>();
+        public override List<string> CyclerOptions
+        {
+            get
+            {
+                if (frameRates == null || frameRates.Count <= 0)
+                {
+                    frameRates = new List<string>();
+
+                    foreach (var item in SettingsContainer.Instance.VideoFrameRates)
+                    {
+                        frameRates.Add(item.ToString());
+                    }
+                }
+
+                return frameRates;
+            }
+        }
 
         public override TemplateContainer SpawnUI(out List<Focusable> fs)
         {
-            // Clone the base template
+            // Create the base UI instance using the inherited method
             TemplateContainer uiInstance = base.SpawnUI(out fs);
 
             // Query the components in the template
@@ -23,8 +39,10 @@ namespace BambuFramework.UI
             var prevButton = uiInstance.Q<Button>("btnPrev");
             var nextButton = uiInstance.Q<Button>("btnNext");
 
-            // Initialize the label with the current option
-            if (label != null && CyclerOptions.Count > 0)
+            currentIndex = SettingsManager.Instance.VideoFramerate;
+
+            // Initialize the label with the current option (default to 60 FPS)
+            if (label != null && CyclerOptions != null && CyclerOptions.Count > 0)
             {
                 label.text = CyclerOptions[currentIndex];
             }
@@ -38,7 +56,8 @@ namespace BambuFramework.UI
                     {
                         currentIndex = (currentIndex - 1 + CyclerOptions.Count) % CyclerOptions.Count;
                         label.text = CyclerOptions[currentIndex];
-                        Bambu.Log($"Cycler value changed to: {CyclerOptions[currentIndex]}");
+                        ApplyFramerateSetting(currentIndex);
+                        Bambu.Log($"Framerate changed to: {CyclerOptions[currentIndex]}");
                     }
                 };
             }
@@ -52,7 +71,8 @@ namespace BambuFramework.UI
                     {
                         currentIndex = (currentIndex + 1) % CyclerOptions.Count;
                         label.text = CyclerOptions[currentIndex];
-                        Bambu.Log($"Cycler value changed to: {CyclerOptions[currentIndex]}");
+                        ApplyFramerateSetting(currentIndex);
+                        Bambu.Log($"Framerate changed to: {CyclerOptions[currentIndex]}");
                     }
                 };
             }
@@ -60,14 +80,18 @@ namespace BambuFramework.UI
             fs.Add(prevButton);
             fs.Add(nextButton);
 
-
+            // Handle focus and blur events for visual feedback
             nextButton.RegisterCallback<FocusEvent>((e) => Focus(uiInstance));
             prevButton.RegisterCallback<FocusEvent>((e) => Focus(uiInstance));
             nextButton.RegisterCallback<BlurEvent>((e) => Blur(uiInstance));
             prevButton.RegisterCallback<BlurEvent>((e) => Blur(uiInstance));
 
-
             return uiInstance;
+        }
+
+        private void ApplyFramerateSetting(int currentIndex)
+        {
+            SettingsManager.Instance.SetVideoFramerate(currentIndex);
         }
 
         protected override void Focus(VisualElement template)
