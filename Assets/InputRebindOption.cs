@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BambuFramework.Settings;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
@@ -43,18 +44,21 @@ namespace BambuFramework.UI
 
             // Show feedback for rebinding in progress
             rebindButton.text = "Press a key...";
-            action.Disable();
 
-            var rebindOperation = action.PerformInteractiveRebinding()
-                .OnMatchWaitForAnother(0.1f)
-                .OnComplete(op =>
-                {
-                    // Update the button text to the new binding
-                    UpdateRebindButtonText(rebindButton);
-                    action.Enable();
-                    op.Dispose();
-                })
-                .Start();
+            SettingsManager.Instance.RebindKeys(action, () => UpdateRebindButtonText(rebindButton));
+
+            //action.Disable();
+
+            //var rebindOperation = action.PerformInteractiveRebinding()
+            //    .OnMatchWaitForAnother(0.1f)
+            //    .OnComplete(op =>
+            //    {
+            //        // Update the button text to the new binding
+            //        UpdateRebindButtonText(rebindButton);
+            //        action.Enable();
+            //        op.Dispose();
+            //    })
+            //    .Start();
         }
 
         private void UpdateRebindButtonText(Button rebindButton)
@@ -69,10 +73,12 @@ namespace BambuFramework.UI
 
                 if (bindingIndex != -1)
                 {
-                    var binding = action.bindings[bindingIndex];
-                    rebindButton.text = InputControlPath.ToHumanReadableString(
-                        binding.effectivePath,
-                        InputControlPath.HumanReadableStringOptions.OmitDevice);
+                    //var binding = action.bindings[bindingIndex];
+                    //rebindButton.text = InputControlPath.ToHumanReadableString(
+                    //    binding.effectivePath,
+                    //    InputControlPath.HumanReadableStringOptions.OmitDevice);
+
+                    rebindButton.text = action.GetBindingDisplayString(InputBinding.MaskByGroup(activeControlScheme));
                 }
                 else
                 {

@@ -1,7 +1,10 @@
 using BambuFramework.Audio;
 using BambuFramework.UI;
 using IngameDebugConsole;
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
 
 namespace BambuFramework.Settings
 {
@@ -217,6 +220,33 @@ namespace BambuFramework.Settings
                 default:
                     return 0;
             }
+        }
+
+        public void RebindKeys(InputAction inputAction, Action onComplete = null)
+        {
+            inputAction.Disable();
+
+            // Get the active control scheme from the first player (or adjust based on your system)
+            var activeControlScheme = GetActiveControlScheme();
+
+            // Filter the bindings to only include the ones for the active control scheme
+            var rebindOperation = inputAction.PerformInteractiveRebinding()
+                .WithBindingGroup(activeControlScheme)
+                .OnMatchWaitForAnother(0.1f)  // Optional, to wait for another match
+                .OnComplete(op =>
+                {
+                    // Update the button text to the new binding
+                    onComplete?.Invoke();
+                    inputAction.Enable();
+                    op.Dispose();
+                })
+                .Start();
+        }
+
+        private string GetActiveControlScheme()
+        {
+            var user = InputUser.all[0];  // Assumes single-player or first player
+            return user.controlScheme?.name ?? "Keyboard&Mouse";  // Return the current control scheme or fallback to default
         }
     }
 }
