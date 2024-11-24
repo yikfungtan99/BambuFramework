@@ -6,6 +6,7 @@
         TOGGLE = 0,
         DROPDOWN = 1,
         SLIDER = 2,
-        CYCLER = 3
+        CYCLER = 3,
+        INPUT_REBIND = 4
     }
 }

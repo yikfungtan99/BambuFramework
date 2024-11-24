@@ -22,6 +22,8 @@ namespace BambuFramework.UI
 
         private int currentSettingIndex;
 
+        private List<SettingOption> currentSettingOptions = new List<SettingOption>();
+
         private void Awake()
         {
             tabView = Root.Q<TabView>("TabView"); // Make sure your TabView has the "TabView" name or update this accordingly
@@ -62,16 +64,28 @@ namespace BambuFramework.UI
 
                 foreach (SettingOption settingOption in tab.SettingOptions)
                 {
-                    var settingElement = settingOption.SpawnUI(out List<Focusable> fs);
-                    if (settingElement == null)
+                    var settingOptionUI = settingOption.SpawnUI(out List<Focusable> fs);
+                    if (settingOptionUI == null)
                     {
                         Bambu.Log($"{settingOption} NOT FOUND!");
                     }
 
                     focussables.AddRange(fs);
 
-                    tabInstance.Add(settingElement);
+                    tabInstance.Add(settingOptionUI);
+
+                    currentSettingOptions.Add(settingOption);
                 }
+
+                UpdateAllSettingOptions();
+            }
+        }
+
+        private void UpdateAllSettingOptions()
+        {
+            foreach (var settingOptionInstance in currentSettingOptions)
+            {
+                settingOptionInstance.UpdateSettingOption();
             }
         }
 
@@ -84,6 +98,8 @@ namespace BambuFramework.UI
             inputActions.UI.NextTab.performed += ctx => NavigateTabs(1);
             inputActions.UI.PreviousTab.performed += ctx => NavigateTabs(-1);
             inputActions.UI.Exit.performed += ctx => Back();
+
+            UpdateAllSettingOptions();
         }
 
         public override void Hide(bool sortingOrder = true)

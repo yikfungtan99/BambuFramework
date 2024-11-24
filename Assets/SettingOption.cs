@@ -3,6 +3,7 @@ using UnityEngine.UIElements;
 
 namespace BambuFramework.UI
 {
+
     [System.Serializable]
     public abstract class SettingOption
     {
@@ -26,5 +27,10 @@ namespace BambuFramework.UI
 
         protected abstract void Focus(VisualElement v);
         protected abstract void Blur(VisualElement v);
+
+        public virtual void UpdateSettingOption()
+        {
+
+        }
     }
 }

@@ -5,52 +5,42 @@ namespace BambuFramework
 {
     public class Player : MonoBehaviour
     {
+        private PlayerInput playerInput;
+
         private InputSystem_Actions inputActions;
-        public InputSystem_Actions InputActions { get => inputActions; }
+        public InputSystem_Actions InputActions => inputActions;
+        public string CurrentControlScheme => playerInput.currentControlScheme;
 
         private GameManager gameManager;
 
-
         private void Start()
         {
+            playerInput = GetComponent<PlayerInput>();
+
             inputActions = new InputSystem_Actions();
 
+            // Subscribe to the Pause action
             inputActions.Player.Pause.performed += OnPause;
 
+            // Subscribe to GameManager's events
             gameManager = GameManager.Instance;
             gameManager.OnGameStart += SwitchToGameActionMap;
 
+            // Default to UI action map
             ToggleActionMap(inputActions.UI);
         }
 
         private void OnDestroy()
         {
-            if (gameManager != null) gameManager.OnGameStart -= SwitchToGameActionMap;
-        }
+            if (gameManager != null)
+                gameManager.OnGameStart -= SwitchToGameActionMap;
 
-        private void Update()
-        {
-
-        }
-
-        private void OnEnable()
-        {
-
-        }
-
-        private void OnDisable()
-        {
-
-        }
-
-        private void OnChange(PlayerInput input)
-        {
-
+            if (inputActions != null)
+                inputActions.Player.Pause.performed -= OnPause;
         }
 
         private void OnPause(InputAction.CallbackContext context)
         {
-            // Call ShowPause method on UIManager when Pause action is triggered
             GameManager.Instance.Pause(this);
         }
 
@@ -62,9 +52,7 @@ namespace BambuFramework
         public void ToggleActionMap(InputActionMap actionMap)
         {
             if (actionMap.enabled)
-            {
                 return;
-            }
 
             inputActions.Disable();
             actionMap.Enable();
