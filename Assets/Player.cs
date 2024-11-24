@@ -6,6 +6,7 @@ namespace BambuFramework
     public class Player : MonoBehaviour
     {
         private PlayerInput playerInput;
+        public PlayerInput PlayerInput { get => playerInput; }
 
         private InputSystem_Actions inputActions;
         public InputSystem_Actions InputActions => inputActions;

@@ -22,6 +22,8 @@ namespace BambuFramework.Settings
         private readonly string KEY_SETTING_AUDIO_SFX = nameof(KEY_SETTING_AUDIO_SFX);
         private readonly string KEY_SETTING_AUDIO_MUSIC = nameof(KEY_SETTING_AUDIO_MUSIC);
 
+        private readonly string KEY_INPUT_BINDS = nameof(KEY_INPUT_BINDS);
+
         public bool GameplayConsole { get; private set; }
         public Vector2Int VideoResolution { get; private set; }
         public bool IsFullScreen
@@ -93,6 +95,8 @@ namespace BambuFramework.Settings
             SetAudioMaster(AudioMaster);
             SetAudioSFX(AudioSFX);
             SetAudioMusic(AudioMusic);
+
+            LoadRebinds();
         }
 
         public void LoadVideoResolution()
@@ -239,8 +243,22 @@ namespace BambuFramework.Settings
                     onComplete?.Invoke();
                     inputAction.Enable();
                     op.Dispose();
+
+                    SaveRebinds();
                 })
                 .Start();
+        }
+
+        private void SaveRebinds()
+        {
+            var rebinds = PlayerManager.Instance.HostPlayer.PlayerInput.actions.SaveBindingOverridesAsJson();
+            PlayerPrefs.SetString(KEY_INPUT_BINDS, rebinds);
+        }
+
+        private void LoadRebinds()
+        {
+            var rebinds = PlayerPrefs.GetString(KEY_INPUT_BINDS);
+            PlayerManager.Instance.HostPlayer.PlayerInput.actions.LoadBindingOverridesFromJson(rebinds);
         }
 
         private string GetActiveControlScheme()
