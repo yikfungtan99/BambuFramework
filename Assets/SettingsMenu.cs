@@ -32,9 +32,6 @@ namespace BambuFramework.UI
                 return;
             }
 
-            btnBack = Root.Q<Button>("btnBack");
-            btnBack.clicked += Back;
-
             // Instantiate settings options
             PopulateSettingsOptions();
 
@@ -46,7 +43,7 @@ namespace BambuFramework.UI
 
         private void PopulateSettingsOptions()
         {
-            if (settingsContainer == null || settingsContainer.settingOptions == null)
+            if (settingsContainer == null)
             {
                 Bambu.Log("SettingsContainer or settingOptions is not assigned!");
                 return;
@@ -56,11 +53,20 @@ namespace BambuFramework.UI
 
             foreach (SettingsTab tab in settingsContainer.Tabs)
             {
-                var tabInstance = tabView.Q<VisualElement>($"tab{tab.TabName}");
+                var tabInstance = tabView.Q<Tab>($"tab{tab.TabName}");
+
+                btnBack = tabInstance.Q<Button>("btnBack");
+                btnBack.clicked += Back;
+
+                tabView.Add(tabInstance);
 
                 foreach (SettingOption settingOption in tab.SettingOptions)
                 {
                     var settingElement = settingOption.SpawnUI(out List<Focusable> fs);
+                    if (settingElement == null)
+                    {
+                        Bambu.Log($"{settingOption} NOT FOUND!");
+                    }
 
                     focussables.AddRange(fs);
 

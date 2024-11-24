@@ -23,6 +23,7 @@ namespace BambuFramework.UI
             menuScreenInputHintKVP = new Dictionary<MenuScreen, int>()
             {
                 { mainMenu, 0 },
+                { pauseMenu, 0 },
                 { settingsMenu, 1 },
             };
 
@@ -75,6 +76,7 @@ namespace BambuFramework.UI
 
         public void ShowInputHints(int index = 0)
         {
+            Bambu.Log($"Show Input Hints {index}", Debugging.ELogCategory.UI);
             inputHints.Show(index);
         }
 

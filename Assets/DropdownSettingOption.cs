@@ -8,7 +8,7 @@ namespace BambuFramework.UI
     public class DropdownSettingOption : SettingOption
     {
         [SerializeField] private string[] baseOptions;
-        public string[] DropdownOptions { get => baseOptions; }
+        public virtual string[] DropdownOptions { get => baseOptions; }
         public override ESettingOptions SettingsOption => ESettingOptions.DROPDOWN;
 
         public override TemplateContainer SpawnUI(out List<Focusable> fs)
@@ -32,12 +32,12 @@ namespace BambuFramework.UI
                 // Optionally, add a callback for when the dropdown value changes
                 dropdown.RegisterValueChangedCallback(evt =>
                 {
-                    Bambu.Log($"Dropdown value changed to: {evt.newValue}");
+                    Bambu.Log($"Dropdown value changed to: {evt.newValue}", Debugging.ELogCategory.UI);
                 });
             }
             else
             {
-                Bambu.Log("DropdownField with the name 'settingDropdown' was not found in the UI template.");
+                Bambu.Log("DropdownField with the name 'settingDropdown' was not found in the UI template.", Debugging.ELogCategory.UI);
             }
 
             fs.Add(dropdown);

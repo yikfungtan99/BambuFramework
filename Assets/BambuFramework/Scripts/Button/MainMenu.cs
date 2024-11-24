@@ -1,4 +1,4 @@
-using BambuFramework.Debug;
+using BambuFramework.Debugging;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -45,6 +45,7 @@ namespace BambuFramework.UI
         private void Play()
         {
             GameManager.Instance.Play();
+            UIManager.Instance.HideInputHints();
             Hide();
             uiManager.ResetActive();
         }

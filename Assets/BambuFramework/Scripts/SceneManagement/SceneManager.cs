@@ -1,4 +1,4 @@
-using BambuFramework.Debug;
+using BambuFramework.Debugging;
 using Eflatun.SceneReference;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,6 +21,7 @@ namespace BambuFramework.SceneManagement
 
         private void Start()
         {
+            UnityEngine.Debug.developerConsoleVisible = true;
             AddPermanentScenes(initialPermanentScenes);
         }
 

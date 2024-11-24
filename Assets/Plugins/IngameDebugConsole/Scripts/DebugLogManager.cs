@@ -611,9 +611,7 @@ namespace IngameDebugConsole
 
             PopupEnabled = enablePopup;
 
-#if !UNITY_EDITOR
-            gameObject.SetActive(PlayerPrefs.GetInt("Console", 0) == 1);
-#endif
+            gameObject.SetActive(PlayerPrefs.GetInt("KEY_SETTING_GAMEPLAY_CONSOLE", 0) == 1);
         }
 
         private void OnDestroy()

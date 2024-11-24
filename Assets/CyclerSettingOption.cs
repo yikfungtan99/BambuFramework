@@ -7,10 +7,10 @@ namespace BambuFramework.UI
     [System.Serializable]
     public class CyclerSettingOption : SettingOption
     {
-        [SerializeField] private string[] baseOptions;
+        [SerializeField] private List<string> baseOptions = new List<string>();
         private int currentIndex = 0;
 
-        public string[] CyclerOptions => baseOptions;
+        public virtual List<string> CyclerOptions => baseOptions;
         public override ESettingOptions SettingsOption => ESettingOptions.CYCLER;
 
         public override TemplateContainer SpawnUI(out List<Focusable> fs)
@@ -24,7 +24,7 @@ namespace BambuFramework.UI
             var nextButton = uiInstance.Q<Button>("btnNext");
 
             // Initialize the label with the current option
-            if (label != null && CyclerOptions.Length > 0)
+            if (label != null && CyclerOptions.Count > 0)
             {
                 label.text = CyclerOptions[currentIndex];
             }
@@ -34,9 +34,9 @@ namespace BambuFramework.UI
             {
                 prevButton.clicked += () =>
                 {
-                    if (CyclerOptions.Length > 0)
+                    if (CyclerOptions.Count > 0)
                     {
-                        currentIndex = (currentIndex - 1 + CyclerOptions.Length) % CyclerOptions.Length;
+                        currentIndex = (currentIndex - 1 + CyclerOptions.Count) % CyclerOptions.Count;
                         label.text = CyclerOptions[currentIndex];
                         Bambu.Log($"Cycler value changed to: {CyclerOptions[currentIndex]}");
                     }
@@ -48,9 +48,9 @@ namespace BambuFramework.UI
             {
                 nextButton.clicked += () =>
                 {
-                    if (CyclerOptions.Length > 0)
+                    if (CyclerOptions.Count > 0)
                     {
-                        currentIndex = (currentIndex + 1) % CyclerOptions.Length;
+                        currentIndex = (currentIndex + 1) % CyclerOptions.Count;
                         label.text = CyclerOptions[currentIndex];
                         Bambu.Log($"Cycler value changed to: {CyclerOptions[currentIndex]}");
                     }
