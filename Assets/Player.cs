@@ -10,15 +10,19 @@ namespace BambuFramework
 
         private InputSystem_Actions inputActions;
         public InputSystem_Actions InputActions => inputActions;
-        public string CurrentControlScheme => playerInput.currentControlScheme;
+        public string CurrentControlScheme { get; private set; }
 
         private GameManager gameManager;
+
+        public event System.Action OnInputDeviceChanged;
 
         private void Start()
         {
             playerInput = GetComponent<PlayerInput>();
 
             inputActions = new InputSystem_Actions();
+
+            playerInput.onControlsChanged += OnControlsChanged;
 
             // Subscribe to the Pause action
             inputActions.Player.Pause.performed += OnPause;
@@ -29,6 +33,14 @@ namespace BambuFramework
 
             // Default to UI action map
             ToggleActionMap(inputActions.UI);
+        }
+
+        private void OnControlsChanged(PlayerInput input)
+        {
+            if (input.currentControlScheme == CurrentControlScheme) return;
+
+            CurrentControlScheme = input.currentControlScheme;
+            OnInputDeviceChanged?.Invoke();
         }
 
         private void OnDestroy()

@@ -16,9 +16,13 @@ namespace BambuFramework.UI
 
         private Button btnRebind;
 
-        public override TemplateContainer SpawnUI(out List<Focusable> focussables)
+        private SettingsMenu menu;
+
+        public override TemplateContainer SpawnUI(SettingsMenu menu, out List<Focusable> focussables)
         {
-            TemplateContainer uiInstance = base.SpawnUI(out focussables);
+            TemplateContainer uiInstance = base.SpawnUI(menu, out focussables);
+
+            this.menu = menu;
 
             btnRebind = uiInstance.Q<Button>("btnRebind");
 
@@ -45,20 +49,10 @@ namespace BambuFramework.UI
             // Show feedback for rebinding in progress
             rebindButton.text = "Press a key...";
 
-            SettingsManager.Instance.RebindKeys(action, () => UpdateRebindButtonText(rebindButton));
-
-            //action.Disable();
-
-            //var rebindOperation = action.PerformInteractiveRebinding()
-            //    .OnMatchWaitForAnother(0.1f)
-            //    .OnComplete(op =>
-            //    {
-            //        // Update the button text to the new binding
-            //        UpdateRebindButtonText(rebindButton);
-            //        action.Enable();
-            //        op.Dispose();
-            //    })
-            //    .Start();
+            SettingsManager.Instance.RebindKeys(menu.Player, action, () =>
+            {
+                UpdateRebindButtonText(rebindButton);
+            });
         }
 
         private void UpdateRebindButtonText(Button rebindButton)
@@ -105,7 +99,14 @@ namespace BambuFramework.UI
 
         public override void UpdateSettingOption()
         {
+            if (SettingsManager.Instance.IsRebinding)
+            {
+                Debug.Log("REBINDING");
+                return;
+            }
+
             base.UpdateSettingOption();
+
             UpdateRebindButtonText(btnRebind);
         }
     }

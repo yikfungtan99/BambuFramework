@@ -29,10 +29,10 @@ namespace BambuFramework.UI
             }
         }
 
-        public override TemplateContainer SpawnUI(out List<Focusable> fs)
+        public override TemplateContainer SpawnUI(SettingsMenu menu, out List<Focusable> fs)
         {
             // Create the base UI instance using the inherited method
-            TemplateContainer uiInstance = base.SpawnUI(out fs);
+            TemplateContainer uiInstance = base.SpawnUI(menu, out fs);
 
             // Query the components in the template
             var label = uiInstance.Q<Label>("lblCurrentOption");

@@ -1,3 +1,4 @@
+using BambuFramework.Settings;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace BambuFramework.UI
         [SerializeField] private SettingsContainer settingsContainer;
         protected override Button firstButton => null;
 
+
         private TabView tabView;
         private Button btnBack;
         private int tabCount;
@@ -23,6 +25,9 @@ namespace BambuFramework.UI
         private int currentSettingIndex;
 
         private List<SettingOption> currentSettingOptions = new List<SettingOption>();
+
+        private Player player;
+        public Player Player { get => player; }
 
         private void Awake()
         {
@@ -64,7 +69,7 @@ namespace BambuFramework.UI
 
                 foreach (SettingOption settingOption in tab.SettingOptions)
                 {
-                    var settingOptionUI = settingOption.SpawnUI(out List<Focusable> fs);
+                    var settingOptionUI = settingOption.SpawnUI(this, out List<Focusable> fs);
                     if (settingOptionUI == null)
                     {
                         Bambu.Log($"{settingOption} NOT FOUND!");
@@ -93,11 +98,15 @@ namespace BambuFramework.UI
         {
             base.Show(player, sortingOrder);
 
+            this.player = player;
+
             inputActions = player.InputActions;
 
             inputActions.UI.NextTab.performed += ctx => NavigateTabs(1);
             inputActions.UI.PreviousTab.performed += ctx => NavigateTabs(-1);
             inputActions.UI.Exit.performed += ctx => Back();
+
+            if (player != null) player.OnInputDeviceChanged += UpdateAllSettingOptions;
 
             UpdateAllSettingOptions();
         }
@@ -106,12 +115,16 @@ namespace BambuFramework.UI
         {
             base.Hide(sortingOrder);
 
+            if (SettingsManager.Instance.IsRebinding) return;
+
             if (inputActions != null)
             {
                 inputActions.UI.NextTab.performed -= ctx => NavigateTabs(1);
                 inputActions.UI.PreviousTab.performed -= ctx => NavigateTabs(-1);
                 inputActions.UI.Exit.performed -= ctx => Back();
             }
+
+            if (player != null) player.OnInputDeviceChanged -= UpdateAllSettingOptions;
         }
 
         private void SetFocusOnSetting(int index)

@@ -30,9 +30,9 @@ namespace BambuFramework.UI
 
         public override string[] DropdownOptions => ResolutionOptions.ToArray();
 
-        public override TemplateContainer SpawnUI(out List<Focusable> fs)
+        public override TemplateContainer SpawnUI(SettingsMenu menu, out List<Focusable> fs)
         {
-            TemplateContainer uiInstance = base.SpawnUI(out fs);
+            TemplateContainer uiInstance = base.SpawnUI(menu, out fs);
 
             // Query the Dropdown element
             var dropdown = uiInstance.Q<DropdownField>("CustomDropdown");

@@ -17,9 +17,9 @@ namespace BambuFramework.UI
         public override float DefaultValue => SettingsManager.Instance.GetAudioVolume(channel);
 
         // Override the UI logic, keeping the functionality reusable
-        public override TemplateContainer SpawnUI(out List<Focusable> fs)
+        public override TemplateContainer SpawnUI(SettingsMenu menu, out List<Focusable> fs)
         {
-            TemplateContainer uiInstance = base.SpawnUI(out fs);
+            TemplateContainer uiInstance = base.SpawnUI(menu, out fs);
 
             var slider = uiInstance.Q<Slider>("CustomSlider");
             var textField = uiInstance.Q<TextField>("CustomTextField");

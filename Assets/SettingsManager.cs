@@ -39,6 +39,13 @@ namespace BambuFramework.Settings
         public int AudioMaster { get; private set; }
         public int AudioSFX { get; private set; }
         public int AudioMusic { get; private set; }
+        public bool IsRebinding { get; private set; }
+
+        string rebindingControlScheme;
+        Action OnRebindComplete;
+        InputAction inputAction;
+
+        InputActionRebindingExtensions.RebindingOperation rebindingOperation;
 
         private void Start()
         {
@@ -226,27 +233,108 @@ namespace BambuFramework.Settings
             }
         }
 
-        public void RebindKeys(InputAction inputAction, Action onComplete = null)
+        public void RebindKeys(Player player, InputAction ia, Action onComplete = null)
         {
+            IsRebinding = true;
+
+            inputAction = ia;
             inputAction.Disable();
 
+            player.OnInputDeviceChanged += CancelRebind;
+
             // Get the active control scheme from the first player (or adjust based on your system)
-            var activeControlScheme = GetActiveControlScheme();
+            rebindingControlScheme = GetActiveControlScheme();
 
-            // Filter the bindings to only include the ones for the active control scheme
-            var rebindOperation = inputAction.PerformInteractiveRebinding()
-                .WithBindingGroup(activeControlScheme)
-                .OnMatchWaitForAnother(0.1f)  // Optional, to wait for another match
-                .OnComplete(op =>
-                {
-                    // Update the button text to the new binding
-                    onComplete?.Invoke();
-                    inputAction.Enable();
-                    op.Dispose();
+            OnRebindComplete = onComplete;
 
-                    SaveRebinds();
-                })
-                .Start();
+            if (rebindingControlScheme == "Gamepad")
+            {
+                // Filter the bindings to only include the ones for the active control scheme
+                rebindingOperation = inputAction.PerformInteractiveRebinding()
+                                    .WithBindingGroup(rebindingControlScheme)
+                                    .WithControlsExcluding("Keyboard")
+                                    .WithControlsExcluding("Mouse")
+                                    .WithCancelingThrough("<Gamepad>/select")
+                                    .OnMatchWaitForAnother(0.1f)  // Optional, to wait for another match
+                                    .OnComplete(op =>
+                                    {
+                                        Debug.Log("COMPLETED Gamepad");
+                                        // Update the button text to the new binding
+                                        onComplete?.Invoke();
+                                        inputAction.Enable();
+                                        IsRebinding = false;
+
+                                        op.Dispose();
+
+                                        SaveRebinds();
+                                        rebindingOperation = null;
+                                    })
+                                    .OnCancel(op =>
+                                    {
+                                        Debug.Log("CANCELLED Gamepad");
+                                        // Update the button text to the new binding
+                                        onComplete?.Invoke();
+                                        inputAction.Enable();
+                                        IsRebinding = false;
+
+                                        op.Dispose();
+
+                                        rebindingOperation = null;
+                                    })
+                                    .Start();
+            }
+
+            if (rebindingControlScheme == "Keyboard&Mouse")
+            {
+                // Filter the bindings to only include the ones for the active control scheme
+                rebindingOperation = inputAction.PerformInteractiveRebinding()
+                    .WithBindingGroup(rebindingControlScheme)
+                    .WithControlsExcluding("Gamepad")
+                    .WithCancelingThrough("<Keyboard>/escape")
+                    .OnMatchWaitForAnother(0.1f)  // Optional, to wait for another match
+                    .OnComplete(op =>
+                    {
+                        Debug.Log("COMPLETED keyboard");
+
+                        // Update the button text to the new binding
+                        onComplete?.Invoke();
+                        inputAction.Enable();
+                        IsRebinding = false;
+
+                        op.Dispose();
+
+                        SaveRebinds();
+                        rebindingOperation = null;
+                    })
+                    .OnCancel(op =>
+                    {
+                        Debug.Log("Cancelled keyboard");
+                        onComplete?.Invoke();
+                        inputAction.Enable();
+                        IsRebinding = false;
+
+                        op.Dispose();
+
+                        rebindingOperation = null;
+                    })
+                    .Start();
+            }
+        }
+
+        public void CancelRebind()
+        {
+            Debug.Log("CANCEL REBIND");
+            if (rebindingOperation != null) rebindingOperation.Cancel();
+
+            //if (rebindingOperation != null)
+            //{
+            //    rebindingOperation.Cancel();
+            //    rebindingOperation = null;
+            //    OnRebindComplete?.Invoke();
+            //    OnRebindComplete = null;
+            //    IsRebinding = false;
+            //    Debug.Log($"{rebindingControlScheme} Rebind canceled");
+            //}
         }
 
         private void SaveRebinds()

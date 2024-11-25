@@ -13,10 +13,10 @@ namespace BambuFramework.UI
         public virtual List<string> CyclerOptions => baseOptions;
         public override ESettingOptions SettingsOption => ESettingOptions.CYCLER;
 
-        public override TemplateContainer SpawnUI(out List<Focusable> fs)
+        public override TemplateContainer SpawnUI(SettingsMenu menu, out List<Focusable> fs)
         {
             // Clone the base template
-            TemplateContainer uiInstance = base.SpawnUI(out fs);
+            TemplateContainer uiInstance = base.SpawnUI(menu, out fs);
 
             // Query the components in the template
             var label = uiInstance.Q<Label>("lblCurrentOption");

@@ -12,7 +12,7 @@ namespace BambuFramework.UI
 
         public string Title;
 
-        public virtual TemplateContainer SpawnUI(out List<Focusable> focussables)
+        public virtual TemplateContainer SpawnUI(SettingsMenu menu, out List<Focusable> focussables)
         {
             TemplateContainer uiInstance = SettingsUI.CloneTree();
 
