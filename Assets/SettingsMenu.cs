@@ -103,9 +103,9 @@ namespace BambuFramework.UI
 
             this.player = player;
 
-            player.UiActionMap.FindAction("NextTab").performed += ctx => NavigateTabs(1);
-            player.UiActionMap.FindAction("PreviousTab").performed += ctx => NavigateTabs(-1);
-            player.UiActionMap.FindAction("Exit").performed += ctx => Back();
+            player.PlayerInput.actions["NextTab"].performed += ctx => NavigateTabs(1);
+            player.PlayerInput.actions["PreviousTab"].performed += ctx => NavigateTabs(-1);
+            player.PlayerInput.actions["Exit"].performed += ctx => Back();
 
             if (player != null) player.OnInputDeviceChanged += UpdateAllSettingOptions;
 
@@ -118,11 +118,11 @@ namespace BambuFramework.UI
 
             if (SettingsManager.Instance.IsRebinding) return;
 
-            if (player != null && player.UiActionMap != null)
+            if (player != null)
             {
-                player.UiActionMap.FindAction("NextTab").performed -= ctx => NavigateTabs(1);
-                player.UiActionMap.FindAction("PreviousTab").performed -= ctx => NavigateTabs(-1);
-                player.UiActionMap.FindAction("Exit").performed -= ctx => Back();
+                player.PlayerInput.actions["NextTab"].performed -= ctx => NavigateTabs(1);
+                player.PlayerInput.actions["PreviousTab"].performed -= ctx => NavigateTabs(-1);
+                player.PlayerInput.actions["Exit"].performed -= ctx => Back();
             }
 
             if (player != null) player.OnInputDeviceChanged -= UpdateAllSettingOptions;
