@@ -12,11 +12,11 @@ namespace BambuFramework.UI
     {
         public override ESettingOptions SettingsOption => ESettingOptions.INPUT_REBIND;
 
-        [SerializeField] private InputActionReference inputActionReference;
-
         private Button btnRebind;
 
         private SettingsMenu menu;
+
+        private InputAction inputAction;
 
         public override TemplateContainer SpawnUI(SettingsMenu menu, out List<Focusable> focussables)
         {
@@ -24,9 +24,14 @@ namespace BambuFramework.UI
 
             this.menu = menu;
 
+            inputAction = menu.Player.PlayerInput.actions.actionMaps[0].actions[2];
+
             btnRebind = uiInstance.Q<Button>("btnRebind");
 
-            if (btnRebind != null && inputActionReference != null)
+            Title = inputAction.name;
+            SetTitle(uiInstance, inputAction.name);
+
+            if (btnRebind != null && inputAction != null)
             {
                 // Set the initial button text to the current binding
                 UpdateRebindButtonText(btnRebind);
@@ -41,15 +46,13 @@ namespace BambuFramework.UI
 
         private void StartRebinding(Button rebindButton)
         {
-            if (inputActionReference == null || inputActionReference.action == null)
+            if (inputAction == null)
                 return;
-
-            var action = inputActionReference.action;
 
             // Show feedback for rebinding in progress
             rebindButton.text = "Press a key...";
 
-            SettingsManager.Instance.RebindKeys(menu.Player, action, () =>
+            SettingsManager.Instance.RebindKeys(menu.Player, inputAction, () =>
             {
                 UpdateRebindButtonText(rebindButton);
             });
@@ -57,12 +60,11 @@ namespace BambuFramework.UI
 
         private void UpdateRebindButtonText(Button rebindButton)
         {
-            if (inputActionReference != null && inputActionReference.action != null)
+            if (inputAction != null)
             {
-                var action = inputActionReference.action;
                 string activeControlScheme = PlayerManager.Instance.HostPlayer.CurrentControlScheme;
 
-                int bindingIndex = action.bindings.IndexOf(binding =>
+                int bindingIndex = inputAction.bindings.IndexOf(binding =>
                     activeControlScheme == null || binding.groups.Contains(activeControlScheme));
 
                 if (bindingIndex != -1)
@@ -72,7 +74,7 @@ namespace BambuFramework.UI
                     //    binding.effectivePath,
                     //    InputControlPath.HumanReadableStringOptions.OmitDevice);
 
-                    rebindButton.text = action.GetBindingDisplayString(InputBinding.MaskByGroup(activeControlScheme));
+                    rebindButton.text = inputAction.GetBindingDisplayString(InputBinding.MaskByGroup(activeControlScheme));
                 }
                 else
                 {

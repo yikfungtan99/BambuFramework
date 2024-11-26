@@ -7,35 +7,43 @@ namespace BambuFramework
     {
         private PlayerInput playerInput;
         public PlayerInput PlayerInput { get => playerInput; }
-
-        private InputSystem_Actions inputActions;
-        public InputSystem_Actions InputActions => inputActions;
         public string CurrentControlScheme { get; private set; }
 
         private GameManager gameManager;
 
         public event System.Action OnInputDeviceChanged;
 
+        public InputActionMap PlayerActionMap;
+        public InputActionMap UiActionMap;
         private InputActionMap currentActionMap;
+
 
         private void Start()
         {
             playerInput = GetComponent<PlayerInput>();
 
-            inputActions = new InputSystem_Actions();
-
             playerInput.onControlsChanged += OnControlsChanged;
 
+            PlayerActionMap = playerInput.actions.FindActionMap("Player");
+            UiActionMap = playerInput.actions.FindActionMap("UI");
+
             // Subscribe to the Pause action
-            inputActions.Player.Pause.performed += OnPause;
+            PlayerActionMap.FindAction("Pause").performed += OnPause;
 
             // Subscribe to GameManager's events
             gameManager = GameManager.Instance;
             gameManager.OnGameStart += SwitchToGameActionMap;
             gameManager.OnGameResume += OnResume;
 
+            PlayerActionMap.FindAction("Attack").performed += Attack;
+
             // Default to UI action map
-            ToggleActionMap(inputActions.UI);
+            ToggleActionMap(UiActionMap);
+        }
+
+        private void Attack(InputAction.CallbackContext context)
+        {
+            Debug.Log("ATTACK");
         }
 
         private void OnControlsChanged(PlayerInput input)
@@ -51,24 +59,23 @@ namespace BambuFramework
             if (gameManager != null)
                 gameManager.OnGameStart -= SwitchToGameActionMap;
 
-            if (inputActions != null)
-                inputActions.Player.Pause.performed -= OnPause;
+            PlayerActionMap.FindAction("Pause").performed -= OnPause;
         }
 
         private void OnPause(InputAction.CallbackContext context)
         {
             GameManager.Instance.Pause(this);
-            ToggleActionMap(inputActions.UI);
+            ToggleActionMap(UiActionMap);
         }
 
         private void OnResume()
         {
-            ToggleActionMap(inputActions.Player);
+            ToggleActionMap(PlayerActionMap);
         }
 
         public void SwitchToGameActionMap()
         {
-            ToggleActionMap(inputActions.Player);
+            ToggleActionMap(PlayerActionMap);
         }
 
         public void ToggleActionMap(InputActionMap actionMap)
@@ -82,10 +89,20 @@ namespace BambuFramework
                 if (actionMap == currentActionMap) return;
 
                 currentActionMap.Disable();
+
+                foreach (var item in currentActionMap.actions)
+                {
+                    item.Disable();
+                }
             }
 
             currentActionMap = actionMap;
-            inputActions.Disable();
+
+            foreach (var item in currentActionMap.actions)
+            {
+                item.Enable();
+            }
+
             actionMap.Enable();
         }
     }

@@ -17,8 +17,8 @@ namespace BambuFramework.UI
             TemplateContainer uiInstance = SettingsUI.CloneTree();
 
             // Assign data or behavior to the generated element (e.g., labels, sliders, toggles, etc.)
-            var label = uiInstance.Q<Label>("settingLabel");
-            if (label != null) label.text = Title;
+
+            SetTitle(uiInstance, Title);
 
             focussables = new List<Focusable>();
 
@@ -30,7 +30,12 @@ namespace BambuFramework.UI
 
         public virtual void UpdateSettingOption()
         {
+        }
 
+        protected void SetTitle(TemplateContainer uiInstance, string title)
+        {
+            var label = uiInstance.Q<Label>("settingLabel");
+            if (label != null) label.text = title;
         }
     }
 }

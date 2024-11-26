@@ -250,7 +250,8 @@ namespace BambuFramework.Settings
             if (rebindingControlScheme == "Gamepad")
             {
                 // Filter the bindings to only include the ones for the active control scheme
-                rebindingOperation = inputAction.PerformInteractiveRebinding()
+                rebindingOperation = inputAction
+                                    .PerformInteractiveRebinding()
                                     .WithBindingGroup(rebindingControlScheme)
                                     .WithControlsExcluding("Keyboard")
                                     .WithControlsExcluding("Mouse")

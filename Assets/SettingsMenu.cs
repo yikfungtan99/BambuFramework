@@ -13,12 +13,9 @@ namespace BambuFramework.UI
         [SerializeField] private SettingsContainer settingsContainer;
         protected override Button firstButton => null;
 
-
         private TabView tabView;
         private Button btnBack;
         private int tabCount;
-
-        private InputSystem_Actions inputActions;
 
         private List<Focusable> focussables = new List<Focusable>();
 
@@ -27,7 +24,13 @@ namespace BambuFramework.UI
         private List<SettingOption> currentSettingOptions = new List<SettingOption>();
 
         private Player player;
-        public Player Player { get => player; }
+        public Player Player
+        {
+            get
+            {
+                return player != null ? player : PlayerManager.Instance.HostPlayer;
+            }
+        }
 
         private void Awake()
         {
@@ -100,11 +103,9 @@ namespace BambuFramework.UI
 
             this.player = player;
 
-            inputActions = player.InputActions;
-
-            inputActions.UI.NextTab.performed += ctx => NavigateTabs(1);
-            inputActions.UI.PreviousTab.performed += ctx => NavigateTabs(-1);
-            inputActions.UI.Exit.performed += ctx => Back();
+            player.UiActionMap.FindAction("NextTab").performed += ctx => NavigateTabs(1);
+            player.UiActionMap.FindAction("PreviousTab").performed += ctx => NavigateTabs(-1);
+            player.UiActionMap.FindAction("Exit").performed += ctx => Back();
 
             if (player != null) player.OnInputDeviceChanged += UpdateAllSettingOptions;
 
@@ -117,11 +118,11 @@ namespace BambuFramework.UI
 
             if (SettingsManager.Instance.IsRebinding) return;
 
-            if (inputActions != null)
+            if (player != null && player.UiActionMap != null)
             {
-                inputActions.UI.NextTab.performed -= ctx => NavigateTabs(1);
-                inputActions.UI.PreviousTab.performed -= ctx => NavigateTabs(-1);
-                inputActions.UI.Exit.performed -= ctx => Back();
+                player.UiActionMap.FindAction("NextTab").performed -= ctx => NavigateTabs(1);
+                player.UiActionMap.FindAction("PreviousTab").performed -= ctx => NavigateTabs(-1);
+                player.UiActionMap.FindAction("Exit").performed -= ctx => Back();
             }
 
             if (player != null) player.OnInputDeviceChanged -= UpdateAllSettingOptions;
