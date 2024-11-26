@@ -55,6 +55,8 @@ namespace BambuFramework.UI
 
         private void ActivateScreen(MenuScreen menuScreen, Player player = null)
         {
+            if (menuScreen == null) return;
+
             if (activeScreen != null)
             {
                 if (activeScreen == menuScreen)

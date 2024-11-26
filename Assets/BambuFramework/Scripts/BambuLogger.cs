@@ -10,7 +10,8 @@ namespace BambuFramework.Debugging
         UI = 1,
         SCENE = 2,
         INPUT = 3,
-        AUDIO = 4
+        AUDIO = 4,
+        SETTING = 5
     }
 
     [System.Serializable]

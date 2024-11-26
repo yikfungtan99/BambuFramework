@@ -16,6 +16,8 @@ namespace BambuFramework
 
         public event System.Action OnInputDeviceChanged;
 
+        private InputActionMap currentActionMap;
+
         private void Start()
         {
             playerInput = GetComponent<PlayerInput>();
@@ -30,6 +32,7 @@ namespace BambuFramework
             // Subscribe to GameManager's events
             gameManager = GameManager.Instance;
             gameManager.OnGameStart += SwitchToGameActionMap;
+            gameManager.OnGameResume += OnResume;
 
             // Default to UI action map
             ToggleActionMap(inputActions.UI);
@@ -55,6 +58,12 @@ namespace BambuFramework
         private void OnPause(InputAction.CallbackContext context)
         {
             GameManager.Instance.Pause(this);
+            ToggleActionMap(inputActions.UI);
+        }
+
+        private void OnResume()
+        {
+            ToggleActionMap(inputActions.Player);
         }
 
         public void SwitchToGameActionMap()
@@ -64,9 +73,18 @@ namespace BambuFramework
 
         public void ToggleActionMap(InputActionMap actionMap)
         {
-            if (actionMap.enabled)
-                return;
+            if (currentActionMap == null)
+            {
+                currentActionMap = actionMap;
+            }
+            else
+            {
+                if (actionMap == currentActionMap) return;
 
+                currentActionMap.Disable();
+            }
+
+            currentActionMap = actionMap;
             inputActions.Disable();
             actionMap.Enable();
         }

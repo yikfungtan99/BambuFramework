@@ -258,7 +258,7 @@ namespace BambuFramework.Settings
                                     .OnMatchWaitForAnother(0.1f)  // Optional, to wait for another match
                                     .OnComplete(op =>
                                     {
-                                        Debug.Log("COMPLETED Gamepad");
+                                        Bambu.Log("COMPLETED Gamepad", Debugging.ELogCategory.SETTING);
                                         // Update the button text to the new binding
                                         onComplete?.Invoke();
                                         inputAction.Enable();
@@ -271,7 +271,7 @@ namespace BambuFramework.Settings
                                     })
                                     .OnCancel(op =>
                                     {
-                                        Debug.Log("CANCELLED Gamepad");
+                                        Bambu.Log("CANCELLED Gamepad", Debugging.ELogCategory.SETTING);
                                         // Update the button text to the new binding
                                         onComplete?.Invoke();
                                         inputAction.Enable();
@@ -294,7 +294,7 @@ namespace BambuFramework.Settings
                     .OnMatchWaitForAnother(0.1f)  // Optional, to wait for another match
                     .OnComplete(op =>
                     {
-                        Debug.Log("COMPLETED keyboard");
+                        Bambu.Log("COMPLETED keyboard", Debugging.ELogCategory.SETTING);
 
                         // Update the button text to the new binding
                         onComplete?.Invoke();
@@ -308,7 +308,7 @@ namespace BambuFramework.Settings
                     })
                     .OnCancel(op =>
                     {
-                        Debug.Log("Cancelled keyboard");
+                        Bambu.Log("Cancelled keyboard", Debugging.ELogCategory.SETTING);
                         onComplete?.Invoke();
                         inputAction.Enable();
                         IsRebinding = false;
@@ -323,7 +323,7 @@ namespace BambuFramework.Settings
 
         public void CancelRebind()
         {
-            Debug.Log("CANCEL REBIND");
+            Bambu.Log("CANCEL REBIND", Debugging.ELogCategory.SETTING);
             if (rebindingOperation != null) rebindingOperation.Cancel();
 
             //if (rebindingOperation != null)

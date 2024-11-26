@@ -25,6 +25,7 @@ namespace BambuFramework.UI
 
         private void Resume()
         {
+            GameManager.Instance.Resume();
             Hide();
             UIManager.Instance.HideInputHints();
             uiManager.ResetActive();
