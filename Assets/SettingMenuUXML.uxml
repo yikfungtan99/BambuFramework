@@ -12,6 +12,9 @@
             <engine:Tab label="AUDIO" focusable="false" name="tabAudio" class="settingsTab" style="align-items: flex-start; align-content: auto; justify-content: flex-start; padding-top: 35px; padding-right: 35px; padding-bottom: 35px; padding-left: 35px; height: 768px;">
                 <engine:Button text="BACK" name="btnBack" class="customButton" style="width: 265px; font-size: 40px; position: absolute; top: 708px; left: -34px; bottom: -5px; flex-basis: initial; align-self: center; align-items: auto; align-content: auto; flex-direction: column; right: 1521px; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px; padding-top: 35px; padding-right: 35px; padding-bottom: 35px; padding-left: 35px;" />
             </engine:Tab>
+            <engine:Tab label="CONTROLS" focusable="false" name="tabControls" class="settingsTab" style="align-items: flex-start; align-content: auto; justify-content: flex-start; padding-top: 35px; padding-right: 35px; padding-bottom: 35px; padding-left: 35px; height: 768px;">
+                <engine:Button text="BACK" name="btnBack" class="customButton" style="width: 265px; font-size: 40px; position: absolute; top: 708px; left: -34px; bottom: -5px; flex-basis: initial; align-self: center; align-items: auto; align-content: auto; flex-direction: column; right: 1521px; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px; padding-top: 35px; padding-right: 35px; padding-bottom: 35px; padding-left: 35px;" />
+            </engine:Tab>
         </engine:TabView>
     </engine:VisualElement>
 </engine:UXML>

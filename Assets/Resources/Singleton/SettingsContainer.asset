@@ -21,7 +21,6 @@ MonoBehaviour:
     - {fileID: 9197481963319205126, guid: ea808c59f54927c42a218e5fcbaebd75, type: 3}
     - {fileID: 9197481963319205126, guid: 3b86d5835a44e3341b73f1907fcb5352, type: 3}
     - {fileID: 9197481963319205126, guid: aa836e7b4cea96c4d9d635432f9d39b2, type: 3}
-    - {fileID: 1120369429361536294, guid: b51540e7f78779c40a7d785d0be36b4a, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -120,7 +119,7 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: 3|BambuFramework.UI.SettingsTab, Assembly-CSharp
@@ -133,25 +132,13 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 1
     - Name: 
       Entry: 7
       Data: 5|BambuFramework.UI.ConsoleToggleSettingOption, Assembly-CSharp
     - Name: Title
       Entry: 1
       Data: CONSOLE
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 6|BambuFramework.UI.InputRebindOption, Assembly-CSharp
-    - Name: Title
-      Entry: 1
-      Data: ATTACK
-    - Name: inputActionReference
-      Entry: 10
-      Data: 5
     - Name: 
       Entry: 8
       Data: 
@@ -166,20 +153,20 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 7|BambuFramework.UI.SettingsTab, Assembly-CSharp
+      Data: 6|BambuFramework.UI.SettingsTab, Assembly-CSharp
     - Name: TabName
       Entry: 1
       Data: Video
     - Name: SettingOptions
       Entry: 7
-      Data: 8|System.Collections.Generic.List`1[[BambuFramework.UI.SettingOption,
+      Data: 7|System.Collections.Generic.List`1[[BambuFramework.UI.SettingOption,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 3
     - Name: 
       Entry: 7
-      Data: 9|BambuFramework.UI.VideoResolutionDropdownSettingOption, Assembly-CSharp
+      Data: 8|BambuFramework.UI.VideoResolutionDropdownSettingOption, Assembly-CSharp
     - Name: Title
       Entry: 1
       Data: VIDEO
@@ -191,13 +178,13 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 10|BambuFramework.UI.FramerateCyclerSettingOption, Assembly-CSharp
+      Data: 9|BambuFramework.UI.FramerateCyclerSettingOption, Assembly-CSharp
     - Name: Title
       Entry: 1
       Data: FRAMERATE
     - Name: baseOptions
       Entry: 7
-      Data: 11|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
+      Data: 10|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
     - Name: 
       Entry: 12
       Data: 0
@@ -212,7 +199,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 12|BambuFramework.UI.WindowsModeSettingsOption, Assembly-CSharp
+      Data: 11|BambuFramework.UI.WindowsModeSettingsOption, Assembly-CSharp
     - Name: Title
       Entry: 1
       Data: WINDOWS MODE
@@ -233,20 +220,20 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 13|BambuFramework.UI.SettingsTab, Assembly-CSharp
+      Data: 12|BambuFramework.UI.SettingsTab, Assembly-CSharp
     - Name: TabName
       Entry: 1
       Data: Audio
     - Name: SettingOptions
       Entry: 7
-      Data: 14|System.Collections.Generic.List`1[[BambuFramework.UI.SettingOption,
+      Data: 13|System.Collections.Generic.List`1[[BambuFramework.UI.SettingOption,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 3
     - Name: 
       Entry: 7
-      Data: 15|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
+      Data: 14|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
     - Name: Title
       Entry: 1
       Data: MASTER
@@ -267,7 +254,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 16|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
+      Data: 15|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
     - Name: Title
       Entry: 1
       Data: SFX
@@ -288,7 +275,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 17|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
+      Data: 16|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
     - Name: Title
       Entry: 1
       Data: MUSIC
@@ -304,6 +291,37 @@ MonoBehaviour:
     - Name: channel
       Entry: 3
       Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 17|BambuFramework.UI.SettingsTab, Assembly-CSharp
+    - Name: TabName
+      Entry: 1
+      Data: Controls
+    - Name: SettingOptions
+      Entry: 7
+      Data: 18|System.Collections.Generic.List`1[[BambuFramework.UI.SettingOption,
+        Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 19|BambuFramework.UI.InputRebindOption, Assembly-CSharp
+    - Name: Title
+      Entry: 6
+      Data: 
     - Name: 
       Entry: 8
       Data: 

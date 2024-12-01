@@ -65,6 +65,8 @@ namespace BambuFramework.UI
             {
                 var tabInstance = tabView.Q<Tab>($"tab{tab.TabName}");
 
+                Debug.Log(tab.TabName);
+
                 btnBack = tabInstance.Q<Button>("btnBack");
                 btnBack.clicked += Back;
 
