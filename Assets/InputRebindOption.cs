@@ -1,6 +1,5 @@
 ﻿using BambuFramework.Settings;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
 using UnityEngine.UIElements;
@@ -54,6 +53,9 @@ namespace BambuFramework.UI
 
                 templateContainers.Add(uiInstance);
                 actionButtonPairs.Add(inputAction, btnRebind);
+
+                btnRebind.RegisterCallback<FocusEvent>((e) => Focus(uiInstance));
+                btnRebind.RegisterCallback<BlurEvent>((e) => Blur(uiInstance));
             }
         }
 
@@ -102,25 +104,24 @@ namespace BambuFramework.UI
             return user.controlScheme?.name ?? "Keyboard&Mouse";
         }
 
-        protected override void Focus(VisualElement v)
+        protected override void Focus(VisualElement template)
         {
-            v.AddToClassList("focused");
+            UnityEngine.Color initColor = template.style.backgroundColor.value;
+            template.style.backgroundColor = new UnityEngine.Color(initColor.r, initColor.g, initColor.b, 155);
         }
 
-        protected override void Blur(VisualElement v)
+        protected override void Blur(VisualElement template)
         {
-            v.RemoveFromClassList("focused");
+            UnityEngine.Color initColor = template.style.backgroundColor.value;
+            template.style.backgroundColor = new UnityEngine.Color(initColor.r, initColor.g, initColor.b, 0);
         }
 
         public override void UpdateSettingOption()
         {
             if (SettingsManager.Instance.IsRebinding)
             {
-                Debug.Log("REBINDING");
                 return;
             }
-
-            base.UpdateSettingOption();
 
             foreach (var abp in actionButtonPairs)
             {

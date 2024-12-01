@@ -1,5 +1,6 @@
 using BambuFramework.Settings;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace BambuFramework.UI
 
         private TabView tabView;
         private Button btnBack;
+        private Button btnDefault;
         private int tabCount;
 
         private List<Focusable> focussables = new List<Focusable>();
@@ -69,6 +71,9 @@ namespace BambuFramework.UI
 
                 btnBack = tabInstance.Q<Button>("btnBack");
                 btnBack.clicked += Back;
+
+                btnDefault = tabInstance.Q<Button>("btnDefault");
+                btnDefault.clicked += Default;
 
                 tabView.Add(tabInstance);
 
@@ -155,6 +160,11 @@ namespace BambuFramework.UI
         private void Back()
         {
             uiManager.ReturnToPrevious();
+        }
+
+        private void Default()
+        {
+            throw new NotImplementedException();
         }
 
         protected override void UpdateMenu()

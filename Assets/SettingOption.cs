@@ -26,9 +26,7 @@ namespace BambuFramework.UI
         protected abstract void Focus(VisualElement v);
         protected abstract void Blur(VisualElement v);
 
-        public virtual void UpdateSettingOption()
-        {
-        }
+        public abstract void UpdateSettingOption();
 
         protected void SetTitle(TemplateContainer uiInstance, string title)
         {

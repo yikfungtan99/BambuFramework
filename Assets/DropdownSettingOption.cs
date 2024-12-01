@@ -11,6 +11,8 @@ namespace BambuFramework.UI
         public virtual string[] DropdownOptions { get => baseOptions; }
         public override ESettingOptions SettingsOption => ESettingOptions.DROPDOWN;
 
+        protected DropdownField dropDown;
+
         public override void SpawnUI(SettingsMenu menu, out List<TemplateContainer> templateContainers, out List<Focusable> fs)
         {
             base.SpawnUI(menu, out templateContainers, out fs);
@@ -19,20 +21,14 @@ namespace BambuFramework.UI
             TemplateContainer uiInstance = templateContainers[0];
 
             // Query the Dropdown element
-            var dropdown = uiInstance.Q<DropdownField>("CustomDropdown");
-            if (dropdown != null)
+            dropDown = uiInstance.Q<DropdownField>("CustomDropdown");
+
+            if (dropDown != null)
             {
-                // Populate the dropdown with the options
-                dropdown.choices = new List<string>(DropdownOptions);
+                UpdateSettingOption();
 
-                // Optionally set the default value
-                if (DropdownOptions.Length > 0)
-                {
-                    dropdown.value = DropdownOptions[0]; // Set the first option as the default
-                }
-
-                // Optionally, add a callback for when the dropdown value changes
-                dropdown.RegisterValueChangedCallback(evt =>
+                // Optionally, add a callback for when the dropDown value changes
+                dropDown.RegisterValueChangedCallback(evt =>
                 {
                     Bambu.Log($"Dropdown value changed to: {evt.newValue}", Debugging.ELogCategory.UI);
                 });
@@ -42,10 +38,10 @@ namespace BambuFramework.UI
                 Bambu.Log("DropdownField with the name 'settingDropdown' was not found in the UI template.", Debugging.ELogCategory.UI);
             }
 
-            fs.Add(dropdown);
+            fs.Add(dropDown);
 
-            dropdown.RegisterCallback<FocusEvent>((e) => Focus(uiInstance));
-            dropdown.RegisterCallback<BlurEvent>((e) => Blur(uiInstance));
+            dropDown.RegisterCallback<FocusEvent>((e) => Focus(uiInstance));
+            dropDown.RegisterCallback<BlurEvent>((e) => Blur(uiInstance));
         }
 
         protected override void Focus(VisualElement template)
@@ -58,6 +54,18 @@ namespace BambuFramework.UI
         {
             Color initColor = template.style.backgroundColor.value;
             template.style.backgroundColor = new Color(initColor.r, initColor.g, initColor.b, 0);
+        }
+
+        public override void UpdateSettingOption()
+        {
+            // Populate the dropDown with the options
+            dropDown.choices = new List<string>(DropdownOptions);
+
+            // Optionally set the default value
+            if (DropdownOptions.Length > 0)
+            {
+                dropDown.SetValueWithoutNotify(DropdownOptions[0]); // Set the first option as the default
+            }
         }
     }
 }

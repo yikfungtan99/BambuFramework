@@ -35,5 +35,10 @@ namespace BambuFramework.UI
             Color initColor = template.style.backgroundColor.value;
             template.style.backgroundColor = new Color(initColor.r, initColor.g, initColor.b, 0);
         }
+
+        public override void UpdateSettingOption()
+        {
+
+        }
     }
 }

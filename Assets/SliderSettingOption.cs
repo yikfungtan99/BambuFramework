@@ -17,6 +17,9 @@ namespace BambuFramework.UI
 
         public override ESettingOptions SettingsOption => ESettingOptions.SLIDER;
 
+        protected Slider slider;
+        protected TextField textField;
+
         public override void SpawnUI(SettingsMenu menu, out List<TemplateContainer> templateContainers, out List<Focusable> fs)
         {
             base.SpawnUI(menu, out templateContainers, out fs);
@@ -24,8 +27,8 @@ namespace BambuFramework.UI
             TemplateContainer uiInstance = templateContainers[0];
 
             // Query the slider and text field elements
-            var slider = uiInstance.Q<Slider>("CustomSlider");
-            var textField = uiInstance.Q<TextField>("CustomTextField");
+            slider = uiInstance.Q<Slider>("CustomSlider");
+            textField = uiInstance.Q<TextField>("CustomTextField");
 
             // Configure the slider
             if (slider != null)
@@ -112,6 +115,11 @@ namespace BambuFramework.UI
         {
             Color initColor = template.style.backgroundColor.value;
             template.style.backgroundColor = new Color(initColor.r, initColor.g, initColor.b, 0);
+        }
+
+        public override void UpdateSettingOption()
+        {
+
         }
     }
 }

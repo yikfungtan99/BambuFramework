@@ -13,6 +13,10 @@ namespace BambuFramework.UI
         public virtual List<string> CyclerOptions => baseOptions;
         public override ESettingOptions SettingsOption => ESettingOptions.CYCLER;
 
+        private Label label;
+        private Button prevButton;
+        private Button nextButton;
+
         public override void SpawnUI(SettingsMenu menu, out List<TemplateContainer> templateContainers, out List<Focusable> fs)
         {
             // Clone the base template
@@ -21,15 +25,11 @@ namespace BambuFramework.UI
             TemplateContainer uiInstance = templateContainers[0];
 
             // Query the components in the template
-            var label = uiInstance.Q<Label>("lblCurrentOption");
-            var prevButton = uiInstance.Q<Button>("btnPrev");
-            var nextButton = uiInstance.Q<Button>("btnNext");
+            label = uiInstance.Q<Label>("lblCurrentOption");
+            prevButton = uiInstance.Q<Button>("btnPrev");
+            nextButton = uiInstance.Q<Button>("btnNext");
 
-            // Initialize the label with the current option
-            if (label != null && CyclerOptions.Count > 0)
-            {
-                label.text = CyclerOptions[currentIndex];
-            }
+            UpdateSettingOption();
 
             // Set up the Previous button functionality
             if (prevButton != null)
@@ -79,6 +79,16 @@ namespace BambuFramework.UI
         {
             Color initColor = template.style.backgroundColor.value;
             template.style.backgroundColor = new Color(initColor.r, initColor.g, initColor.b, 0);
+        }
+
+        public override void UpdateSettingOption()
+        {
+            // Initialize the label with the current option
+            if (label != null && CyclerOptions.Count > 0)
+            {
+                label.text = CyclerOptions[currentIndex];
+            }
+
         }
     }
 }

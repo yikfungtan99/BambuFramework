@@ -52,7 +52,7 @@ namespace BambuFramework.Audio
         }
 
         /// <summary>
-        /// Populates the dropdown list with audio event names from the registry.
+        /// Populates the dropDown list with audio event names from the registry.
         /// </summary>
         private ValueDropdownList<string> GetEventNames()
         {

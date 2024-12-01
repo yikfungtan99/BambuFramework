@@ -30,9 +30,9 @@ namespace BambuFramework.UI
             // Create the base UI instance using the inherited method
             TemplateContainer uiInstance = templateContainers[0];
 
-            var dropdown = uiInstance.Q<DropdownField>("CustomDropdown");
+            dropDown = uiInstance.Q<DropdownField>("CustomDropdown");
 
-            // Set initial value for dropdown based on current window mode setting
+            // Set initial value for dropDown based on current window mode setting
             currentIndex = SettingsManager.Instance.VideoWindowMode;  // Assuming GetWindowMode returns an index for the selected window mode
 
             //if (label != null && DropdownOptions != null && DropdownOptions.Length > 0)
@@ -40,22 +40,22 @@ namespace BambuFramework.UI
             //    label.text = DropdownOptions[currentIndex];  // Display the current window mode name in the label
             //}
 
-            // Initialize the dropdown field
-            if (dropdown != null)
+            // Initialize the dropDown field
+            if (dropDown != null)
             {
-                dropdown.choices = new List<string>(DropdownOptions);
-                dropdown.index = currentIndex;  // Set the dropdown to show the current index
-                dropdown.RegisterValueChangedCallback(evt =>
+                dropDown.choices = new List<string>(DropdownOptions);
+                dropDown.index = currentIndex;  // Set the dropDown to show the current index
+                dropDown.RegisterValueChangedCallback(evt =>
                 {
-                    currentIndex = dropdown.index;
+                    currentIndex = dropDown.index;
                     ApplyWindowModeSetting(currentIndex);
                     //if (label != null) label.text = DropdownOptions[currentIndex];  // Update label text
                     Bambu.Log($"Window mode changed to: {DropdownOptions[currentIndex]}", Debugging.ELogCategory.UI);
                 });
             }
 
-            // Add the dropdown and label to the focusable list
-            fs.Add(dropdown);
+            // Add the dropDown and label to the focusable list
+            fs.Add(dropDown);
         }
 
         private void ApplyWindowModeSetting(int currentIndex)
@@ -76,6 +76,12 @@ namespace BambuFramework.UI
             // Handle visual feedback when focus is lost
             Color initColor = template.style.backgroundColor.value;
             template.style.backgroundColor = new Color(initColor.r, initColor.g, initColor.b, 0);
+        }
+
+        public override void UpdateSettingOption()
+        {
+            dropDown.choices = new List<string>(DropdownOptions);
+            dropDown.SetValueWithoutNotify(dropDown.choices[currentIndex]);  // Set the dropDown to show the current index
         }
     }
 }

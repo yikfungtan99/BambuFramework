@@ -7,6 +7,8 @@ namespace BambuFramework.UI
     [System.Serializable]
     public class ConsoleToggleSettingOption : ToggleSettingOption
     {
+        private Toggle toggle;
+
         public override void SpawnUI(SettingsMenu menu, out List<TemplateContainer> templateContainers, out List<Focusable> fs)
         {
             base.SpawnUI(menu, out templateContainers, out fs);
@@ -14,11 +16,11 @@ namespace BambuFramework.UI
             TemplateContainer uiInstance = templateContainers[0];
 
             // Query the Toggle element in the template
-            var toggle = uiInstance.Q<Toggle>("CustomToggle");
+            toggle = uiInstance.Q<Toggle>("CustomToggle");
+
             if (toggle != null)
             {
-                // Set the initial value based on the current GameplayConsole setting
-                toggle.value = SettingsManager.Instance.GameplayConsole;
+                UpdateSettingOption();
 
                 // Register a callback to update the GameplayConsole setting when the toggle changes
                 toggle.RegisterValueChangedCallback(evt =>
@@ -32,6 +34,11 @@ namespace BambuFramework.UI
             {
                 Bambu.Log("Toggle with the name 'CustomToggle' was not found in the UI template.");
             }
+        }
+
+        public override void UpdateSettingOption()
+        {
+            toggle.value = SettingsManager.Instance.GameplayConsole;
         }
     }
 }

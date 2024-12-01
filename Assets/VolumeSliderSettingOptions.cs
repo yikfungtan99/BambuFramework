@@ -22,8 +22,8 @@ namespace BambuFramework.UI
             base.SpawnUI(menu, out templateContainers, out fs);
             TemplateContainer uiInstance = templateContainers[0];
 
-            var slider = uiInstance.Q<Slider>("CustomSlider");
-            var textField = uiInstance.Q<TextField>("CustomTextField");
+            slider = uiInstance.Q<Slider>("CustomSlider");
+            textField = uiInstance.Q<TextField>("CustomTextField");
 
             if (slider != null)
             {
@@ -96,6 +96,12 @@ namespace BambuFramework.UI
         {
             Color initColor = template.style.backgroundColor.value;
             template.style.backgroundColor = new Color(initColor.r, initColor.g, initColor.b, 0);
+        }
+
+        public override void UpdateSettingOption()
+        {
+            slider.SetValueWithoutNotify(slider.value);
+            textField.SetValueWithoutNotify(((int)slider.value).ToString());
         }
     }
 }
