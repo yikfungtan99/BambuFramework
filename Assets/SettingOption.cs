@@ -12,17 +12,15 @@ namespace BambuFramework.UI
 
         public string Title;
 
-        public virtual TemplateContainer SpawnUI(SettingsMenu menu, out List<Focusable> focussables)
+        public virtual void SpawnUI(SettingsMenu menu, out List<TemplateContainer> templateContainers, out List<Focusable> focussables)
         {
-            TemplateContainer uiInstance = SettingsUI.CloneTree();
-
-            // Assign data or behavior to the generated element (e.g., labels, sliders, toggles, etc.)
-
-            SetTitle(uiInstance, Title);
+            templateContainers = new List<TemplateContainer> { SettingsUI.CloneTree() };
 
             focussables = new List<Focusable>();
 
-            return uiInstance;
+            // Assign data or behavior to the generated element (e.g., labels, sliders, toggles, etc.)
+
+            SetTitle(templateContainers[0], Title);
         }
 
         protected abstract void Focus(VisualElement v);

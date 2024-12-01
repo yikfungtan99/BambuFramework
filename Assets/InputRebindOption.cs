@@ -12,39 +12,53 @@ namespace BambuFramework.UI
     {
         public override ESettingOptions SettingsOption => ESettingOptions.INPUT_REBIND;
 
-        private Button btnRebind;
-
         private SettingsMenu menu;
 
-        private InputAction inputAction;
+        private Dictionary<InputAction, Button> actionButtonPairs;
 
-        public override TemplateContainer SpawnUI(SettingsMenu menu, out List<Focusable> focussables)
+        public override void SpawnUI(SettingsMenu menu, out List<TemplateContainer> templateContainers, out List<Focusable> focussables)
         {
-            TemplateContainer uiInstance = base.SpawnUI(menu, out focussables);
+            templateContainers = new List<TemplateContainer>();
+            focussables = new List<Focusable>();
 
-            this.menu = menu;
+            actionButtonPairs = new Dictionary<InputAction, Button>();
 
-            inputAction = menu.Player.PlayerInput.actions.actionMaps[0].actions[2];
-
-            btnRebind = uiInstance.Q<Button>("btnRebind");
-
-            Title = inputAction.name;
-            SetTitle(uiInstance, inputAction.name);
-
-            if (btnRebind != null && inputAction != null)
+            for (int i = 0; i < menu.Player.PlayerInput.actions.actionMaps[0].actions.Count; i++)
             {
-                // Set the initial button text to the current binding
-                UpdateRebindButtonText(btnRebind);
+                TemplateContainer uiInstance = SettingsUI.CloneTree();
 
-                // Add click event for rebinding
-                btnRebind.clicked += () => StartRebinding(btnRebind);
-                focussables.Add(btnRebind);
+                SetTitle(uiInstance, Title);
+
+                focussables = new List<Focusable>();
+
+                this.menu = menu;
+
+                InputAction inputAction = menu.Player.PlayerInput.actions.actionMaps[0].actions[i];
+
+                if (inputAction.type == InputActionType.Value) continue;
+                Debug.Log(inputAction.type);
+
+                Button btnRebind = uiInstance.Q<Button>("btnRebind");
+
+                Title = inputAction.name.ToUpper();
+                SetTitle(uiInstance, inputAction.name);
+
+                if (btnRebind != null && inputAction != null)
+                {
+                    // Set the initial button text to the current binding
+                    UpdateRebindButtonText(inputAction, btnRebind);
+
+                    // Add click event for rebinding
+                    btnRebind.clicked += () => StartRebinding(inputAction, btnRebind);
+                    focussables.Add(btnRebind);
+                }
+
+                templateContainers.Add(uiInstance);
+                actionButtonPairs.Add(inputAction, btnRebind);
             }
-
-            return uiInstance;
         }
 
-        private void StartRebinding(Button rebindButton)
+        private void StartRebinding(InputAction inputAction, Button rebindButton)
         {
             if (inputAction == null)
                 return;
@@ -54,11 +68,11 @@ namespace BambuFramework.UI
 
             SettingsManager.Instance.RebindKeys(menu.Player, inputAction, () =>
             {
-                UpdateRebindButtonText(rebindButton);
+                UpdateRebindButtonText(inputAction, rebindButton);
             });
         }
 
-        private void UpdateRebindButtonText(Button rebindButton)
+        private void UpdateRebindButtonText(InputAction inputAction, Button rebindButton)
         {
             if (inputAction != null)
             {
@@ -109,7 +123,10 @@ namespace BambuFramework.UI
 
             base.UpdateSettingOption();
 
-            UpdateRebindButtonText(btnRebind);
+            foreach (var abp in actionButtonPairs)
+            {
+                UpdateRebindButtonText(abp.Key, abp.Value);
+            }
         }
     }
 }

@@ -24,10 +24,11 @@ namespace BambuFramework.UI
             }
         }
 
-        public override TemplateContainer SpawnUI(SettingsMenu menu, out List<Focusable> fs)
+        public override void SpawnUI(SettingsMenu menu, out List<TemplateContainer> templateContainers, out List<Focusable> fs)
         {
+            base.SpawnUI(menu, out templateContainers, out fs);
             // Create the base UI instance using the inherited method
-            TemplateContainer uiInstance = base.SpawnUI(menu, out fs);
+            TemplateContainer uiInstance = templateContainers[0];
 
             var dropdown = uiInstance.Q<DropdownField>("CustomDropdown");
 
@@ -55,8 +56,6 @@ namespace BambuFramework.UI
 
             // Add the dropdown and label to the focusable list
             fs.Add(dropdown);
-
-            return uiInstance;
         }
 
         private void ApplyWindowModeSetting(int currentIndex)

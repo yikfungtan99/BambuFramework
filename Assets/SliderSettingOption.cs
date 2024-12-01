@@ -17,10 +17,11 @@ namespace BambuFramework.UI
 
         public override ESettingOptions SettingsOption => ESettingOptions.SLIDER;
 
-        public override TemplateContainer SpawnUI(SettingsMenu menu, out List<Focusable> fs)
+        public override void SpawnUI(SettingsMenu menu, out List<TemplateContainer> templateContainers, out List<Focusable> fs)
         {
+            base.SpawnUI(menu, out templateContainers, out fs);
             // Clone the base template
-            TemplateContainer uiInstance = base.SpawnUI(menu, out fs);
+            TemplateContainer uiInstance = templateContainers[0];
 
             // Query the slider and text field elements
             var slider = uiInstance.Q<Slider>("CustomSlider");
@@ -99,8 +100,6 @@ namespace BambuFramework.UI
 
             slider.RegisterCallback<FocusEvent>((e) => Focus(uiInstance));
             slider.RegisterCallback<BlurEvent>((e) => Blur(uiInstance));
-
-            return uiInstance;
         }
 
         protected override void Focus(VisualElement template)

@@ -72,15 +72,19 @@ namespace BambuFramework.UI
 
                 foreach (SettingOption settingOption in tab.SettingOptions)
                 {
-                    var settingOptionUI = settingOption.SpawnUI(this, out List<Focusable> fs);
-                    if (settingOptionUI == null)
+                    settingOption.SpawnUI(this, out List<TemplateContainer> uiInstances, out List<Focusable> fs);
+
+                    for (int i = 0; i < uiInstances.Count; i++)
                     {
-                        Bambu.Log($"{settingOption} NOT FOUND!");
+                        if (uiInstances[i] == null)
+                        {
+                            Bambu.Log($"{settingOption} NOT FOUND!");
+                        }
+
+                        tabInstance.Add(uiInstances[i]);
                     }
 
                     focussables.AddRange(fs);
-
-                    tabInstance.Add(settingOptionUI);
 
                     currentSettingOptions.Add(settingOption);
                 }

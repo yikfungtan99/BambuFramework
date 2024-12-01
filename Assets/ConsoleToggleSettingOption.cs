@@ -7,10 +7,11 @@ namespace BambuFramework.UI
     [System.Serializable]
     public class ConsoleToggleSettingOption : ToggleSettingOption
     {
-        public override TemplateContainer SpawnUI(SettingsMenu menu, out List<Focusable> fs)
+        public override void SpawnUI(SettingsMenu menu, out List<TemplateContainer> templateContainers, out List<Focusable> fs)
         {
+            base.SpawnUI(menu, out templateContainers, out fs);
             // Create the base UI instance using the inherited method
-            TemplateContainer uiInstance = base.SpawnUI(menu, out fs);
+            TemplateContainer uiInstance = templateContainers[0];
 
             // Query the Toggle element in the template
             var toggle = uiInstance.Q<Toggle>("CustomToggle");
@@ -31,8 +32,6 @@ namespace BambuFramework.UI
             {
                 Bambu.Log("Toggle with the name 'CustomToggle' was not found in the UI template.");
             }
-
-            return uiInstance;
         }
     }
 }

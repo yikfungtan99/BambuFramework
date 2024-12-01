@@ -30,9 +30,10 @@ namespace BambuFramework.UI
 
         public override string[] DropdownOptions => ResolutionOptions.ToArray();
 
-        public override TemplateContainer SpawnUI(SettingsMenu menu, out List<Focusable> fs)
+        public override void SpawnUI(SettingsMenu menu, out List<TemplateContainer> templateContainers, out List<Focusable> fs)
         {
-            TemplateContainer uiInstance = base.SpawnUI(menu, out fs);
+            base.SpawnUI(menu, out templateContainers, out fs);
+            TemplateContainer uiInstance = templateContainers[0];
 
             // Query the Dropdown element
             var dropdown = uiInstance.Q<DropdownField>("CustomDropdown");
@@ -69,8 +70,6 @@ namespace BambuFramework.UI
             {
                 Bambu.Log("DropdownField with the name 'settingDropdown' was not found in the UI template.", Debugging.ELogCategory.UI);
             }
-
-            return uiInstance;
         }
 
         private void ApplyResolution(int width, int height)

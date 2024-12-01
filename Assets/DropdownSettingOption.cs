@@ -11,10 +11,12 @@ namespace BambuFramework.UI
         public virtual string[] DropdownOptions { get => baseOptions; }
         public override ESettingOptions SettingsOption => ESettingOptions.DROPDOWN;
 
-        public override TemplateContainer SpawnUI(SettingsMenu menu, out List<Focusable> fs)
+        public override void SpawnUI(SettingsMenu menu, out List<TemplateContainer> templateContainers, out List<Focusable> fs)
         {
+            base.SpawnUI(menu, out templateContainers, out fs);
+
             // Clone the base template
-            TemplateContainer uiInstance = base.SpawnUI(menu, out fs);
+            TemplateContainer uiInstance = templateContainers[0];
 
             // Query the Dropdown element
             var dropdown = uiInstance.Q<DropdownField>("CustomDropdown");
@@ -44,8 +46,6 @@ namespace BambuFramework.UI
 
             dropdown.RegisterCallback<FocusEvent>((e) => Focus(uiInstance));
             dropdown.RegisterCallback<BlurEvent>((e) => Blur(uiInstance));
-
-            return uiInstance;
         }
 
         protected override void Focus(VisualElement template)
