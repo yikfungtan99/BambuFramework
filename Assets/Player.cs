@@ -20,12 +20,13 @@ namespace BambuFramework
             playerInput.onControlsChanged += OnControlsChanged;
 
             // Subscribe to the Pause action
-            playerInput.actions["Pause"].performed += OnPause;
 
             // Subscribe to GameManager's events
             gameManager = GameManager.Instance;
-            gameManager.OnGameStart += SwitchToGameActionMap;
+            playerInput.actions["Pause"].performed += OnPause;
             gameManager.OnGameResume += OnResume;
+            gameManager.OnGameStart += OnGameStart;
+            gameManager.OnGamePaused += OnGamePaused;
 
             playerInput.actions["Attack"].performed += Attack;
 
@@ -34,6 +35,21 @@ namespace BambuFramework
             playerInput.SwitchCurrentActionMap(playerInput.actions.FindActionMap("UI").name);
 
             Debug.Log(playerInput.currentActionMap);
+        }
+
+        private void OnResume()
+        {
+            SwitchToGameActionMap();
+        }
+
+        private void OnGameStart()
+        {
+            SwitchToGameActionMap();
+        }
+
+        private void OnGamePaused()
+        {
+            SwitchToUIActionMap();
         }
 
         private void Attack(InputAction.CallbackContext context)
@@ -58,11 +74,11 @@ namespace BambuFramework
         private void OnPause(InputAction.CallbackContext context)
         {
             GameManager.Instance.Pause(this);
-            playerInput.SwitchCurrentActionMap(playerInput.actions.FindActionMap("UI").name);
         }
 
-        private void OnResume()
+        private void SwitchToUIActionMap()
         {
+            playerInput.SwitchCurrentActionMap(playerInput.actions.FindActionMap("UI").name);
         }
 
         public void SwitchToGameActionMap()
