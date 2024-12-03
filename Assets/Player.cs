@@ -78,17 +78,18 @@ namespace BambuFramework
 
         private void SwitchToUIActionMap()
         {
-            playerInput.SwitchCurrentActionMap(playerInput.actions.FindActionMap("UI").name);
+            ToggleActionMap("UI");
         }
 
         public void SwitchToGameActionMap()
         {
-            playerInput.SwitchCurrentActionMap(playerInput.actions.FindActionMap("Player").name);
+            ToggleActionMap("Player");
         }
 
-        public void ToggleActionMap(InputActionMap actionMap)
+        public void ToggleActionMap(string actionMap)
         {
-
+            if (playerInput.currentActionMap != null) playerInput.currentActionMap.Disable();
+            playerInput.SwitchCurrentActionMap(playerInput.actions.FindActionMap(actionMap).name);
         }
     }
 }

@@ -355,5 +355,15 @@ namespace BambuFramework.Settings
             var user = InputUser.all[0];  // Assumes single-player or first player
             return user.controlScheme?.name ?? "Keyboard&Mouse";  // Return the current control scheme or fallback to default
         }
+
+        public void RevertDefaultSettings(int index)
+        {
+            switch (index)
+            {
+                default:
+                    break;
+            }
+            throw new NotImplementedException();
+        }
     }
 }

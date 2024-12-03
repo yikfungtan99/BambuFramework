@@ -102,14 +102,20 @@ namespace BambuFramework.UI
             inputHints.Hide();
         }
 
-        public void ReturnToPrevious()
+        public void ReturnToPrevious(bool reset = false)
         {
             ActivateScreen(previousScreen);
+            if (reset) ResetPrevious();
         }
 
         internal void ResetActive()
         {
             activeScreen = null;
+            previousScreen = null;
+        }
+
+        public void ResetPrevious()
+        {
             previousScreen = null;
         }
     }

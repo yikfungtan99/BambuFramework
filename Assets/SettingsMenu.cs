@@ -1,6 +1,5 @@
 using BambuFramework.Settings;
 using Sirenix.OdinInspector;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -159,12 +158,13 @@ namespace BambuFramework.UI
 
         private void Back()
         {
-            uiManager.ReturnToPrevious();
+            uiManager.ReturnToPrevious(true);
         }
 
         private void Default()
         {
-            throw new NotImplementedException();
+            SettingsManager.Instance.RevertDefaultSettings(tabView.selectedTabIndex);
+            UpdateAllSettingOptions();
         }
 
         protected override void UpdateMenu()
