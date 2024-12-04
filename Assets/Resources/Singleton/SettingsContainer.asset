@@ -230,7 +230,7 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: 14|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
@@ -295,6 +295,27 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: 
+      Entry: 7
+      Data: 17|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
+    - Name: Title
+      Entry: 6
+      Data: 
+    - Name: minValue
+      Entry: 4
+      Data: 0
+    - Name: maxValue
+      Entry: 4
+      Data: 100
+    - Name: defaultValue
+      Entry: 4
+      Data: 50
+    - Name: channel
+      Entry: 3
+      Data: 3
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
       Entry: 13
       Data: 
     - Name: 
@@ -305,23 +326,23 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 17|BambuFramework.UI.SettingsTab, Assembly-CSharp
+      Data: 18|BambuFramework.UI.SettingsTab, Assembly-CSharp
     - Name: TabName
       Entry: 1
       Data: Controls
     - Name: SettingOptions
       Entry: 7
-      Data: 18|System.Collections.Generic.List`1[[BambuFramework.UI.SettingOption,
+      Data: 19|System.Collections.Generic.List`1[[BambuFramework.UI.SettingOption,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 19|BambuFramework.UI.InputRebindOption, Assembly-CSharp
+      Data: 20|BambuFramework.UI.InputRebindOption, Assembly-CSharp
     - Name: Title
-      Entry: 6
-      Data: 
+      Entry: 1
+      Data: PAUSE
     - Name: 
       Entry: 8
       Data: 

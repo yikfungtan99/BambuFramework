@@ -4,6 +4,7 @@
     {
         MASTER = 0,
         SFX = 1,
-        MUSIC = 2
+        MUSIC = 2,
+        UI = 3,
     }
 }
