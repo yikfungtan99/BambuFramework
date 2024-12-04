@@ -14,7 +14,7 @@ namespace BambuFramework.UI
         // These can be overridden in derived classes to set specific volume ranges
         public override float MinValue => 0f;
         public override float MaxValue => 100f;
-        public override float DefaultValue => SettingsManager.Instance.GetAudioVolume(channel);
+        public override float Value => SettingsManager.Instance.GetAudioVolume(channel);
 
         // Override the UI logic, keeping the functionality reusable
         public override void SpawnUI(SettingsMenu menu, out List<TemplateContainer> templateContainers, out List<Focusable> fs)
@@ -29,11 +29,11 @@ namespace BambuFramework.UI
             {
                 slider.lowValue = MinValue;
                 slider.highValue = MaxValue;
-                slider.value = DefaultValue;
+                slider.value = Value;
 
                 if (textField != null)
                 {
-                    textField.value = ((int)DefaultValue).ToString();
+                    textField.value = ((int)Value).ToString();
                 }
 
                 // Update text field on slider change
@@ -100,8 +100,9 @@ namespace BambuFramework.UI
 
         public override void UpdateSettingOption()
         {
-            slider.SetValueWithoutNotify(slider.value);
-            textField.SetValueWithoutNotify(((int)slider.value).ToString());
+            float value = Value;
+            slider.SetValueWithoutNotify(value);
+            textField.SetValueWithoutNotify(((int)value).ToString());
         }
     }
 }

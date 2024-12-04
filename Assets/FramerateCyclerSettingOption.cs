@@ -42,6 +42,7 @@ namespace BambuFramework.UI
             var nextButton = uiInstance.Q<Button>("btnNext");
 
             currentIndex = SettingsManager.Instance.VideoFramerate;
+            currentIndex = Mathf.Clamp(currentIndex, 0, CyclerOptions.Count - 1);
 
             // Initialize the label with the current option (default to 60 FPS)
             if (label != null && CyclerOptions != null && CyclerOptions.Count > 0)
@@ -59,7 +60,7 @@ namespace BambuFramework.UI
                         currentIndex = (currentIndex - 1 + CyclerOptions.Count) % CyclerOptions.Count;
                         label.text = CyclerOptions[currentIndex];
                         ApplyFramerateSetting(currentIndex);
-                        Bambu.Log($"Framerate changed to: {CyclerOptions[currentIndex]}");
+                        Bambu.Log($"Framerate changed to: {CyclerOptions[currentIndex]}", Debugging.ELogCategory.UI);
                     }
                 };
             }
@@ -74,7 +75,7 @@ namespace BambuFramework.UI
                         currentIndex = (currentIndex + 1) % CyclerOptions.Count;
                         label.text = CyclerOptions[currentIndex];
                         ApplyFramerateSetting(currentIndex);
-                        Bambu.Log($"Framerate changed to: {CyclerOptions[currentIndex]}");
+                        Bambu.Log($"Framerate changed to: {CyclerOptions[currentIndex]}", Debugging.ELogCategory.UI);
                     }
                 };
             }
@@ -104,6 +105,21 @@ namespace BambuFramework.UI
         {
             Color initColor = template.style.backgroundColor.value;
             template.style.backgroundColor = new Color(initColor.r, initColor.g, initColor.b, 0);
+        }
+
+        public override void UpdateSettingOption()
+        {
+            base.UpdateSettingOption();
+
+            currentIndex = SettingsManager.Instance.VideoFramerate;
+            currentIndex = Mathf.Clamp(currentIndex, 0, CyclerOptions.Count - 1);
+
+            // Initialize the label with the current option (default to 60 FPS)
+            if (label != null && CyclerOptions != null && CyclerOptions.Count > 0)
+            {
+                label.text = CyclerOptions[currentIndex];
+            }
+
         }
     }
 }

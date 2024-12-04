@@ -80,8 +80,8 @@ namespace BambuFramework.UI
 
         public override void UpdateSettingOption()
         {
-            dropDown.choices = new List<string>(DropdownOptions);
-            dropDown.SetValueWithoutNotify(dropDown.choices[currentIndex]);  // Set the dropDown to show the current index
+            currentIndex = SettingsManager.Instance.VideoWindowMode;  // Assuming GetWindowMode returns an index for the selected window mode
+            dropDown.SetValueWithoutNotify(DropdownOptions[currentIndex]);  // Set the dropDown to show the current index
         }
     }
 }

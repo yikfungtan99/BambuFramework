@@ -35,6 +35,7 @@ namespace BambuFramework.UI
                 InputAction inputAction = menu.Player.PlayerInput.actions.actionMaps[0].actions[i];
 
                 if (inputAction.type == InputActionType.Value) continue;
+                if (inputAction.name == "Pause") continue;
 
                 Button btnRebind = uiInstance.Q<Button>("btnRebind");
 

@@ -30,11 +30,7 @@ namespace BambuFramework
 
             playerInput.actions["Attack"].performed += Attack;
 
-            Debug.Log(playerInput.currentActionMap);
-
             playerInput.SwitchCurrentActionMap(playerInput.actions.FindActionMap("UI").name);
-
-            Debug.Log(playerInput.currentActionMap);
         }
 
         private void OnResume()

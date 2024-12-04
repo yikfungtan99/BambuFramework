@@ -13,9 +13,9 @@ namespace BambuFramework.UI
         public virtual List<string> CyclerOptions => baseOptions;
         public override ESettingOptions SettingsOption => ESettingOptions.CYCLER;
 
-        private Label label;
-        private Button prevButton;
-        private Button nextButton;
+        protected Label label;
+        protected Button prevButton;
+        protected Button nextButton;
 
         public override void SpawnUI(SettingsMenu menu, out List<TemplateContainer> templateContainers, out List<Focusable> fs)
         {

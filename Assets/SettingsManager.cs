@@ -186,20 +186,6 @@ namespace BambuFramework.Settings
             SaveAudioSettings();
         }
 
-        public void ResetVideoSettings()
-        {
-            VideoResolution = new Vector2Int(Screen.currentResolution.width, Screen.currentResolution.height); // Default to monitor resolution
-            VideoWindowMode = 1; // Default to fullscreen
-            VideoFramerate = 60; // Default to 60 FPS
-
-            PlayerPrefs.SetInt(KEY_SETTING_VIDEO_RESOLUTION + "_Width", VideoResolution.x);
-            PlayerPrefs.SetInt(KEY_SETTING_VIDEO_RESOLUTION + "_Height", VideoResolution.y);
-            PlayerPrefs.SetInt(KEY_SETTING_VIDEO_WINDOW_MODE, VideoWindowMode);
-            PlayerPrefs.SetInt(KEY_SETTING_VIDEO_FRAMERATE, VideoFramerate);
-
-            PlayerPrefs.Save();
-        }
-
         public void SetAudioVolume(EAudioChannel channel, int volume)
         {
             switch (channel)
@@ -231,6 +217,47 @@ namespace BambuFramework.Settings
                 default:
                     return 0;
             }
+        }
+
+        public void RevertDefaultGameplaySettings()
+        {
+            GameplayConsole = SettingsContainer.Instance.DefaultGameplayConsole;
+            SetGameplayConsole(GameplayConsole);
+        }
+
+        public void RevertDefaultVideoSettings()
+        {
+            var currentResolution = Screen.currentResolution; // OS-set resolution
+            Vector2Int defaultResolution = new Vector2Int(currentResolution.width, currentResolution.height);
+
+            VideoResolution = defaultResolution;
+
+            VideoWindowMode = SettingsContainer.Instance.DefaultVideoWindowMode;
+
+            VideoFramerate = SettingsContainer.Instance.VideoFrameRates.Count - 1;
+
+            SetVideoResolution(VideoResolution);
+            SetVideoWindowMode(VideoWindowMode);
+            SetVideoFramerate(VideoFramerate);
+        }
+
+        public void RevertDefaultAudioSettings()
+        {
+            AudioMaster = SettingsContainer.Instance.DefaultAudioMaster;
+            AudioSFX = SettingsContainer.Instance.DefaultAudioSFX;
+            AudioMusic = SettingsContainer.Instance.DefaultAudioMusic;
+
+            SetAudioMaster(AudioMaster);
+            SetAudioSFX(AudioSFX);
+            SetAudioMusic(AudioMusic);
+        }
+
+        public void RevertDefaultInputSettings()
+        {
+            var playerInput = PlayerManager.Instance.HostPlayer.PlayerInput;
+            playerInput.actions.RemoveAllBindingOverrides();
+
+            SaveRebinds();
         }
 
         public void RebindKeys(Player player, InputAction ia, Action onComplete = null)
@@ -326,16 +353,6 @@ namespace BambuFramework.Settings
         {
             Bambu.Log("CANCEL REBIND", Debugging.ELogCategory.SETTING);
             if (rebindingOperation != null) rebindingOperation.Cancel();
-
-            //if (rebindingOperation != null)
-            //{
-            //    rebindingOperation.Cancel();
-            //    rebindingOperation = null;
-            //    OnRebindComplete?.Invoke();
-            //    OnRebindComplete = null;
-            //    IsRebinding = false;
-            //    Debug.Log($"{rebindingControlScheme} Rebind canceled");
-            //}
         }
 
         private void SaveRebinds()
@@ -360,10 +377,25 @@ namespace BambuFramework.Settings
         {
             switch (index)
             {
+                case 0:
+                    RevertDefaultGameplaySettings();
+                    break;
+
+                case 1:
+                    RevertDefaultVideoSettings();
+                    break;
+
+                case 2:
+                    RevertDefaultAudioSettings();
+                    break;
+
+                case 3:
+                    RevertDefaultInputSettings();
+                    break;
+
                 default:
                     break;
             }
-            throw new NotImplementedException();
         }
     }
 }

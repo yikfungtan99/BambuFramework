@@ -13,7 +13,7 @@ namespace BambuFramework.UI
 
         public virtual float MinValue => minValue;
         public virtual float MaxValue => maxValue;
-        public virtual float DefaultValue => defaultValue;
+        public virtual float Value => defaultValue;
 
         public override ESettingOptions SettingsOption => ESettingOptions.SLIDER;
 
@@ -35,12 +35,12 @@ namespace BambuFramework.UI
             {
                 slider.lowValue = MinValue;
                 slider.highValue = MaxValue;
-                slider.value = DefaultValue;
+                slider.value = Value;
 
                 // Update the text field with the initial slider value
                 if (textField != null)
                 {
-                    textField.value = ((int)DefaultValue).ToString(); // Display one decimal place
+                    textField.value = ((int)Value).ToString(); // Display one decimal place
                 }
 
                 // Synchronize the slider with the text field
