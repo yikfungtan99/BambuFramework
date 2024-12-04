@@ -60,7 +60,7 @@ namespace BambuFramework.UI
 
         protected abstract void UpdateMenu();
 
-        public virtual void Show(Player player = null, bool sortingOrder = true)
+        public virtual void Show(Player player, bool sortingOrder = true)
         {
             BambuLogger.Log($"Showing: {gameObject.name}", ELogCategory.UI);
 

@@ -158,7 +158,7 @@ namespace BambuFramework.UI
 
         private void Back()
         {
-            uiManager.ReturnToPrevious(true);
+            uiManager.ReturnToPrevious(initiatedPlayer, true);
         }
 
         private void Default()

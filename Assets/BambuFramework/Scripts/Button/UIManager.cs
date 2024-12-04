@@ -32,15 +32,15 @@ namespace BambuFramework.UI
             settingsMenu.Init(this);
             inputHints.Init(this);
 
-            ShowMainMenu();
+            ShowMainMenu(PlayerManager.Instance.HostPlayer);
             HidePause();
             HideSettings();
             HideInputHints();
         }
 
-        public void ShowMainMenu()
+        public void ShowMainMenu(Player player)
         {
-            ActivateScreen(mainMenu);
+            ActivateScreen(mainMenu, player);
         }
 
         public void ShowPause(Player player)
@@ -53,7 +53,7 @@ namespace BambuFramework.UI
             ActivateScreen(settingsMenu, player);
         }
 
-        private void ActivateScreen(MenuScreen menuScreen, Player player = null)
+        private void ActivateScreen(MenuScreen menuScreen, Player player)
         {
             if (menuScreen == null) return;
 
@@ -102,9 +102,9 @@ namespace BambuFramework.UI
             inputHints.Hide();
         }
 
-        public void ReturnToPrevious(bool reset = false)
+        public void ReturnToPrevious(Player player, bool reset = false)
         {
-            ActivateScreen(previousScreen);
+            ActivateScreen(previousScreen, player);
             if (reset) ResetPrevious();
         }
 

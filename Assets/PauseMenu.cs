@@ -38,7 +38,7 @@ namespace BambuFramework.UI
 
         private void MainMenu()
         {
-            uiManager.ShowMainMenu();
+            uiManager.ShowMainMenu(initiatedPlayer);
         }
 
         // Update is called once per frame
