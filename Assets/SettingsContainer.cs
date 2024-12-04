@@ -26,6 +26,7 @@ namespace BambuFramework.UI
         public int DefaultAudioMaster = 50; // Default master volume percentage
         public int DefaultAudioSFX = 50;    // Default SFX volume percentage
         public int DefaultAudioMusic = 50;  // Default music volume percentage
+        public int DefaultAudioUI = 50;  // Default music volume percentage
 
         [Header("Default Input Settings")]
         [OdinSerialize]

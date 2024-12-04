@@ -39,6 +39,7 @@ namespace BambuFramework.Settings
         public int AudioMaster { get; private set; }
         public int AudioSFX { get; private set; }
         public int AudioMusic { get; private set; }
+        public int AudioUI { get; private set; }
         public bool IsRebinding { get; private set; }
 
         string rebindingControlScheme;
@@ -186,6 +187,13 @@ namespace BambuFramework.Settings
             SaveAudioSettings();
         }
 
+        public void SetAudioUI(int value)
+        {
+            AudioMusic = value;
+            AudioManager.Instance.SetChannelVolume(EAudioChannel.UI, AudioUI);
+            SaveAudioSettings();
+        }
+
         public void SetAudioVolume(EAudioChannel channel, int volume)
         {
             switch (channel)
@@ -198,6 +206,9 @@ namespace BambuFramework.Settings
                     break;
                 case EAudioChannel.MUSIC:
                     SetAudioMusic(volume);
+                    break;
+                case EAudioChannel.UI:
+                    SetAudioUI(volume);
                     break;
                 default:
                     break;
@@ -214,6 +225,8 @@ namespace BambuFramework.Settings
                     return AudioSFX;
                 case EAudioChannel.MUSIC:
                     return AudioMusic;
+                case EAudioChannel.UI:
+                    return AudioUI;
                 default:
                     return 0;
             }
@@ -246,10 +259,12 @@ namespace BambuFramework.Settings
             AudioMaster = SettingsContainer.Instance.DefaultAudioMaster;
             AudioSFX = SettingsContainer.Instance.DefaultAudioSFX;
             AudioMusic = SettingsContainer.Instance.DefaultAudioMusic;
+            AudioUI = SettingsContainer.Instance.DefaultAudioUI;
 
             SetAudioMaster(AudioMaster);
             SetAudioSFX(AudioSFX);
             SetAudioMusic(AudioMusic);
+            SetAudioUI(AudioUI);
         }
 
         public void RevertDefaultInputSettings()

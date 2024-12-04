@@ -113,29 +113,121 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
+    - Name: DefaultInputBindings
+      Entry: 7
+      Data: 2|System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[System.String,
+        mscorlib]], mscorlib
+    - Name: comparer
+      Entry: 7
+      Data: 3|System.Collections.Generic.GenericEqualityComparer`1[[System.String,
+        mscorlib]], mscorlib
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 12
+      Data: 6
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Move_Forward
+    - Name: $v
+      Entry: 1
+      Data: <Keyboard>/w
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Move_Backward
+    - Name: $v
+      Entry: 1
+      Data: <Keyboard>/s
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Move_Left
+    - Name: $v
+      Entry: 1
+      Data: <Keyboard>/a
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Move_Right
+    - Name: $v
+      Entry: 1
+      Data: <Keyboard>/d
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Jump
+    - Name: $v
+      Entry: 1
+      Data: <Keyboard>/space
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 1
+      Data: Fire
+    - Name: $v
+      Entry: 1
+      Data: <Mouse>/leftButton
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: Tabs
       Entry: 7
-      Data: 2|System.Collections.Generic.List`1[[BambuFramework.UI.SettingsTab, Assembly-CSharp]],
+      Data: 4|System.Collections.Generic.List`1[[BambuFramework.UI.SettingsTab, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 4
     - Name: 
       Entry: 7
-      Data: 3|BambuFramework.UI.SettingsTab, Assembly-CSharp
+      Data: 5|BambuFramework.UI.SettingsTab, Assembly-CSharp
     - Name: TabName
       Entry: 1
       Data: Gameplay
     - Name: SettingOptions
       Entry: 7
-      Data: 4|System.Collections.Generic.List`1[[BambuFramework.UI.SettingOption,
+      Data: 6|System.Collections.Generic.List`1[[BambuFramework.UI.SettingOption,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 5|BambuFramework.UI.ConsoleToggleSettingOption, Assembly-CSharp
+      Data: 7|BambuFramework.UI.ConsoleToggleSettingOption, Assembly-CSharp
     - Name: Title
       Entry: 1
       Data: CONSOLE
@@ -153,20 +245,20 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 6|BambuFramework.UI.SettingsTab, Assembly-CSharp
+      Data: 8|BambuFramework.UI.SettingsTab, Assembly-CSharp
     - Name: TabName
       Entry: 1
       Data: Video
     - Name: SettingOptions
       Entry: 7
-      Data: 7|System.Collections.Generic.List`1[[BambuFramework.UI.SettingOption,
+      Data: 9|System.Collections.Generic.List`1[[BambuFramework.UI.SettingOption,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 3
     - Name: 
       Entry: 7
-      Data: 8|BambuFramework.UI.VideoResolutionDropdownSettingOption, Assembly-CSharp
+      Data: 10|BambuFramework.UI.VideoResolutionDropdownSettingOption, Assembly-CSharp
     - Name: Title
       Entry: 1
       Data: VIDEO
@@ -178,13 +270,13 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 9|BambuFramework.UI.FramerateCyclerSettingOption, Assembly-CSharp
+      Data: 11|BambuFramework.UI.FramerateCyclerSettingOption, Assembly-CSharp
     - Name: Title
       Entry: 1
       Data: FRAMERATE
     - Name: baseOptions
       Entry: 7
-      Data: 10|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
+      Data: 12|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
     - Name: 
       Entry: 12
       Data: 0
@@ -199,7 +291,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 11|BambuFramework.UI.WindowsModeSettingsOption, Assembly-CSharp
+      Data: 13|BambuFramework.UI.WindowsModeSettingsOption, Assembly-CSharp
     - Name: Title
       Entry: 1
       Data: WINDOWS MODE
@@ -220,20 +312,20 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 12|BambuFramework.UI.SettingsTab, Assembly-CSharp
+      Data: 14|BambuFramework.UI.SettingsTab, Assembly-CSharp
     - Name: TabName
       Entry: 1
       Data: Audio
     - Name: SettingOptions
       Entry: 7
-      Data: 13|System.Collections.Generic.List`1[[BambuFramework.UI.SettingOption,
+      Data: 15|System.Collections.Generic.List`1[[BambuFramework.UI.SettingOption,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 4
     - Name: 
       Entry: 7
-      Data: 14|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
+      Data: 16|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
     - Name: Title
       Entry: 1
       Data: MASTER
@@ -254,7 +346,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 15|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
+      Data: 17|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
     - Name: Title
       Entry: 1
       Data: SFX
@@ -275,7 +367,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 16|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
+      Data: 18|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
     - Name: Title
       Entry: 1
       Data: MUSIC
@@ -296,10 +388,10 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 17|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
+      Data: 19|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
     - Name: Title
-      Entry: 6
-      Data: 
+      Entry: 1
+      Data: UI
     - Name: minValue
       Entry: 4
       Data: 0
@@ -326,23 +418,23 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 18|BambuFramework.UI.SettingsTab, Assembly-CSharp
+      Data: 20|BambuFramework.UI.SettingsTab, Assembly-CSharp
     - Name: TabName
       Entry: 1
       Data: Controls
     - Name: SettingOptions
       Entry: 7
-      Data: 19|System.Collections.Generic.List`1[[BambuFramework.UI.SettingOption,
+      Data: 21|System.Collections.Generic.List`1[[BambuFramework.UI.SettingOption,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 20|BambuFramework.UI.InputRebindOption, Assembly-CSharp
+      Data: 22|BambuFramework.UI.InputRebindOption, Assembly-CSharp
     - Name: Title
       Entry: 1
-      Data: PAUSE
+      Data: SPRINT
     - Name: 
       Entry: 8
       Data: 
@@ -362,3 +454,8 @@ MonoBehaviour:
       Entry: 8
       Data: 
   VideoFrameRates: 1e0000003c0000007800000090000000a5000000f0000000
+  DefaultGameplayConsole: 0
+  DefaultVideoWindowMode: 0
+  DefaultAudioMaster: 50
+  DefaultAudioSFX: 50
+  DefaultAudioMusic: 50
