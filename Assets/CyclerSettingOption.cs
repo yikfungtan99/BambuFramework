@@ -40,7 +40,7 @@ namespace BambuFramework.UI
                     {
                         currentIndex = (currentIndex - 1 + CyclerOptions.Count) % CyclerOptions.Count;
                         label.text = CyclerOptions[currentIndex];
-                        Bambu.Log($"Cycler value changed to: {CyclerOptions[currentIndex]}");
+                        Bambu.Log($"Cycler value changed to: {CyclerOptions[currentIndex]}", Debugging.ELogCategory.SETTING);
                     }
                 };
             }
