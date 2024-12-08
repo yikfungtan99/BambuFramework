@@ -40,6 +40,7 @@ namespace BambuFramework.UI
                     {
                         currentIndex = (currentIndex - 1 + CyclerOptions.Count) % CyclerOptions.Count;
                         label.text = CyclerOptions[currentIndex];
+                        UIManager.Instance.Submit();
                         Bambu.Log($"Cycler value changed to: {CyclerOptions[currentIndex]}", Debugging.ELogCategory.SETTING);
                     }
                 };
@@ -54,6 +55,7 @@ namespace BambuFramework.UI
                     {
                         currentIndex = (currentIndex + 1) % CyclerOptions.Count;
                         label.text = CyclerOptions[currentIndex];
+                        UIManager.Instance.Submit();
                         Bambu.Log($"Cycler value changed to: {CyclerOptions[currentIndex]}");
                     }
                 };
@@ -63,10 +65,10 @@ namespace BambuFramework.UI
             fs.Add(nextButton);
 
 
-            nextButton.RegisterCallback<FocusEvent>((e) => Focus(uiInstance));
-            prevButton.RegisterCallback<FocusEvent>((e) => Focus(uiInstance));
-            nextButton.RegisterCallback<BlurEvent>((e) => Blur(uiInstance));
-            prevButton.RegisterCallback<BlurEvent>((e) => Blur(uiInstance));
+            //nextButton.RegisterCallback<FocusEvent>((e) => Focus(uiInstance));
+            //prevButton.RegisterCallback<FocusEvent>((e) => Focus(uiInstance));
+            //nextButton.RegisterCallback<BlurEvent>((e) => Blur(uiInstance));
+            //prevButton.RegisterCallback<BlurEvent>((e) => Blur(uiInstance));
         }
 
         public override void UpdateSettingOption()

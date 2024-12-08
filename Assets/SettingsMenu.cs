@@ -124,7 +124,7 @@ namespace BambuFramework.UI
         {
             base.Hide(sortingOrder);
 
-            if (SettingsManager.Instance.IsRebinding) return;
+            if (SettingsManager.Instance.IsBusy) return;
 
             if (player != null)
             {
@@ -173,6 +173,8 @@ namespace BambuFramework.UI
         private void NavigateTabs(int direction)
         {
             if (tabView == null) return;
+            if (SettingsManager.Instance.IsBusy) return;
+
             // Update selected index and wrap around if necessary
             tabView.selectedTabIndex = (tabView.selectedTabIndex + direction + tabCount) % tabCount;
             SetFocusOnTab(tabView.selectedTabIndex);

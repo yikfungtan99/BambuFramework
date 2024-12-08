@@ -29,7 +29,7 @@ namespace BambuFramework.UI
         protected abstract Button firstButton { get; }
         protected Button lastFocusedButton;
         private VisualElement root;
-        protected VisualElement Root
+        public VisualElement Root
         {
             get
             {

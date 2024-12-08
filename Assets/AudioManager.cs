@@ -11,9 +11,6 @@ namespace BambuFramework.Audio
 
         private readonly Dictionary<EAudioChannel, Bus> audioBuses = new Dictionary<EAudioChannel, Bus>();
 
-        // Dictionary to track event instances by the parent GameObject
-        private readonly Dictionary<GameObject, EventInstance> loopingInstances = new Dictionary<GameObject, EventInstance>();
-
         protected override void Awake()
         {
             base.Awake();
@@ -76,57 +73,7 @@ namespace BambuFramework.Audio
                 return;
             }
 
-            if (audioRef.isLooping)
-            {
-                Instance.PlayLoopingAudioInternal(audioRef, position);
-            }
-            else
-            {
-                RuntimeManager.PlayOneShot(audioRef.eventReference, position);
-            }
-        }
-
-        private void PlayLoopingAudioInternal(AudioReference audioRef, Vector3 position)
-        {
-            if (loopingInstances.ContainsKey(gameObject))
-            {
-                Debug.LogWarning($"A looping sound is already playing on {gameObject.name}");
-                return;
-            }
-
-            // Create an emitterInstance as a child of the parentObject
-            var emitterInstance = new GameObject($"Emitter_{audioRef.EventName}");
-            emitterInstance.transform.SetParent(gameObject.transform);
-            emitterInstance.transform.position = position;
-
-            // Create the FMOD instance
-            var instance = RuntimeManager.CreateInstance(audioRef.eventReference);
-            RuntimeManager.AttachInstanceToGameObject(instance, emitterInstance.transform);
-            instance.start();
-
-            // Store the event instance for later management
-            loopingInstances[gameObject] = instance;
-        }
-
-        /// <summary>
-        /// Stops a looping sound attached to the specified game object.
-        /// </summary>
-        public void StopLoopingAudio(GameObject parentObject)
-        {
-            if (loopingInstances.TryGetValue(parentObject, out var instance))
-            {
-                // Stop the sound and release the instance
-                instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                instance.release();
-
-                // Destroy the emitterInstance GameObject
-                Destroy(parentObject);
-                loopingInstances.Remove(parentObject);
-            }
-            else
-            {
-                Debug.LogWarning($"No looping sound found for {parentObject.name}");
-            }
+            RuntimeManager.PlayOneShot(audioRef.eventReference, position);
         }
 
         /// <summary>

@@ -45,8 +45,16 @@ namespace BambuFramework.UI
             {
                 dropDown.choices = new List<string>(DropdownOptions);
                 dropDown.index = currentIndex;  // Set the dropDown to show the current index
+
+                dropDown.RegisterCallback<NavigationSubmitEvent>((click) => Expanded());
+                dropDown.RegisterCallback<PointerDownEvent>((click) => Expanded());
+
+                dropDown.RegisterCallback<FocusEvent>((click) => Collapsed());
+                menu.Root.RegisterCallback<MouseDownEvent>((click) => Collapsed());
+
                 dropDown.RegisterValueChangedCallback(evt =>
                 {
+                    Collapsed();
                     currentIndex = dropDown.index;
                     ApplyWindowModeSetting(currentIndex);
                     //if (label != null) label.text = DropdownOptions[currentIndex];  // Update label text
@@ -58,24 +66,22 @@ namespace BambuFramework.UI
             fs.Add(dropDown);
         }
 
+        private void Expanded()
+        {
+            Debug.Log("Expanded");
+            SettingsManager.Instance.IsBusy = true;
+        }
+
+        private void Collapsed()
+        {
+            Debug.Log("Collapse");
+            SettingsManager.Instance.IsBusy = false;
+        }
+
         private void ApplyWindowModeSetting(int currentIndex)
         {
             // Assuming SettingsManager has a method to set the window mode by index
             SettingsManager.Instance.SetVideoWindowMode(currentIndex);
-        }
-
-        protected override void Focus(VisualElement template)
-        {
-            // Handle visual feedback when focused
-            Color initColor = template.style.backgroundColor.value;
-            template.style.backgroundColor = new Color(initColor.r, initColor.g, initColor.b, 155);
-        }
-
-        protected override void Blur(VisualElement template)
-        {
-            // Handle visual feedback when focus is lost
-            Color initColor = template.style.backgroundColor.value;
-            template.style.backgroundColor = new Color(initColor.r, initColor.g, initColor.b, 0);
         }
 
         public override void UpdateSettingOption()

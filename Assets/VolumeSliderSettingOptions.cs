@@ -74,8 +74,8 @@ namespace BambuFramework.UI
 
             fs.Add(slider);
 
-            slider.RegisterCallback<FocusEvent>((e) => Focus(uiInstance));
-            slider.RegisterCallback<BlurEvent>((e) => Blur(uiInstance));
+            //slider.RegisterCallback<FocusEvent>((e) => Focus(uiInstance));
+            //slider.RegisterCallback<BlurEvent>((e) => Blur(uiInstance));
         }
 
         // Apply the volume setting (use a specific method in derived classes for actual setting)

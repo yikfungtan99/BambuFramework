@@ -40,7 +40,7 @@ namespace BambuFramework.Settings
         public int AudioSFX { get; private set; }
         public int AudioMusic { get; private set; }
         public int AudioUI { get; private set; }
-        public bool IsRebinding { get; private set; }
+        public bool IsBusy { get; set; }
 
         string rebindingControlScheme;
         Action OnRebindComplete;
@@ -277,7 +277,7 @@ namespace BambuFramework.Settings
 
         public void RebindKeys(Player player, InputAction ia, Action onComplete = null)
         {
-            IsRebinding = true;
+            IsBusy = true;
 
             inputAction = ia;
             inputAction.Disable();
@@ -305,7 +305,7 @@ namespace BambuFramework.Settings
                                         // Update the button text to the new binding
                                         onComplete?.Invoke();
                                         inputAction.Enable();
-                                        IsRebinding = false;
+                                        IsBusy = false;
 
                                         op.Dispose();
 
@@ -318,7 +318,7 @@ namespace BambuFramework.Settings
                                         // Update the button text to the new binding
                                         onComplete?.Invoke();
                                         inputAction.Enable();
-                                        IsRebinding = false;
+                                        IsBusy = false;
 
                                         op.Dispose();
 
@@ -342,7 +342,7 @@ namespace BambuFramework.Settings
                         // Update the button text to the new binding
                         onComplete?.Invoke();
                         inputAction.Enable();
-                        IsRebinding = false;
+                        IsBusy = false;
 
                         op.Dispose();
 
@@ -354,7 +354,7 @@ namespace BambuFramework.Settings
                         Bambu.Log("Cancelled keyboard", Debugging.ELogCategory.SETTING);
                         onComplete?.Invoke();
                         inputAction.Enable();
-                        IsRebinding = false;
+                        IsBusy = false;
 
                         op.Dispose();
 

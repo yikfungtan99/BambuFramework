@@ -107,7 +107,7 @@ namespace BambuFramework.UI
 
         public override void UpdateSettingOption()
         {
-            if (SettingsManager.Instance.IsRebinding)
+            if (SettingsManager.Instance.IsBusy)
             {
                 return;
             }

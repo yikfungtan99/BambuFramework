@@ -26,9 +26,6 @@ namespace BambuFramework.Audio
 
         public EventReference eventReference;
 
-        [Tooltip("Toggle if this audio should loop.")]
-        public bool isLooping;
-
         public void Play()
         {
             Play(Vector3.zero);
