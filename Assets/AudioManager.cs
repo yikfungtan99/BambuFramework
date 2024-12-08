@@ -7,7 +7,7 @@ namespace BambuFramework.Audio
 {
     public class AudioManager : SingletonBehaviour<AudioManager>
     {
-        [SerializeField] private AudioContainer audioContainer;
+        public AudioLibrary AudioContainer;
 
         private readonly Dictionary<EAudioChannel, Bus> audioBuses = new Dictionary<EAudioChannel, Bus>();
 
@@ -63,63 +63,45 @@ namespace BambuFramework.Audio
             }
         }
 
-        /// <summary>
-        /// Plays a one-shot sound at the specified position.
-        /// </summary>
-        public void PlayAudio(string eventName, Vector3 position)
+        public static void PlayAudio(AudioReference audioRef)
         {
-            var audioEvent = audioContainer.GetAudioEvent(eventName);
+            PlayAudio(audioRef, Vector3.zero);
+        }
 
-            if (audioEvent == null || audioEvent.eventReference.IsNull)
+        public static void PlayAudio(AudioReference audioRef, Vector3 position)
+        {
+            if (audioRef == null)
             {
-                Debug.LogWarning($"Audio Event '{eventName}' not found in registry.");
+                Debug.LogWarning($"Audio Event not found in registry.");
                 return;
             }
 
-            RuntimeManager.PlayOneShot(audioEvent.eventReference, position);
+            if (audioRef.isLooping)
+            {
+                Instance.PlayLoopingAudioInternal(audioRef, position);
+            }
+            else
+            {
+                RuntimeManager.PlayOneShot(audioRef.eventReference, position);
+            }
         }
 
-        /// <summary>
-        /// Gets the current volume of the specified audio channel.
-        /// </summary>
-        public float GetChannelVolume(EAudioChannel channel)
+        private void PlayLoopingAudioInternal(AudioReference audioRef, Vector3 position)
         {
-            if (audioBuses.TryGetValue(channel, out var bus))
-            {
-                bus.getVolume(out float volume);
-                return volume;
-            }
-
-            Debug.LogWarning($"Audio bus for channel '{channel}' not found.");
-            return 0f;
-        }
-        /// <summary>
-        /// Plays a looping audio attached to the specified game object.
-        /// </summary>
-        public void PlayLoopingAudio(string eventName)
-        {
-            var audioEvent = audioContainer.GetAudioEvent(eventName);
-
-            if (audioEvent == null || audioEvent.eventReference.IsNull)
-            {
-                Debug.LogWarning($"Audio Event '{eventName}' not found in registry.");
-                return;
-            }
-
             if (loopingInstances.ContainsKey(gameObject))
             {
                 Debug.LogWarning($"A looping sound is already playing on {gameObject.name}");
                 return;
             }
 
-            // Create an emitter as a child of the parentObject
-            var emitter = new GameObject($"Emitter_{eventName}");
-            emitter.transform.SetParent(gameObject.transform);
-            emitter.transform.localPosition = Vector3.zero;
+            // Create an emitterInstance as a child of the parentObject
+            var emitterInstance = new GameObject($"Emitter_{audioRef.EventName}");
+            emitterInstance.transform.SetParent(gameObject.transform);
+            emitterInstance.transform.position = position;
 
             // Create the FMOD instance
-            var instance = RuntimeManager.CreateInstance(audioEvent.eventReference);
-            RuntimeManager.AttachInstanceToGameObject(instance, emitter.transform);
+            var instance = RuntimeManager.CreateInstance(audioRef.eventReference);
+            RuntimeManager.AttachInstanceToGameObject(instance, emitterInstance.transform);
             instance.start();
 
             // Store the event instance for later management
@@ -137,7 +119,7 @@ namespace BambuFramework.Audio
                 instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 instance.release();
 
-                // Destroy the emitter GameObject
+                // Destroy the emitterInstance GameObject
                 Destroy(parentObject);
                 loopingInstances.Remove(parentObject);
             }
@@ -146,5 +128,21 @@ namespace BambuFramework.Audio
                 Debug.LogWarning($"No looping sound found for {parentObject.name}");
             }
         }
+
+        /// <summary>
+        /// Gets the current volume of the specified audio channel.
+        /// </summary>
+        public float GetChannelVolume(EAudioChannel channel)
+        {
+            if (audioBuses.TryGetValue(channel, out var bus))
+            {
+                bus.getVolume(out float volume);
+                return volume;
+            }
+
+            Debug.LogWarning($"Audio bus for channel '{channel}' not found.");
+            return 0f;
+        }
+
     }
 }

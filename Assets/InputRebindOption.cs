@@ -105,18 +105,6 @@ namespace BambuFramework.UI
             return user.controlScheme?.name ?? "Keyboard&Mouse";
         }
 
-        protected override void Focus(VisualElement template)
-        {
-            UnityEngine.Color initColor = template.style.backgroundColor.value;
-            template.style.backgroundColor = new UnityEngine.Color(initColor.r, initColor.g, initColor.b, 155);
-        }
-
-        protected override void Blur(VisualElement template)
-        {
-            UnityEngine.Color initColor = template.style.backgroundColor.value;
-            template.style.backgroundColor = new UnityEngine.Color(initColor.r, initColor.g, initColor.b, 0);
-        }
-
         public override void UpdateSettingOption()
         {
             if (SettingsManager.Instance.IsRebinding)

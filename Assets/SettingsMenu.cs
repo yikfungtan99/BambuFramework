@@ -11,7 +11,7 @@ namespace BambuFramework.UI
     {
         [InlineEditor]
         [SerializeField] private SettingsContainer settingsContainer;
-        protected override Button firstButton => null;
+        protected override Button firstButton => btnBack;
 
         private TabView tabView;
         private Button btnBack;
@@ -184,6 +184,7 @@ namespace BambuFramework.UI
             // Highlight the currently selected tab header
             var selectedTab = tabView.Children().ElementAt(index) as VisualElement;
             selectedTab?.Focus();
+            uiManager.Select();
         }
     }
 }

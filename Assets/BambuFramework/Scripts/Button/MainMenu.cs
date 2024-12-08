@@ -1,4 +1,3 @@
-using BambuFramework.Debugging;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -26,15 +25,7 @@ namespace BambuFramework.UI
 
             exitButton.clicked -= Exit;
             exitButton.clicked += Exit;
-
-            Show();
-        }
-
-        public override void Show(Player player = null, bool sortingOrder = true)
-        {
-            BambuLogger.Log($"Showing: {gameObject.name}", ELogCategory.UI);
-            Root.visible = true;
-            Root.schedule.Execute(() => firstButton?.Focus()).StartingIn(1);
+            firstButton?.Focus();
         }
 
         public override void Hide(bool sortingOrder = false)

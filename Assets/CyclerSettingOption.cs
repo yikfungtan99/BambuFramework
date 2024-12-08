@@ -69,18 +69,6 @@ namespace BambuFramework.UI
             prevButton.RegisterCallback<BlurEvent>((e) => Blur(uiInstance));
         }
 
-        protected override void Focus(VisualElement template)
-        {
-            Color initColor = template.style.backgroundColor.value;
-            template.style.backgroundColor = new Color(initColor.r, initColor.g, initColor.b, 155);
-        }
-
-        protected override void Blur(VisualElement template)
-        {
-            Color initColor = template.style.backgroundColor.value;
-            template.style.backgroundColor = new Color(initColor.r, initColor.g, initColor.b, 0);
-        }
-
         public override void UpdateSettingOption()
         {
             // Initialize the label with the current option

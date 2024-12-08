@@ -1,12 +1,9 @@
 using BambuFramework.Audio;
-using UnityEngine;
 
 namespace BambuFramework
 {
     public class MusicManager : SingletonBehaviour<MusicManager>
     {
-        [SerializeField] private AudioReference mainMenuMusic;
-
         private GameManager gameManager;
 
         private void Start()
@@ -18,9 +15,14 @@ namespace BambuFramework
             PlayMainMenuMusic();
         }
 
+        private void OnDestroy()
+        {
+            if (gameManager != null) gameManager.OnGameStart -= PlayGameMusic;
+        }
+
         private void PlayMainMenuMusic()
         {
-            mainMenuMusic.Play();
+            AudioLibrary.Instance.MainMenuMusic[0].Play();
         }
 
         private void PlayGameMusic()

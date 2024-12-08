@@ -1,4 +1,5 @@
 ﻿using BambuFramework.Debugging;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -46,9 +47,20 @@ namespace BambuFramework.UI
 
         protected Player initiatedPlayer;
 
+        private List<Button> buttons = new List<Button>();
+
         public void Init(UIManager uiManager)
         {
             this.uiManager = uiManager;
+
+            buttons = Root.Query<Button>().ToList();
+
+            foreach (Button b in buttons)
+            {
+                b.RegisterCallback<FocusEvent>(Focus);
+                b.RegisterCallback<BlurEvent>(Blur);
+                b.clicked += Click;
+            }
         }
 
         private void Update()
@@ -65,7 +77,6 @@ namespace BambuFramework.UI
             BambuLogger.Log($"Showing: {gameObject.name}", ELogCategory.UI);
 
             Root.visible = true;
-            Root.schedule.Execute(() => firstButton?.Focus()).StartingIn(1);
 
             if (sortingOrder) uiDocument.sortingOrder = 1;
 
@@ -78,6 +89,25 @@ namespace BambuFramework.UI
 
             Root.visible = false;
             if (sortingOrder) uiDocument.sortingOrder = -1;
+        }
+
+        protected virtual void Cancel()
+        {
+
+        }
+
+        protected virtual void Blur(BlurEvent evt)
+        {
+        }
+
+        protected virtual void Focus(FocusEvent evt)
+        {
+            uiManager.Select();
+        }
+
+        private void Click()
+        {
+            uiManager.Submit();
         }
     }
 }

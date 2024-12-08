@@ -23,8 +23,6 @@ namespace BambuFramework.UI
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         public override void Show(Player player = null, bool sortingOrder = true)
         {
-            base.Show(player, false);
-
             if (inputHint == null) return;
             if (Root == null) return;
 

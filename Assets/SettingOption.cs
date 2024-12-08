@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace BambuFramework.UI
@@ -23,8 +24,18 @@ namespace BambuFramework.UI
             SetTitle(templateContainers[0], Title);
         }
 
-        protected abstract void Focus(VisualElement v);
-        protected abstract void Blur(VisualElement v);
+        protected virtual void Focus(VisualElement template)
+        {
+            Color initColor = template.style.backgroundColor.value;
+            template.style.backgroundColor = new Color(initColor.r, initColor.g, initColor.b, 155);
+            UIManager.Instance.Select();
+        }
+
+        protected virtual void Blur(VisualElement template)
+        {
+            Color initColor = template.style.backgroundColor.value;
+            template.style.backgroundColor = new Color(initColor.r, initColor.g, initColor.b, 0);
+        }
 
         public abstract void UpdateSettingOption();
 

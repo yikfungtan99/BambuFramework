@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace BambuFramework.UI
@@ -15,6 +16,10 @@ namespace BambuFramework.UI
         public MenuScreen ActiveScreen { get => activeScreen; }
 
         private Dictionary<MenuScreen, int> menuScreenInputHintKVP;
+
+        public event Action OnSelect;
+        public event Action OnSubmit;
+        public event Action OnCancel;
 
         protected override void Awake()
         {
@@ -117,6 +122,21 @@ namespace BambuFramework.UI
         public void ResetPrevious()
         {
             previousScreen = null;
+        }
+
+        public void Select()
+        {
+            OnSelect?.Invoke();
+        }
+
+        public void Submit()
+        {
+            OnSubmit?.Invoke();
+        }
+
+        public void Cancel()
+        {
+            OnCancel?.Invoke();
         }
     }
 }
