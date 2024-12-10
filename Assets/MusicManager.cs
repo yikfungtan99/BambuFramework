@@ -22,12 +22,13 @@ namespace BambuFramework
 
         private void PlayMainMenuMusic()
         {
-            AudioLibrary.Instance.MainMenuMusic[0].Play();
+            AudioLibrary.Instance.MainMenuMusic.PlayAsInstance();
         }
 
         private void PlayGameMusic()
         {
-
+            Bambu.Log("PLAY GAME MUSIC");
+            AudioLibrary.Instance.MainMenuMusic.Stop();
         }
     }
 }

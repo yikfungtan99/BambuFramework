@@ -25,6 +25,7 @@ namespace BambuFramework.Audio
             audioBuses[EAudioChannel.MASTER] = RuntimeManager.GetBus("bus:/");
             audioBuses[EAudioChannel.SFX] = RuntimeManager.GetBus("bus:/SFX");
             audioBuses[EAudioChannel.MUSIC] = RuntimeManager.GetBus("bus:/MUSIC");
+            audioBuses[EAudioChannel.UI] = RuntimeManager.GetBus("bus:/UI");
         }
 
         /// <summary>
@@ -60,12 +61,7 @@ namespace BambuFramework.Audio
             }
         }
 
-        public static void PlayAudio(AudioReference audioRef)
-        {
-            PlayAudio(audioRef, Vector3.zero);
-        }
-
-        public static void PlayAudio(AudioReference audioRef, Vector3 position)
+        public static void PlayAudioOneShot(AudioReference audioRef, Vector3 position)
         {
             if (audioRef == null)
             {
@@ -74,6 +70,29 @@ namespace BambuFramework.Audio
             }
 
             RuntimeManager.PlayOneShot(audioRef.eventReference, position);
+        }
+
+        public static EventInstance PlayAudio(AudioReference audioRef, Vector3 position)
+        {
+            EventInstance e = RuntimeManager.CreateInstance(audioRef.eventReference);
+
+            //// Convert Unity's position to FMOD's 3D attributes
+            //FMOD.ATTRIBUTES_3D attributes = RuntimeUtils.To3DAttributes(position);
+
+            //// Set the 3D attributes for the EventInstance
+            //e.set3DAttributes(attributes);
+
+            //e.setProperty(FMOD.Studio.EVENT_PROPERTY.MAX, -1);
+
+            e.start();
+
+            return e;
+        }
+
+        public static void StopAudio(EventInstance eventInstance, FMOD.Studio.STOP_MODE stopMode = FMOD.Studio.STOP_MODE.ALLOWFADEOUT)
+        {
+            Debug.Log("Bye");
+            eventInstance.stop(stopMode);
         }
 
         /// <summary>

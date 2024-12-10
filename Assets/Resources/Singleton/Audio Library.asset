@@ -22,14 +22,21 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   MainMenuMusic:
-  - eventReference:
+    eventReference:
       Guid:
-        Data1: 1528574828
-        Data2: 1091093793
-        Data3: -611202156
-        Data4: 2108089356
-      Path: event:/Bocchi the rock
-    isLooping: 1
+        Data1: 347191908
+        Data2: 1191655508
+        Data3: 1129440954
+        Data4: -585918697
+      Path: event:/Music/Main_Menu_Music
+  GameMusic:
+    eventReference:
+      Guid:
+        Data1: 0
+        Data2: 0
+        Data3: 0
+        Data4: 0
+      Path: 
   UISelect:
     eventReference:
       Guid:
@@ -37,8 +44,7 @@ MonoBehaviour:
         Data2: 1189336106
         Data3: 12975039
         Data4: 1383602156
-      Path: event:/UI/UI Cancel
-    isLooping: 0
+      Path: event:/UI/Cancel
   UISubmit:
     eventReference:
       Guid:
@@ -46,8 +52,7 @@ MonoBehaviour:
         Data2: 1175936432
         Data3: -1319212365
         Data4: -1851580846
-      Path: event:/UI/UI Confirm
-    isLooping: 0
+      Path: event:/UI/Confirm
   UICancel:
     eventReference:
       Guid:
@@ -55,5 +60,4 @@ MonoBehaviour:
         Data2: 1189336106
         Data3: 12975039
         Data4: 1383602156
-      Path: event:/UI/UI Cancel
-    isLooping: 0
+      Path: event:/UI/Cancel

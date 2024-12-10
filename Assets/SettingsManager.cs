@@ -21,6 +21,7 @@ namespace BambuFramework.Settings
         private readonly string KEY_SETTING_AUDIO_MASTER = nameof(KEY_SETTING_AUDIO_MASTER);
         private readonly string KEY_SETTING_AUDIO_SFX = nameof(KEY_SETTING_AUDIO_SFX);
         private readonly string KEY_SETTING_AUDIO_MUSIC = nameof(KEY_SETTING_AUDIO_MUSIC);
+        private readonly string KEY_SETTING_AUDIO_UI = nameof(KEY_SETTING_AUDIO_UI);
 
         private readonly string KEY_INPUT_BINDS = nameof(KEY_INPUT_BINDS);
 
@@ -85,6 +86,7 @@ namespace BambuFramework.Settings
             PlayerPrefs.SetInt(KEY_SETTING_AUDIO_MASTER, AudioMaster);
             PlayerPrefs.SetInt(KEY_SETTING_AUDIO_SFX, AudioSFX);
             PlayerPrefs.SetInt(KEY_SETTING_AUDIO_MUSIC, AudioMusic);
+            PlayerPrefs.SetInt(KEY_SETTING_AUDIO_UI, AudioUI);
         }
 
         public void LoadSettings()
@@ -99,10 +101,12 @@ namespace BambuFramework.Settings
             AudioMaster = PlayerPrefs.GetInt(KEY_SETTING_AUDIO_MASTER, 50);
             AudioSFX = PlayerPrefs.GetInt(KEY_SETTING_AUDIO_SFX, 50);
             AudioMusic = PlayerPrefs.GetInt(KEY_SETTING_AUDIO_MUSIC, 50);
+            AudioUI = PlayerPrefs.GetInt(KEY_SETTING_AUDIO_UI, 50);
 
             SetAudioMaster(AudioMaster);
             SetAudioSFX(AudioSFX);
             SetAudioMusic(AudioMusic);
+            SetAudioUI(AudioUI);
 
             LoadRebinds();
         }
@@ -189,7 +193,7 @@ namespace BambuFramework.Settings
 
         public void SetAudioUI(int value)
         {
-            AudioMusic = value;
+            AudioUI = value;
             AudioManager.Instance.SetChannelVolume(EAudioChannel.UI, AudioUI);
             SaveAudioSettings();
         }

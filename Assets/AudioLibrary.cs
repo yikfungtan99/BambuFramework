@@ -9,7 +9,8 @@ namespace BambuFramework.Audio
         // Header for Main Menu Music
         [FoldoutGroup("Music")]
         [ListDrawerSettings(ListElementLabelName = "EventName")]
-        public AudioReference[] MainMenuMusic;
+        public AudioReference MainMenuMusic;
+        public AudioReference GameMusic;
 
         // Header for UI Sounds
         [FoldoutGroup("UI")]
