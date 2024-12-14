@@ -38,5 +38,11 @@ namespace BambuFramework
         {
             OnGameResume?.Invoke();
         }
+
+        public void Quit()
+        {
+            sceneManager.UnloadGameScenes();
+            UIManager.Instance.ShowMainMenu(PlayerManager.Instance.HostPlayer);
+        }
     }
 }

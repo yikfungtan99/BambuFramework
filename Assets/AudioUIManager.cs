@@ -1,6 +1,5 @@
 using BambuFramework.Audio;
 using BambuFramework.UI;
-using UnityEngine;
 
 namespace BambuFramework
 {
@@ -29,19 +28,16 @@ namespace BambuFramework
 
         private void OnSelect()
         {
-            Debug.Log("Play Select");
             AudioLibrary.Instance.UISelect.Play();
         }
 
         private void OnSubmit()
         {
-            Debug.Log("Play Submit");
             AudioLibrary.Instance.UISubmit.Play();
         }
 
         private void OnCancel()
         {
-            Debug.Log("Play Cancel");
             AudioLibrary.Instance.UICancel.Play();
         }
     }

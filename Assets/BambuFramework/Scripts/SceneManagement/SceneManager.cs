@@ -30,6 +30,11 @@ namespace BambuFramework.SceneManagement
             SwapScenes(gameScenes);
         }
 
+        public void UnloadGameScenes()
+        {
+            SwapScenes(null);
+        }
+
         public void AddPermanentScene(SceneReference sceneRef)
         {
             LoadAddressableScene(sceneRef, LoadSceneMode.Additive);
@@ -54,6 +59,8 @@ namespace BambuFramework.SceneManagement
         public async void SwapScenes(SceneReference[] sceneRef)
         {
             await UnloadAllSwappable();
+
+            if (sceneRef == null) return;
 
             for (int i = 0; i < sceneRef.Length; i++)
             {

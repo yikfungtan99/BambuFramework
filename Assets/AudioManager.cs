@@ -91,7 +91,6 @@ namespace BambuFramework.Audio
 
         public static void StopAudio(EventInstance eventInstance, FMOD.Studio.STOP_MODE stopMode = FMOD.Studio.STOP_MODE.ALLOWFADEOUT)
         {
-            Debug.Log("Bye");
             eventInstance.stop(stopMode);
         }
 
