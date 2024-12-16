@@ -4,19 +4,19 @@ namespace BambuFramework
 {
     public static class Bambu
     {
-        public static void Log(object msg, ELogCategory logCategory = ELogCategory.GENERIC)
+        public static void Log(object msgObject, ELogCategory logCategory = ELogCategory.GENERIC)
         {
-            Print(msg.ToString(), logCategory);
+            BambuLogger.Log(msgObject.ToString(), logCategory);
         }
 
-        public static void Log(string msg, ELogCategory logCategory = ELogCategory.GENERIC)
+        public static void LogWarning(object msgObject, ELogCategory logCategory = ELogCategory.GENERIC)
         {
-            Print(msg, logCategory);
+            BambuLogger.LogWarning(msgObject.ToString(), logCategory);
         }
 
-        public static void Print(string msg, ELogCategory logCategory = ELogCategory.GENERIC)
+        public static void LogError(object msgObject, ELogCategory logCategory = ELogCategory.GENERIC)
         {
-            BambuLogger.Log(msg, logCategory);
+            BambuLogger.LogError(msgObject.ToString(), logCategory);
         }
     }
 }

@@ -12,6 +12,7 @@ namespace BambuFramework
         public event Action OnGameStart;
         public event Action OnGamePaused;
         public event Action OnGameResume;
+        public event Action OnReturnToMainMenu;
 
         private SceneManager sceneManager;
 
@@ -39,10 +40,16 @@ namespace BambuFramework
             OnGameResume?.Invoke();
         }
 
-        public void Quit()
+        public void MainMenu()
         {
             sceneManager.UnloadGameScenes();
             UIManager.Instance.ShowMainMenu(PlayerManager.Instance.HostPlayer);
+            OnReturnToMainMenu?.Invoke();
+        }
+
+        public void Quit()
+        {
+            Application.Quit();
         }
     }
 }

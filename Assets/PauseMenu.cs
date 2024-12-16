@@ -38,7 +38,7 @@ namespace BambuFramework.UI
 
         private void MainMenu()
         {
-            GameManager.Instance.Quit();
+            GameManager.Instance.MainMenu();
         }
 
         // Update is called once per frame

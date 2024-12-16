@@ -11,6 +11,7 @@ namespace BambuFramework
             gameManager = GameManager.Instance;
 
             gameManager.OnGameStart += PlayGameMusic;
+            gameManager.OnReturnToMainMenu += PlayMainMenuMusic;
 
             PlayMainMenuMusic();
         }
@@ -18,6 +19,7 @@ namespace BambuFramework
         private void OnDestroy()
         {
             if (gameManager != null) gameManager.OnGameStart -= PlayGameMusic;
+            if (gameManager != null) gameManager.OnReturnToMainMenu -= PlayMainMenuMusic;
         }
 
         private void PlayMainMenuMusic()
@@ -27,7 +29,6 @@ namespace BambuFramework
 
         private void PlayGameMusic()
         {
-            Bambu.Log("PLAY GAME MUSIC");
             AudioLibrary.Instance.MainMenuMusic.Stop();
         }
     }

@@ -44,20 +44,23 @@ namespace BambuFramework.Audio
         public void Play(Vector3 position)
         {
             AudioManager.PlayAudioOneShot(this, position);
+            Bambu.Log($"Played One Shot: {EventName}", Debugging.ELogCategory.AUDIO);
         }
         public void PlayAsInstance()
         {
-            currentEventInstance = AudioManager.PlayAudio(this, Vector3.zero);
+            PlayAsInstance(Vector3.zero);
         }
 
         public void PlayAsInstance(Vector3 position)
         {
             currentEventInstance = AudioManager.PlayAudio(this, position);
+            Bambu.Log($"Played Instance: {EventName}", Debugging.ELogCategory.AUDIO);
         }
 
         public void Stop()
         {
             AudioManager.StopAudio(currentEventInstance, FMOD.Studio.STOP_MODE.IMMEDIATE);
+            Bambu.Log($"Stopped Instance: {EventName}", Debugging.ELogCategory.AUDIO);
         }
     }
 }

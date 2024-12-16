@@ -85,10 +85,20 @@ namespace BambuFramework.Debugging
 
         public static void Log(object obj, ELogCategory cat = ELogCategory.GENERIC)
         {
-            LogInternal(obj, cat);
+            LogInternal(obj, cat, LogType.Log);
         }
 
-        private static void LogInternal(object obj, ELogCategory cat)
+        public static void LogWarning(object obj, ELogCategory cat = ELogCategory.GENERIC)
+        {
+            LogInternal(obj, cat, LogType.Warning);
+        }
+
+        public static void LogError(object obj, ELogCategory cat = ELogCategory.GENERIC)
+        {
+            LogInternal(obj, cat, LogType.Error);
+        }
+
+        private static void LogInternal(object obj, ELogCategory cat, LogType logType)
         {
             BambuLogConfig target = logs.Find(x => x.Error == cat);
             if (target == null) return;
@@ -96,11 +106,30 @@ namespace BambuFramework.Debugging
 
             string logMessage = $"{cat}: ";
 
-            Debug.Log(string.Format("<color=#{0:X2}{1:X2}{2:X2}>{3}</color>",
-                (byte)(target.LogColor.r * 255f),
-                (byte)(target.LogColor.g * 255f),
-                (byte)(target.LogColor.b * 255f),
-                logMessage) + obj);
+            string message = string.Format("<color=#{0:X2}{1:X2}{2:X2}>{3}</color>",
+                                            (byte)(target.LogColor.r * 255f),
+                                            (byte)(target.LogColor.g * 255f),
+                                            (byte)(target.LogColor.b * 255f),
+                                            logMessage) + obj;
+
+            switch (logType)
+            {
+                case LogType.Error:
+                    Debug.LogError(message);
+                    break;
+                case LogType.Assert:
+                    break;
+                case LogType.Warning:
+                    Debug.LogWarning(message);
+                    break;
+                case LogType.Log:
+                    Debug.Log(message);
+                    break;
+                case LogType.Exception:
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
