@@ -19,7 +19,7 @@ MonoBehaviour:
     - {fileID: 9197481963319205126, guid: 6dda591e928435a419f71c97807f7c2b, type: 3}
     - {fileID: 9197481963319205126, guid: cd4e02df60850624e9f4bdf5c7ea776a, type: 3}
     - {fileID: 9197481963319205126, guid: ea808c59f54927c42a218e5fcbaebd75, type: 3}
-    - {fileID: 9197481963319205126, guid: 3b86d5835a44e3341b73f1907fcb5352, type: 3}
+    - {fileID: 9197481963319205126, guid: feade726a9ccfbd4493fe90c87fb0daa, type: 3}
     - {fileID: 9197481963319205126, guid: aa836e7b4cea96c4d9d635432f9d39b2, type: 3}
     SerializedBytesString: 
     Prefab: {fileID: 0}
@@ -459,3 +459,4 @@ MonoBehaviour:
   DefaultAudioMaster: 50
   DefaultAudioSFX: 50
   DefaultAudioMusic: 50
+  DefaultAudioUI: 50

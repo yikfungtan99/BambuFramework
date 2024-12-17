@@ -49,9 +49,6 @@ namespace BambuFramework.UI
                 dropDown.RegisterCallback<NavigationSubmitEvent>((click) => Expanded());
                 dropDown.RegisterCallback<PointerDownEvent>((click) => Expanded());
 
-                dropDown.RegisterCallback<FocusEvent>((click) => Collapsed());
-                menu.Root.RegisterCallback<MouseDownEvent>((click) => Collapsed());
-
                 dropDown.RegisterValueChangedCallback(evt =>
                 {
                     Collapsed();
