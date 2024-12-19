@@ -1,7 +1,7 @@
 using BambuFramework.Audio;
 using BambuFramework.UI;
-using IngameDebugConsole;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
@@ -12,35 +12,26 @@ namespace BambuFramework.Settings
     {
         private SettingsContainer settingsContainer;
 
-        private readonly string KEY_SETTING_GAMEPLAY_CONSOLE = nameof(KEY_SETTING_GAMEPLAY_CONSOLE);
+        private List<SettingBase> settings = new List<SettingBase>();
+        private List<SettingBase> gameplaySettings = new List<SettingBase>();
+        private List<SettingBase> videoSettings = new List<SettingBase>();
+        private List<SettingBase> audioSettings = new List<SettingBase>();
 
-        private readonly string KEY_SETTING_VIDEO_RESOLUTION = nameof(KEY_SETTING_VIDEO_RESOLUTION);
-        private readonly string KEY_SETTING_VIDEO_WINDOW_MODE = nameof(KEY_SETTING_VIDEO_WINDOW_MODE);
-        private readonly string KEY_SETTING_VIDEO_FRAMERATE = nameof(KEY_SETTING_VIDEO_FRAMERATE);
+        //GAMEPLAY
+        public ConsoleSetting ConsoleSetting = new ConsoleSetting();
 
-        private readonly string KEY_SETTING_AUDIO_MASTER = nameof(KEY_SETTING_AUDIO_MASTER);
-        private readonly string KEY_SETTING_AUDIO_SFX = nameof(KEY_SETTING_AUDIO_SFX);
-        private readonly string KEY_SETTING_AUDIO_MUSIC = nameof(KEY_SETTING_AUDIO_MUSIC);
-        private readonly string KEY_SETTING_AUDIO_UI = nameof(KEY_SETTING_AUDIO_UI);
+        //VIDEO
+        public VideoResolutionSetting ResolutionSetting = new VideoResolutionSetting();
+        public WindowModeSetting VideoWindowModeSetting = new WindowModeSetting();
+        public FrameRateSetting FrameRateSetting = new FrameRateSetting();
+
+        public AudioMasterSetting AudioMasterSettings = new AudioMasterSetting();
+        public AudioSFXSetting AudioSFXSettings = new AudioSFXSetting();
+        public AudioMusicSetting AudioMusicSettings = new AudioMusicSetting();
+        public AudioUISetting AudioUISettings = new AudioUISetting();
 
         private readonly string KEY_INPUT_BINDS = nameof(KEY_INPUT_BINDS);
 
-        public bool GameplayConsole { get; private set; }
-        public Vector2Int VideoResolution { get; private set; }
-        public bool IsFullScreen
-        {
-            get
-            {
-                return VideoWindowMode == 0;
-            }
-        }
-        public int VideoWindowMode { get; private set; }
-        public int VideoFramerate { get; private set; }
-
-        public int AudioMaster { get; private set; }
-        public int AudioSFX { get; private set; }
-        public int AudioMusic { get; private set; }
-        public int AudioUI { get; private set; }
         public bool IsBusy { get; set; }
 
         string rebindingControlScheme;
@@ -49,226 +40,98 @@ namespace BambuFramework.Settings
 
         InputActionRebindingExtensions.RebindingOperation rebindingOperation;
 
+        public List<SettingBase> GetSettings(int index)
+        {
+            Debug.Log(index);
+
+            switch (index)
+            {
+                case 0:
+                    return gameplaySettings;
+
+                case 1:
+                    return videoSettings;
+
+                case 2:
+                    return audioSettings;
+            }
+
+            return null;
+        }
+
         private void Start()
         {
             settingsContainer = SettingsContainer.Instance;
 
+            Debug.Log(ConsoleSetting);
+            gameplaySettings.Add(ConsoleSetting);
+
+            videoSettings.Add(ResolutionSetting);
+            videoSettings.Add(VideoWindowModeSetting);
+            videoSettings.Add(FrameRateSetting);
+
+            audioSettings.Add(AudioMasterSettings);
+            audioSettings.Add(AudioSFXSettings);
+            audioSettings.Add(AudioMusicSettings);
+            audioSettings.Add(AudioUISettings);
+
+            settings.AddRange(gameplaySettings);
+            settings.AddRange(videoSettings);
+            settings.AddRange(audioSettings);
+
             LoadSettings();
+            ApplySettings();
         }
 
-        public void SaveSettings()
+        public void ApplySettings()
         {
-            SaveGameplaySettings();
-
-            SaveVideoSettings();
-
-            SaveAudioSettings();
-
-            PlayerPrefs.Save();
+            foreach (var setting in settings)
+            {
+                setting.ApplySetting();
+            }
         }
 
-        private void SaveGameplaySettings()
+        public void ApplySetting(int index)
         {
-            PlayerPrefs.SetInt(KEY_SETTING_GAMEPLAY_CONSOLE, GameplayConsole ? 1 : 0);
+            foreach (var setting in GetSettings(index))
+            {
+                setting.ApplySetting();
+                setting.SaveSetting();
+            }
         }
 
-        private void SaveVideoSettings()
+        public void LoadSetting(int index)
         {
-            PlayerPrefs.SetInt(KEY_SETTING_VIDEO_RESOLUTION + "_Width", VideoResolution.x);
-            PlayerPrefs.SetInt(KEY_SETTING_VIDEO_RESOLUTION + "_Height", VideoResolution.y);
-
-            PlayerPrefs.SetInt(KEY_SETTING_VIDEO_WINDOW_MODE, VideoWindowMode);
-            PlayerPrefs.SetInt(KEY_SETTING_VIDEO_FRAMERATE, VideoFramerate);
-        }
-
-        private void SaveAudioSettings()
-        {
-            PlayerPrefs.SetInt(KEY_SETTING_AUDIO_MASTER, AudioMaster);
-            PlayerPrefs.SetInt(KEY_SETTING_AUDIO_SFX, AudioSFX);
-            PlayerPrefs.SetInt(KEY_SETTING_AUDIO_MUSIC, AudioMusic);
-            PlayerPrefs.SetInt(KEY_SETTING_AUDIO_UI, AudioUI);
+            foreach (var setting in GetSettings(index))
+            {
+                setting.LoadSetting();
+            }
         }
 
         public void LoadSettings()
         {
-            GameplayConsole = PlayerPrefs.GetInt(KEY_SETTING_GAMEPLAY_CONSOLE, 0) == 1;
-            SetGameplayConsole(GameplayConsole);
-
-            VideoWindowMode = PlayerPrefs.GetInt(KEY_SETTING_VIDEO_WINDOW_MODE, 1);
-            VideoFramerate = PlayerPrefs.GetInt(KEY_SETTING_VIDEO_FRAMERATE, 0);
-            LoadVideoResolution();
-
-            AudioMaster = PlayerPrefs.GetInt(KEY_SETTING_AUDIO_MASTER, 50);
-            AudioSFX = PlayerPrefs.GetInt(KEY_SETTING_AUDIO_SFX, 50);
-            AudioMusic = PlayerPrefs.GetInt(KEY_SETTING_AUDIO_MUSIC, 50);
-            AudioUI = PlayerPrefs.GetInt(KEY_SETTING_AUDIO_UI, 50);
-
-            SetAudioMaster(AudioMaster);
-            SetAudioSFX(AudioSFX);
-            SetAudioMusic(AudioMusic);
-            SetAudioUI(AudioUI);
+            foreach (var setting in settings)
+            {
+                setting.LoadSetting();
+            }
 
             LoadRebinds();
         }
 
-        public void LoadVideoResolution()
+        public void RevertDefaultSettings(int index)
         {
-            int width = PlayerPrefs.GetInt(KEY_SETTING_VIDEO_RESOLUTION + "_Width", Screen.currentResolution.width);
-            int height = PlayerPrefs.GetInt(KEY_SETTING_VIDEO_RESOLUTION + "_Height", Screen.currentResolution.height);
-            VideoResolution = new Vector2Int(width, height);
-        }
-
-        public void SetVideoResolution(Vector2Int resolution)
-        {
-            VideoResolution = resolution;
-            Screen.SetResolution(VideoResolution.x, VideoResolution.y, IsFullScreen);
-            SaveVideoSettings();
-        }
-
-        public void SetGameplayConsole(bool value)
-        {
-            GameplayConsole = value;
-
-            DebugLogManager.Instance.gameObject.SetActive(GameplayConsole);
-
-            SaveGameplaySettings();
-        }
-
-        public void SetVideoWindowMode(int value)
-        {
-            VideoWindowMode = value;
-            Bambu.Log(VideoWindowMode);
-
-            // Apply the actual window mode change to the application (this could be different based on your implementation)
-            switch (VideoWindowMode)
+            if (index == 3)
             {
-                case 0: // Fullscreen
-                    Screen.fullScreen = true;
-                    Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
-                    break;
-                case 1: // Windowed
-                    Screen.fullScreen = false;
-                    Screen.fullScreenMode = FullScreenMode.Windowed;
-                    break;
-                case 2: // Windowed (Borderless)
-                    Screen.fullScreen = false;
-                    Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-                    break;
+                RevertDefaultInputSettings();
+                return;
             }
 
-            Screen.SetResolution(VideoResolution.x, VideoResolution.y, IsFullScreen);
-            SaveVideoSettings();
-        }
-
-        public void SetVideoFramerate(int value)
-        {
-            VideoFramerate = value;
-
-            QualitySettings.vSyncCount = 0;
-            Application.targetFrameRate = settingsContainer.VideoFrameRates[VideoFramerate];
-
-            SaveVideoSettings();
-        }
-
-        public void SetAudioMaster(int value)
-        {
-            AudioMaster = value;
-            AudioManager.Instance.SetChannelVolume(EAudioChannel.MASTER, AudioMaster);
-            SaveAudioSettings();
-        }
-
-        public void SetAudioSFX(int value)
-        {
-            AudioSFX = value;
-            AudioManager.Instance.SetChannelVolume(EAudioChannel.SFX, AudioSFX);
-            SaveAudioSettings();
-        }
-
-        public void SetAudioMusic(int value)
-        {
-            AudioMusic = value;
-            AudioManager.Instance.SetChannelVolume(EAudioChannel.MUSIC, AudioMusic);
-            SaveAudioSettings();
-        }
-
-        public void SetAudioUI(int value)
-        {
-            AudioUI = value;
-            AudioManager.Instance.SetChannelVolume(EAudioChannel.UI, AudioUI);
-            SaveAudioSettings();
-        }
-
-        public void SetAudioVolume(EAudioChannel channel, int volume)
-        {
-            switch (channel)
+            foreach (var setting in GetSettings(index))
             {
-                case EAudioChannel.MASTER:
-                    SetAudioMaster(volume);
-                    break;
-                case EAudioChannel.SFX:
-                    SetAudioSFX(volume);
-                    break;
-                case EAudioChannel.MUSIC:
-                    SetAudioMusic(volume);
-                    break;
-                case EAudioChannel.UI:
-                    SetAudioUI(volume);
-                    break;
-                default:
-                    break;
+                setting.RevertDefaultSetting();
+                setting.ApplySetting();
+                setting.SaveSetting();
             }
-        }
-
-        public float GetAudioVolume(EAudioChannel channel)
-        {
-            switch (channel)
-            {
-                case EAudioChannel.MASTER:
-                    return AudioMaster;
-                case EAudioChannel.SFX:
-                    return AudioSFX;
-                case EAudioChannel.MUSIC:
-                    return AudioMusic;
-                case EAudioChannel.UI:
-                    return AudioUI;
-                default:
-                    return 0;
-            }
-        }
-
-        public void RevertDefaultGameplaySettings()
-        {
-            GameplayConsole = SettingsContainer.Instance.DefaultGameplayConsole;
-            SetGameplayConsole(GameplayConsole);
-        }
-
-        public void RevertDefaultVideoSettings()
-        {
-            var currentResolution = Screen.currentResolution; // OS-set resolution
-            Vector2Int defaultResolution = new Vector2Int(currentResolution.width, currentResolution.height);
-
-            VideoResolution = defaultResolution;
-
-            VideoWindowMode = SettingsContainer.Instance.DefaultVideoWindowMode;
-
-            VideoFramerate = SettingsContainer.Instance.VideoFrameRates.Count - 1;
-
-            SetVideoResolution(VideoResolution);
-            SetVideoWindowMode(VideoWindowMode);
-            SetVideoFramerate(VideoFramerate);
-        }
-
-        public void RevertDefaultAudioSettings()
-        {
-            AudioMaster = SettingsContainer.Instance.DefaultAudioMaster;
-            AudioSFX = SettingsContainer.Instance.DefaultAudioSFX;
-            AudioMusic = SettingsContainer.Instance.DefaultAudioMusic;
-            AudioUI = SettingsContainer.Instance.DefaultAudioUI;
-
-            SetAudioMaster(AudioMaster);
-            SetAudioSFX(AudioSFX);
-            SetAudioMusic(AudioMusic);
-            SetAudioUI(AudioUI);
         }
 
         public void RevertDefaultInputSettings()
@@ -392,24 +255,43 @@ namespace BambuFramework.Settings
             return user.controlScheme?.name ?? "Keyboard&Mouse";  // Return the current control scheme or fallback to default
         }
 
-        public void RevertDefaultSettings(int index)
+        public float GetAudioVolume(EAudioChannel channel)
         {
-            switch (index)
+            switch (channel)
             {
-                case 0:
-                    RevertDefaultGameplaySettings();
+                case EAudioChannel.MASTER:
+                    return AudioMasterSettings.Value;
+                case EAudioChannel.SFX:
+                    return AudioSFXSettings.Value;
+                case EAudioChannel.MUSIC:
+                    return AudioMusicSettings.Value;
+                case EAudioChannel.UI:
+                    return AudioUISettings.Value;
+                default:
+                    break;
+            }
+
+            return 0;
+        }
+
+        public void SetAudioVolume(EAudioChannel channel, int value)
+        {
+            switch (channel)
+            {
+                case EAudioChannel.MASTER:
+                    AudioMasterSettings.Set(value);
                     break;
 
-                case 1:
-                    RevertDefaultVideoSettings();
+                case EAudioChannel.SFX:
+                    AudioSFXSettings.Set(value);
                     break;
 
-                case 2:
-                    RevertDefaultAudioSettings();
+                case EAudioChannel.MUSIC:
+                    AudioMusicSettings.Set(value);
                     break;
 
-                case 3:
-                    RevertDefaultInputSettings();
+                case EAudioChannel.UI:
+                    AudioUISettings.Set(value);
                     break;
 
                 default:

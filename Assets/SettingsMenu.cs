@@ -16,6 +16,8 @@ namespace BambuFramework.UI
         private TabView tabView;
         private Button btnBack;
         private Button btnDefault;
+        private Button btnApply;
+
         private int tabCount;
 
         private List<Focusable> focussables = new List<Focusable>();
@@ -71,6 +73,9 @@ namespace BambuFramework.UI
 
                 btnDefault = tabInstance.Q<Button>("btnDefault");
                 btnDefault.clicked += Default;
+
+                btnApply = tabInstance.Q<Button>("btnApply");
+                if (btnApply != null) btnApply.clicked += Apply;
 
                 tabView.Add(tabInstance);
 
@@ -162,6 +167,12 @@ namespace BambuFramework.UI
         private void Default()
         {
             SettingsManager.Instance.RevertDefaultSettings(tabView.selectedTabIndex);
+            UpdateAllSettingOptions();
+        }
+
+        private void Apply()
+        {
+            SettingsManager.Instance.ApplySetting(tabView.selectedTabIndex);
             UpdateAllSettingOptions();
         }
 

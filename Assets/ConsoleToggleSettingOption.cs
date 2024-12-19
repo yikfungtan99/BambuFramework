@@ -26,8 +26,7 @@ namespace BambuFramework.UI
                 toggle.RegisterValueChangedCallback(evt =>
                 {
                     // Update the GameplayConsole setting in SettingsManager
-                    SettingsManager.Instance.SetGameplayConsole(evt.newValue);
-                    Bambu.Log($"Gameplay Console set to: {evt.newValue}", Debugging.ELogCategory.UI);
+                    SettingsManager.Instance.ConsoleSetting.Set(evt.newValue);
                 });
             }
             else
@@ -38,7 +37,7 @@ namespace BambuFramework.UI
 
         public override void UpdateSettingOption()
         {
-            toggle.value = SettingsManager.Instance.GameplayConsole;
+            toggle.value = SettingsManager.Instance.ConsoleSetting.Value;
         }
     }
 }

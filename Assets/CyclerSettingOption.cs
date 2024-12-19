@@ -8,7 +8,7 @@ namespace BambuFramework.UI
     public class CyclerSettingOption : SettingOption
     {
         [SerializeField] private List<string> baseOptions = new List<string>();
-        private int currentIndex = 0;
+        protected int currentIndex = 0;
 
         public virtual List<string> CyclerOptions => baseOptions;
         public override ESettingOptions SettingsOption => ESettingOptions.CYCLER;
@@ -104,6 +104,7 @@ namespace BambuFramework.UI
             if (CyclerOptions.Count > 0 && currentIndex < CyclerOptions.Count - 1)
             {
                 currentIndex++;
+                OnCycle();
                 UpdateSettingOption();
                 UIManager.Instance.Submit();
                 Bambu.Log($"Cycler value changed to: {CyclerOptions[currentIndex]}", Debugging.ELogCategory.UI);
@@ -115,10 +116,16 @@ namespace BambuFramework.UI
             if (CyclerOptions.Count > 0 && currentIndex > 0)
             {
                 currentIndex--;
+                OnCycle();
                 UpdateSettingOption();
                 UIManager.Instance.Submit();
                 Bambu.Log($"Cycler value changed to: {CyclerOptions[currentIndex]}", Debugging.ELogCategory.UI);
             }
+        }
+
+        protected virtual void OnCycle()
+        {
+
         }
 
         public override void UpdateSettingOption()
