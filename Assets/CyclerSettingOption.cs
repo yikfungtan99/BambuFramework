@@ -13,9 +13,10 @@ namespace BambuFramework.UI
         public virtual List<string> CyclerOptions => baseOptions;
         public override ESettingOptions SettingsOption => ESettingOptions.CYCLER;
 
-        protected Label leftLabel;
-        protected Label middleLabel;
-        protected Label rightLabel;
+        protected Button leftButton;
+        protected Button middleButton;
+        protected Button rightButton;
+
         protected Button prevButton;
         protected Button nextButton;
 
@@ -27,9 +28,9 @@ namespace BambuFramework.UI
             TemplateContainer uiInstance = templateContainers[0];
 
             // Query the components in the template
-            leftLabel = uiInstance.Q<Label>("lblLeftOption");
-            middleLabel = uiInstance.Q<Label>("lblMiddleOption");
-            rightLabel = uiInstance.Q<Label>("lblRightOption");
+            leftButton = uiInstance.Q<Button>("btnLeft");
+            middleButton = uiInstance.Q<Button>("btnMiddle");
+            rightButton = uiInstance.Q<Button>("btnRight");
             prevButton = uiInstance.Q<Button>("btnPrev");
             nextButton = uiInstance.Q<Button>("btnNext");
 
@@ -40,13 +41,7 @@ namespace BambuFramework.UI
             {
                 prevButton.clicked += () =>
                 {
-                    if (CyclerOptions.Count > 0 && currentIndex > 0)
-                    {
-                        currentIndex--;
-                        UpdateSettingOption();
-                        UIManager.Instance.Submit();
-                        Bambu.Log($"Cycler value changed to: {CyclerOptions[currentIndex]}", Debugging.ELogCategory.SETTING);
-                    }
+                    Previous();
                 };
             }
 
@@ -55,18 +50,75 @@ namespace BambuFramework.UI
             {
                 nextButton.clicked += () =>
                 {
-                    if (CyclerOptions.Count > 0 && currentIndex < CyclerOptions.Count - 1)
+                    Next();
+                };
+            }
+
+            if (leftButton != null)
+            {
+                leftButton.clicked += () =>
+                {
+                    if (currentIndex == CyclerOptions.Count - 1)
                     {
-                        currentIndex++;
-                        UpdateSettingOption();
-                        UIManager.Instance.Submit();
-                        Bambu.Log($"Cycler value changed to: {CyclerOptions[currentIndex]}", Debugging.ELogCategory.SETTING);
+                        Previous();
                     }
+
+                    Previous();
+                };
+            }
+
+            if (middleButton != null)
+            {
+                middleButton.clicked += () =>
+                {
+                    if (currentIndex == 0)
+                    {
+                        Next();
+                    }
+                    else if (currentIndex == CyclerOptions.Count - 1)
+                    {
+                        Previous();
+                    }
+                };
+            }
+
+            if (rightButton != null)
+            {
+                rightButton.clicked += () =>
+                {
+                    if (currentIndex == 0)
+                    {
+                        Next();
+                    }
+
+                    Next();
                 };
             }
 
             fs.Add(prevButton);
             fs.Add(nextButton);
+        }
+
+        private void Next()
+        {
+            if (CyclerOptions.Count > 0 && currentIndex < CyclerOptions.Count - 1)
+            {
+                currentIndex++;
+                UpdateSettingOption();
+                UIManager.Instance.Submit();
+                Bambu.Log($"Cycler value changed to: {CyclerOptions[currentIndex]}", Debugging.ELogCategory.UI);
+            }
+        }
+
+        private void Previous()
+        {
+            if (CyclerOptions.Count > 0 && currentIndex > 0)
+            {
+                currentIndex--;
+                UpdateSettingOption();
+                UIManager.Instance.Submit();
+                Bambu.Log($"Cycler value changed to: {CyclerOptions[currentIndex]}", Debugging.ELogCategory.UI);
+            }
         }
 
         public override void UpdateSettingOption()
@@ -77,35 +129,35 @@ namespace BambuFramework.UI
             StyleColor fadedColor = new StyleColor(new Color(1f, 1f, 1f, 0.15f));
 
             // Update left label (current selection)
-            if (middleLabel != null)
+            if (middleButton != null)
             {
                 string middle = CyclerOptions[currentIndex];
-                middleLabel.style.backgroundColor = selectedColor; // Faded white background
+                middleButton.style.backgroundColor = selectedColor; // Faded white background
 
                 if (currentIndex == 0)
                 {
                     middle = CyclerOptions[1];
-                    middleLabel.style.backgroundColor = fadedColor; // Faded white background
+                    middleButton.style.backgroundColor = fadedColor; // Faded white background
                 }
 
                 if (currentIndex == CyclerOptions.Count - 1)
                 {
                     middle = CyclerOptions[CyclerOptions.Count - 2];
-                    middleLabel.style.backgroundColor = fadedColor; // Faded white background
+                    middleButton.style.backgroundColor = fadedColor; // Faded white background
                 }
 
-                middleLabel.text = middle;
+                middleButton.text = middle;
             }
 
             // Update left label (previous selection)
-            if (leftLabel != null)
+            if (leftButton != null)
             {
                 string left = currentIndex > 0 ? CyclerOptions[currentIndex - 1] : CyclerOptions[0];
-                leftLabel.style.backgroundColor = fadedColor; // Faded white background
+                leftButton.style.backgroundColor = fadedColor; // Faded white background
 
                 if (currentIndex == 0)
                 {
-                    leftLabel.style.backgroundColor = selectedColor; // Faded white background
+                    leftButton.style.backgroundColor = selectedColor; // Faded white background
                 }
 
                 if (currentIndex == CyclerOptions.Count - 1)
@@ -113,15 +165,15 @@ namespace BambuFramework.UI
                     left = CyclerOptions[CyclerOptions.Count - 3];
                 }
 
-                leftLabel.text = left;
-                //leftLabel.style.opacity = currentIndex > 0 ? 1f : 0.5f; // Dim if no previous option
+                leftButton.text = left;
+                //leftButton.style.opacity = currentIndex > 0 ? 1f : 0.5f; // Dim if no previous option
             }
 
             // Update right label (next selection)
-            if (rightLabel != null)
+            if (rightButton != null)
             {
                 string right = currentIndex < CyclerOptions.Count - 1 ? CyclerOptions[currentIndex + 1] : CyclerOptions[CyclerOptions.Count - 1];
-                rightLabel.style.backgroundColor = fadedColor; // Faded white background
+                rightButton.style.backgroundColor = fadedColor; // Faded white background
 
                 if (currentIndex == 0)
                 {
@@ -130,10 +182,10 @@ namespace BambuFramework.UI
 
                 if (currentIndex == CyclerOptions.Count - 1)
                 {
-                    rightLabel.style.backgroundColor = selectedColor; // Faded white background
+                    rightButton.style.backgroundColor = selectedColor; // Faded white background
                 }
 
-                rightLabel.text = right;
+                rightButton.text = right;
             }
         }
     }

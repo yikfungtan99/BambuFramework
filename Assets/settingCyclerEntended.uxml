@@ -6,9 +6,9 @@
         <engine:VisualElement name="Spacer" style="flex-grow: 0;" />
         <engine:VisualElement style="flex-grow: 0; height: 54px; width: 256px; flex-direction: row; justify-content: space-between;">
             <engine:Button text="&lt;" name="btnPrev" class="customButton" style="width: 40px; font-size: 40px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
-            <engine:Label text="Label" name="lblLeftOption" style="width: 147px; color: rgb(255, 255, 255); -unity-text-align: middle-center; font-size: 24px; background-color: rgba(255, 255, 255, 0);" />
-            <engine:Label text="Label" name="lblMiddleOption" style="width: 147px; color: rgb(255, 255, 255); -unity-text-align: middle-center; font-size: 24px; background-color: rgba(255, 255, 255, 0);" />
-            <engine:Label text="Label" name="lblRightOption" style="width: 147px; color: rgb(255, 255, 255); -unity-text-align: middle-center; font-size: 24px; background-color: rgba(255, 255, 255, 0);" />
+            <engine:Button text="Button" name="btnLeft" focusable="false" style="width: 200px;" />
+            <engine:Button text="Button" name="btnMiddle" focusable="false" style="width: 200px;" />
+            <engine:Button text="Button" name="btnRight" focusable="false" style="width: 200px;" />
             <engine:Button text="&gt;" name="btnNext" class="customButton" style="width: 40px; font-size: 40px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
         </engine:VisualElement>
     </engine:VisualElement>
