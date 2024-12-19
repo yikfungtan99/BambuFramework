@@ -10,6 +10,7 @@ namespace BambuFramework.Audio
         public AudioLibrary AudioContainer;
 
         private readonly Dictionary<EAudioChannel, Bus> audioBuses = new Dictionary<EAudioChannel, Bus>();
+        private readonly Dictionary<string, EventInstance> activeOneShots = new Dictionary<string, EventInstance>();
 
         protected override void Awake()
         {
@@ -69,7 +70,32 @@ namespace BambuFramework.Audio
                 return;
             }
 
-            RuntimeManager.PlayOneShot(audioRef.eventReference, position);
+            string eventKey = audioRef.eventReference.ToString();
+
+            // Check if the event is already playing
+            if (Instance.activeOneShots.TryGetValue(eventKey, out EventInstance existingInstance))
+            {
+                existingInstance.getPlaybackState(out PLAYBACK_STATE playbackState);
+                if (playbackState != PLAYBACK_STATE.STOPPED)
+                {
+                    Debug.Log($"Audio event '{eventKey}' is still playing. Skipping new playback.");
+                    return;
+                }
+
+                // Remove stopped instances from the active dictionary
+                Instance.activeOneShots.Remove(eventKey);
+            }
+
+            // Create a new event instance and play it
+            EventInstance newInstance = RuntimeManager.CreateInstance(audioRef.eventReference);
+            newInstance.set3DAttributes(RuntimeUtils.To3DAttributes(position));
+            newInstance.start();
+
+            // Add to activeOneShots dictionary
+            Instance.activeOneShots[eventKey] = newInstance;
+
+            // Release the instance when it's done
+            newInstance.release();
         }
 
         public static EventInstance PlayAudio(AudioReference audioRef, Vector3 position)
@@ -108,6 +134,5 @@ namespace BambuFramework.Audio
             Debug.LogWarning($"Audio bus for channel '{channel}' not found.");
             return 0f;
         }
-
     }
 }
