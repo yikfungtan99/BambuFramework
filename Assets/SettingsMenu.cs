@@ -35,6 +35,8 @@ namespace BambuFramework.UI
             }
         }
 
+        private TemplateContainer popupInstance;
+
         private void Awake()
         {
             tabView = Root.Q<TabView>("TabView"); // Make sure your TabView has the "TabView" name or update this accordingly
@@ -66,7 +68,7 @@ namespace BambuFramework.UI
 
             foreach (SettingsTab tab in settingsContainer.Tabs)
             {
-                var tabInstance = tabView.Q<Tab>($"tab{tab.TabName}");
+                Tab tabInstance = tabView.Q<Tab>($"tab{tab.TabName}");
 
                 btnBack = tabInstance.Q<Button>("btnBack");
                 btnBack.clicked += Back;
@@ -161,6 +163,12 @@ namespace BambuFramework.UI
 
         private void Back()
         {
+            if (SettingsManager.Instance.HaveChanges())
+            {
+                ShowApplySettingsPopup();
+                return;
+            }
+
             uiManager.ReturnToPrevious(initiatedPlayer, true);
         }
 
@@ -170,10 +178,24 @@ namespace BambuFramework.UI
             UpdateAllSettingOptions();
         }
 
+        private void RevertToPrevious()
+        {
+            SettingsManager.Instance.LoadSettings();
+            UpdateAllSettingOptions();
+        }
+
         private void Apply()
         {
             SettingsManager.Instance.ApplySetting(tabView.selectedTabIndex);
             UpdateAllSettingOptions();
+        }
+
+        private void ApplyThenBack()
+        {
+            ClosePopup();
+            Apply();
+            UpdateAllSettingOptions();
+            Back();
         }
 
         protected override void UpdateMenu()
@@ -189,6 +211,56 @@ namespace BambuFramework.UI
             // Update selected index and wrap around if necessary
             tabView.selectedTabIndex = (tabView.selectedTabIndex + direction + tabCount) % tabCount;
             SetFocusOnTab(tabView.selectedTabIndex);
+        }
+
+        private void ShowApplySettingsPopup()
+        {
+            PopupData applySettingsPopup = new PopupData();
+            applySettingsPopup.Title = "Unsaved Changes";
+            applySettingsPopup.Description = "Do you wish to apply unchanged settings?";
+            applySettingsPopup.ButtonsText = new string[]
+            {
+                    "YES",
+                    "NO",
+                    "Cancel"
+            };
+            applySettingsPopup.Actions = new System.Action[]
+            {
+                ApplyThenBack,
+                BackFromPopup,
+                ClosePopup
+            };
+
+            popupInstance = UIManager.Instance.ShowPopupWindow(applySettingsPopup);
+            Root.Add(popupInstance);
+        }
+
+        private void BackFromPopup()
+        {
+            ClosePopup();
+            SettingsManager.Instance.LoadSettings();
+            UpdateAllSettingOptions();
+            Back();
+        }
+
+        private void ClosePopup()
+        {
+            if (popupInstance == null) return;
+            Root.Remove(popupInstance);
+        }
+
+        private void NavigateWithApplying(int direction)
+        {
+            Apply();
+            NavigateTabs(direction);
+            ClosePopup();
+        }
+
+        private void NavigateWithoutApplying(int direction)
+        {
+            RevertToPrevious();
+            NavigateTabs(direction);
+            ClosePopup();
         }
 
         private void SetFocusOnTab(int index)

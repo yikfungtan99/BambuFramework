@@ -91,6 +91,7 @@ namespace BambuFramework.UI
             float value = Value;
             slider.SetValueWithoutNotify(value);
             textField.SetValueWithoutNotify(((int)value).ToString());
+            ApplyVolumeSetting(Value);
         }
     }
 }

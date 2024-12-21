@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace BambuFramework.UI
 {
@@ -138,5 +139,45 @@ namespace BambuFramework.UI
         {
             OnCancel?.Invoke();
         }
+
+        public TemplateContainer ShowPopupWindow(PopupData popupData)
+        {
+            TemplateContainer popUpInstance = UITemplatesContainer.Instance.PopupWindow.CloneTree();
+
+            // Set the position to absolute and expand to all anchors
+            popUpInstance.style.position = Position.Absolute;
+            popUpInstance.style.left = 0;
+            popUpInstance.style.top = 0;
+            popUpInstance.style.right = 0;
+            popUpInstance.style.bottom = 0;
+
+            popUpInstance.Q<Label>("lblTitle").text = popupData.Title;
+            popUpInstance.Q<Label>("lblDescription").text = popupData.Description;
+
+            for (int i = 0; i < popupData.ButtonsText.Length; i++)
+            {
+                TemplateContainer buttonOptionInstance = UITemplatesContainer.Instance.PopupOptionButton.CloneTree();
+                Button button = buttonOptionInstance.Q<Button>();
+
+                button.text = popupData.ButtonsText[i];
+
+                if (i < popupData.Actions.Length)
+                {
+                    button.clicked += popupData.Actions[i];
+                }
+
+                popUpInstance.Q<VisualElement>("containerOptionButtons").Add(buttonOptionInstance);
+            }
+
+            return popUpInstance;
+        }
+    }
+
+    public struct PopupData
+    {
+        public string Title;
+        public string Description;
+        public string[] ButtonsText;
+        public Action[] Actions;
     }
 }

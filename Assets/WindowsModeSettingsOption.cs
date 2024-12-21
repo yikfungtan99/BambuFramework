@@ -5,7 +5,7 @@ namespace BambuFramework.UI
 {
     public class WindowsModeSettingsOption : CyclerSettingOption
     {
-        private List<string> windowModeOptions = new List<string> { "Fullscreen", "Windowed", "Borderless" };
+        private List<string> windowModeOptions = new List<string> { "Fullscreen", "Borderless", "Windowed" };
 
         // Override the Dropdown options property
         public override List<string> CyclerOptions
@@ -14,7 +14,7 @@ namespace BambuFramework.UI
             {
                 if (windowModeOptions == null || windowModeOptions.Count == 0)
                 {
-                    windowModeOptions = new List<string> { "Fullscreen", "Windowed", "Borderless" };
+                    windowModeOptions = new List<string> { "Fullscreen", "Borderless", "Windowed" };
                 }
 
                 return windowModeOptions;

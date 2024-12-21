@@ -1,5 +1,4 @@
 using BambuFramework.Audio;
-using BambuFramework.UI;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,8 +9,6 @@ namespace BambuFramework.Settings
 {
     public class SettingsManager : SingletonBehaviour<SettingsManager>
     {
-        private SettingsContainer settingsContainer;
-
         private List<SettingBase> settings = new List<SettingBase>();
         private List<SettingBase> gameplaySettings = new List<SettingBase>();
         private List<SettingBase> videoSettings = new List<SettingBase>();
@@ -42,8 +39,6 @@ namespace BambuFramework.Settings
 
         public List<SettingBase> GetSettings(int index)
         {
-            Debug.Log(index);
-
             switch (index)
             {
                 case 0:
@@ -61,9 +56,6 @@ namespace BambuFramework.Settings
 
         private void Start()
         {
-            settingsContainer = SettingsContainer.Instance;
-
-            Debug.Log(ConsoleSetting);
             gameplaySettings.Add(ConsoleSetting);
 
             videoSettings.Add(ResolutionSetting);
@@ -140,6 +132,19 @@ namespace BambuFramework.Settings
             playerInput.actions.RemoveAllBindingOverrides();
 
             SaveRebinds();
+        }
+
+        public bool HaveChanges()
+        {
+            foreach (SettingBase setting in settings)
+            {
+                if (setting.HaveChanges())
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public void RebindKeys(Player player, InputAction ia, Action onComplete = null)
