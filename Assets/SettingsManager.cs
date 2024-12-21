@@ -19,6 +19,7 @@ namespace BambuFramework.Settings
 
         //VIDEO
         public VideoResolutionSetting ResolutionSetting = new VideoResolutionSetting();
+        public VsyncSetting VsyncSetting = new VsyncSetting();
         public WindowModeSetting VideoWindowModeSetting = new WindowModeSetting();
         public FrameRateSetting FrameRateSetting = new FrameRateSetting();
 

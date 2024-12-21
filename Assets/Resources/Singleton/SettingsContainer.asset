@@ -255,13 +255,13 @@ MonoBehaviour:
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
-      Data: 3
+      Data: 4
     - Name: 
       Entry: 7
       Data: 10|BambuFramework.UI.VideoResolutionDropdownSettingOption, Assembly-CSharp
     - Name: Title
       Entry: 1
-      Data: VIDEO
+      Data: RESOLUTION
     - Name: baseOptions
       Entry: 6
       Data: 
@@ -270,13 +270,22 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 11|BambuFramework.UI.FramerateCyclerSettingOption, Assembly-CSharp
+      Data: 11|BambuFramework.UI.VsyncToggleOption, Assembly-CSharp
+    - Name: Title
+      Entry: 1
+      Data: V-SYNC
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 12|BambuFramework.UI.FramerateCyclerSettingOption, Assembly-CSharp
     - Name: Title
       Entry: 1
       Data: FRAMERATE
     - Name: baseOptions
       Entry: 7
-      Data: 12|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
+      Data: 13|System.Collections.Generic.List`1[[System.String, mscorlib]], mscorlib
     - Name: 
       Entry: 12
       Data: 0
@@ -291,7 +300,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 13|BambuFramework.UI.WindowsModeSettingsOption, Assembly-CSharp
+      Data: 14|BambuFramework.UI.WindowsModeSettingsOption, Assembly-CSharp
     - Name: Title
       Entry: 1
       Data: WINDOWS MODE
@@ -312,20 +321,20 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 14|BambuFramework.UI.SettingsTab, Assembly-CSharp
+      Data: 15|BambuFramework.UI.SettingsTab, Assembly-CSharp
     - Name: TabName
       Entry: 1
       Data: Audio
     - Name: SettingOptions
       Entry: 7
-      Data: 15|System.Collections.Generic.List`1[[BambuFramework.UI.SettingOption,
+      Data: 16|System.Collections.Generic.List`1[[BambuFramework.UI.SettingOption,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 4
     - Name: 
       Entry: 7
-      Data: 16|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
+      Data: 17|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
     - Name: Title
       Entry: 1
       Data: MASTER
@@ -346,7 +355,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 17|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
+      Data: 18|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
     - Name: Title
       Entry: 1
       Data: SFX
@@ -367,7 +376,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 18|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
+      Data: 19|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
     - Name: Title
       Entry: 1
       Data: MUSIC
@@ -388,7 +397,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 19|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
+      Data: 20|BambuFramework.UI.VolumeSliderSettingOption, Assembly-CSharp
     - Name: Title
       Entry: 1
       Data: UI
@@ -418,20 +427,20 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 20|BambuFramework.UI.SettingsTab, Assembly-CSharp
+      Data: 21|BambuFramework.UI.SettingsTab, Assembly-CSharp
     - Name: TabName
       Entry: 1
       Data: Controls
     - Name: SettingOptions
       Entry: 7
-      Data: 21|System.Collections.Generic.List`1[[BambuFramework.UI.SettingOption,
+      Data: 22|System.Collections.Generic.List`1[[BambuFramework.UI.SettingOption,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 22|BambuFramework.UI.InputRebindOption, Assembly-CSharp
+      Data: 23|BambuFramework.UI.InputRebindOption, Assembly-CSharp
     - Name: Title
       Entry: 1
       Data: SPRINT
@@ -456,6 +465,7 @@ MonoBehaviour:
   VideoFrameRates: 1e0000003c0000007800000090000000a5000000f0000000
   DefaultGameplayConsole: 0
   DefaultVideoWindowMode: 0
+  DefaultVsync: 0
   DefaultAudioMaster: 50
   DefaultAudioSFX: 50
   DefaultAudioMusic: 50

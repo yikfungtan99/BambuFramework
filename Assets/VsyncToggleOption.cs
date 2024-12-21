@@ -4,8 +4,7 @@ using UnityEngine.UIElements;
 
 namespace BambuFramework.UI
 {
-    [System.Serializable]
-    public class ConsoleToggleSettingOption : ToggleSettingOption
+    public class VsyncToggleOption : ToggleSettingOption
     {
         public override void SpawnUI(SettingsMenu menu, out List<TemplateContainer> templateContainers, out List<Focusable> fs)
         {
@@ -19,7 +18,7 @@ namespace BambuFramework.UI
                 toggle.RegisterValueChangedCallback(evt =>
                 {
                     // Update the GameplayConsole setting in SettingsManager
-                    SettingsManager.Instance.ConsoleSetting.Set(evt.newValue);
+                    SettingsManager.Instance.VsyncSetting.Set(evt.newValue);
                 });
             }
             else
@@ -30,7 +29,7 @@ namespace BambuFramework.UI
 
         public override void UpdateSettingOption()
         {
-            toggle.value = SettingsManager.Instance.ConsoleSetting.Value;
+            toggle.value = SettingsManager.Instance.VsyncSetting.Value;
         }
     }
 }

@@ -27,8 +27,17 @@ namespace BambuFramework.Settings
 
         public override void ApplySetting()
         {
-            QualitySettings.vSyncCount = 0;
-            Application.targetFrameRate = SettingsContainer.Instance.VideoFrameRates[Value];
+            // If Vsync is enabled, frame rate should sync with the display's refresh rate
+            if (QualitySettings.vSyncCount == 1)
+            {
+                // Optional: Adjust target frame rate to be consistent with the refresh rate
+                Application.targetFrameRate = -1; // Let VSync handle frame rate
+            }
+            else
+            {
+                // Set a custom frame rate cap when VSync is off
+                Application.targetFrameRate = SettingsContainer.Instance.VideoFrameRates[Value];
+            }
         }
     }
 }

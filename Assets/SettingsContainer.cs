@@ -21,6 +21,7 @@ namespace BambuFramework.UI
 
         [Header("Default Video Settings")]
         public int DefaultVideoWindowMode = 0; // 0: Fullscreen, 1: Windowed, 2: Borderless
+        public bool DefaultVsync = false;
 
         [Header("Default Audio Settings")]
         public int DefaultAudioMaster = 50; // Default master volume percentage

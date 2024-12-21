@@ -6,6 +6,7 @@ namespace BambuFramework.UI
     [System.Serializable]
     public class ToggleSettingOption : SettingOption
     {
+        protected Toggle toggle;
         public override ESettingOptions SettingsOption => ESettingOptions.TOGGLE;
 
         public override void SpawnUI(SettingsMenu menu, out List<TemplateContainer> templateContainers, out List<Focusable> fs)
@@ -15,8 +16,9 @@ namespace BambuFramework.UI
             // Clone the base template
             TemplateContainer uiInstance = templateContainers[0];
 
-            // Query the slider and text field elements
-            var toggle = uiInstance.Q<Toggle>("CustomToggle");
+            // Query the Toggle element in the template
+            toggle = uiInstance.Q<Toggle>("CustomToggle");
+
             fs.Add(toggle);
 
             toggle.RegisterCallback<FocusEvent>((e) => Focus(uiInstance));

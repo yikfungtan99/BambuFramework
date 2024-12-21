@@ -8,6 +8,12 @@ namespace BambuFramework.Settings
         public override string KEY => nameof(ConsoleSetting);
         public override bool DefaultValue => SettingsContainer.Instance.DefaultGameplayConsole;
 
+        public override void Set(bool value)
+        {
+            base.Set(value);
+            DebugLogManager.Instance.gameObject.SetActive(Value);
+        }
+
         public override void ApplySetting()
         {
             DebugLogManager.Instance.gameObject.SetActive(Value);
