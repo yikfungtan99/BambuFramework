@@ -112,6 +112,7 @@ namespace BambuFramework.Settings
 
         public void RevertDefaultSettings(int index)
         {
+            Debug.Log(index);
             if (index == 3)
             {
                 RevertDefaultInputSettings();

@@ -174,8 +174,7 @@ namespace BambuFramework.UI
 
         private void Default()
         {
-            SettingsManager.Instance.RevertDefaultSettings(tabView.selectedTabIndex);
-            UpdateAllSettingOptions();
+            ShowDefaultSettingsPopUp();
         }
 
         private void RevertToPrevious()
@@ -188,14 +187,6 @@ namespace BambuFramework.UI
         {
             SettingsManager.Instance.ApplySetting(tabView.selectedTabIndex);
             UpdateAllSettingOptions();
-        }
-
-        private void ApplyThenBack()
-        {
-            ClosePopup();
-            Apply();
-            UpdateAllSettingOptions();
-            Back();
         }
 
         protected override void UpdateMenu()
@@ -216,13 +207,13 @@ namespace BambuFramework.UI
         private void ShowApplySettingsPopup()
         {
             PopupData applySettingsPopup = new PopupData();
-            applySettingsPopup.Title = "Unsaved Changes";
+            applySettingsPopup.Title = "UNSAVED CHANGES";
             applySettingsPopup.Description = "Do you wish to apply unchanged settings?";
             applySettingsPopup.ButtonsText = new string[]
             {
                     "YES",
                     "NO",
-                    "Cancel"
+                    "CANCEL"
             };
             applySettingsPopup.Actions = new System.Action[]
             {
@@ -231,8 +222,48 @@ namespace BambuFramework.UI
                 ClosePopup
             };
 
-            popupInstance = UIManager.Instance.ShowPopupWindow(applySettingsPopup);
+            ShowPopup(applySettingsPopup);
+        }
+
+        private void ShowDefaultSettingsPopUp()
+        {
+            PopupData revertSettingsPopup = new PopupData();
+            revertSettingsPopup.Title = "REVERT TO DEFAULT";
+            revertSettingsPopup.Description = $"Do you wish to revert <color=yellow>{settingsContainer.Tabs[tabView.selectedTabIndex].TabName}</color> settings to default?";
+            revertSettingsPopup.ButtonsText = new string[]
+            {
+                    "YES",
+                    "NO",
+            };
+            revertSettingsPopup.Actions = new System.Action[]
+            {
+                RevertToDefault,
+                ClosePopup
+            };
+
+            ShowPopup(revertSettingsPopup);
+        }
+
+        private void ShowPopup(PopupData popupData)
+        {
+            popupInstance = UIManager.Instance.ShowPopupWindow(popupData);
             Root.Add(popupInstance);
+            SettingsManager.Instance.IsBusy = true;
+        }
+
+        private void ClosePopup()
+        {
+            if (popupInstance == null) return;
+            Root.Remove(popupInstance);
+            SettingsManager.Instance.IsBusy = false;
+        }
+
+        private void ApplyThenBack()
+        {
+            ClosePopup();
+            Apply();
+            UpdateAllSettingOptions();
+            Back();
         }
 
         private void BackFromPopup()
@@ -243,24 +274,11 @@ namespace BambuFramework.UI
             Back();
         }
 
-        private void ClosePopup()
+        private void RevertToDefault()
         {
-            if (popupInstance == null) return;
-            Root.Remove(popupInstance);
-        }
-
-        private void NavigateWithApplying(int direction)
-        {
-            Apply();
-            NavigateTabs(direction);
             ClosePopup();
-        }
-
-        private void NavigateWithoutApplying(int direction)
-        {
-            RevertToPrevious();
-            NavigateTabs(direction);
-            ClosePopup();
+            SettingsManager.Instance.RevertDefaultSettings(tabView.selectedTabIndex);
+            UpdateAllSettingOptions();
         }
 
         private void SetFocusOnTab(int index)
