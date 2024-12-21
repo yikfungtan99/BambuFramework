@@ -154,6 +154,8 @@ namespace BambuFramework.UI
             popUpInstance.Q<Label>("lblTitle").text = popupData.Title;
             popUpInstance.Q<Label>("lblDescription").text = popupData.Description;
 
+            Button firstButton = null;
+
             for (int i = 0; i < popupData.ButtonsText.Length; i++)
             {
                 TemplateContainer buttonOptionInstance = UITemplatesContainer.Instance.PopupOptionButton.CloneTree();
@@ -167,6 +169,18 @@ namespace BambuFramework.UI
                 }
 
                 popUpInstance.Q<VisualElement>("containerOptionButtons").Add(buttonOptionInstance);
+
+                // Store a reference to the first button
+                if (i == 0)
+                {
+                    firstButton = button;
+                }
+            }
+
+            // Schedule the focus on the first button for the next frame
+            if (firstButton != null)
+            {
+                firstButton.schedule.Execute(() => firstButton.Focus());
             }
 
             return popUpInstance;

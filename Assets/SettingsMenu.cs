@@ -100,6 +100,10 @@ namespace BambuFramework.UI
                     currentSettingOptions.Add(settingOption);
                 }
 
+                if (btnBack != null) focussables.Add(btnBack);
+                if (btnDefault != null) focussables.Add(btnDefault);
+                if (btnApply != null) focussables.Add(btnApply);
+
                 UpdateAllSettingOptions();
             }
         }
@@ -249,6 +253,8 @@ namespace BambuFramework.UI
             popupInstance = UIManager.Instance.ShowPopupWindow(popupData);
             Root.Add(popupInstance);
             SettingsManager.Instance.IsBusy = true;
+
+            SetAllFocusables(false);
         }
 
         private void ClosePopup()
@@ -256,6 +262,16 @@ namespace BambuFramework.UI
             if (popupInstance == null) return;
             Root.Remove(popupInstance);
             SettingsManager.Instance.IsBusy = false;
+
+            SetAllFocusables(true);
+        }
+
+        private void SetAllFocusables(bool foc)
+        {
+            foreach (var item in focussables)
+            {
+                item.focusable = foc;
+            }
         }
 
         private void ApplyThenBack()
